@@ -10,6 +10,24 @@ import java.util.concurrent.ThreadLocalRandom;
  * Created by Keith on 11/18/2017.
  */
 public class RealCommands implements CommandExecutor {
+
+    @Command(aliases = "help",async = true)
+    public String help(String args[]){
+        StringBuilder stringBuilder = new StringBuilder();
+        if(args.length > 0){
+            if (args[0].equals("real")){
+                stringBuilder.append("StarCheat : Links the StarFinder cheat sheet");
+                stringBuilder.append("\n");
+                stringBuilder.append("VampCheat : Links the Vampire the Masquerade cheat sheet ");
+                stringBuilder.append("\n");
+                stringBuilder.append("Roll : Dice roller to use do (amountOfDice)4D20(diceNumber) and then + or - number.");
+                return stringBuilder.toString();
+
+            }
+        }
+        return "I REEEEEE I AAAAAAAAA but I also Easy Breezy Beautiful Crocodile";
+    }
+
     @Command(aliases = "vampcheat", async =  true)
     public String vampCheat(){
         return "https://docs.google.com/document/d/17QWOq7o9fdCFIl-LAT1VCI32ZqgLAG2uvc-j22oMvos/edit";
