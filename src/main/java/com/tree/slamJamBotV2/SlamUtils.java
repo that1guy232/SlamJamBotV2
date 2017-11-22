@@ -13,6 +13,8 @@ import java.io.FileNotFoundException;
 public class SlamUtils {
 
 
+
+
     static void sendMessage(IChannel channel, String message){
         // This might look weird but it'll be explained in another page.
         RequestBuffer.request(() -> {
@@ -51,5 +53,6 @@ public class SlamUtils {
             }
         });
     }
+
 
 }

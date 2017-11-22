@@ -96,7 +96,7 @@ public class RealCommands implements CommandExecutor {
                                 return mb.toString();
                             }else {
 
-                                return "Rolled: "+totalRolled+ " For a total of: "+(totalRolled+sub);
+                                return "Rolled: "+totalRolled+ " For a total of: "+(totalRolled-sub);
                             }
                         }
                     }else {

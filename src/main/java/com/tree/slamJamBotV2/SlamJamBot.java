@@ -17,8 +17,10 @@ public class SlamJamBot {
         }
 
 
+
         IDiscordClient client = new ClientBuilder().withToken(args[0]).setMaxReconnectAttempts(Integer.MAX_VALUE).build();
 
+        client.changePlayingText("with meme's");
         //client.getDispatcher().reg
 
         CommandHandler commandHandler = new Discord4JHandler(client);
