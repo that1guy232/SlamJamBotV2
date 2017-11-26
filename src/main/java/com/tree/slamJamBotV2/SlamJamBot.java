@@ -17,19 +17,13 @@ public class SlamJamBot {
         }
 
 
-
-        IDiscordClient client = new ClientBuilder().withToken(args[0]).setMaxReconnectAttempts(Integer.MAX_VALUE).build();
-
-        client.changePlayingText("with meme's");
-        //client.getDispatcher().reg
+        IDiscordClient client = new ClientBuilder().withToken(args[0]).setMaxReconnectAttempts(Integer.MAX_VALUE).streaming("with meme's","https://www.google.ca/").build();
 
         CommandHandler commandHandler = new Discord4JHandler(client);
 
         client.getDispatcher().registerListener(new SillyCommands());
-      //  client.getDispatcher().registerListener(new RealCommands());
+        client.getDispatcher().registerListener(new StarFinderCommands());
         commandHandler.registerCommand(new RealCommands());
-
-
 
         client.login();
 

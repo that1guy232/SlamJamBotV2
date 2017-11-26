@@ -2,6 +2,8 @@ package com.tree.slamJamBotV2;
 
 import de.btobastian.sdcf4j.Command;
 import de.btobastian.sdcf4j.CommandExecutor;
+import sx.blah.discord.handle.obj.IChannel;
+import sx.blah.discord.handle.obj.IUser;
 
 import java.util.ArrayList;
 import java.util.concurrent.ThreadLocalRandom;
@@ -10,6 +12,19 @@ import java.util.concurrent.ThreadLocalRandom;
  * Created by Keith on 11/18/2017.
  */
 public class RealCommands implements CommandExecutor {
+
+
+
+    @Command(aliases = "timer", async = true)
+    public void timer(String args[], IUser user, IChannel channel){
+        if(args.length < 1){
+            SlamUtils.sendMessage(channel,user.mention() + " timer Xmins* ");
+            return;
+        }else {
+
+        }
+        System.err.println("test2");
+    }
 
     @Command(aliases = "help",async = true)
     public String help(String args[]){
@@ -133,4 +148,8 @@ public class RealCommands implements CommandExecutor {
         }
         return "";
     }
+
+
+
+
 }
