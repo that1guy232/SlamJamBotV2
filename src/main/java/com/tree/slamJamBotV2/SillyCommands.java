@@ -6,6 +6,7 @@ import org.apache.commons.csv.CSVRecord;
 import sx.blah.discord.api.events.EventSubscriber;
 import sx.blah.discord.handle.impl.events.guild.channel.message.MessageReceivedEvent;
 import sx.blah.discord.handle.obj.IChannel;
+import sx.blah.discord.handle.obj.IGuild;
 import sx.blah.discord.util.EmbedBuilder;
 import sx.blah.discord.util.RequestBuffer;
 
@@ -46,7 +47,7 @@ public class SillyCommands {
         String message = event.getMessage().getContent();
         IChannel channel = event.getChannel();
         message = message.toLowerCase();
-
+        IGuild guild = event.getGuild();
 
         if(message.equals("traps are gay")){
             SlamUtils.sendFileWithMessage(channel,"<@284068848183934988>",new File("traps.png"));
@@ -81,7 +82,11 @@ public class SillyCommands {
             SlamUtils.sendFile(channel,pic);
         }
 
+        if(message.contains("sleepy-bye arty")){
 
+            guild.getUserByID(284068848183934988L).moveToVoiceChannel(guild.getVoiceChannelByID(376655874543976448L));
+
+        }
 
         if(message.contains("aaaa")){
             SlamUtils.sendMessage(event.getChannel(),"https://www.youtube.com/watch?v=Y4Z7Ds_yv8o");
@@ -142,7 +147,6 @@ public class SillyCommands {
             StringBuilder stringBuilder = new StringBuilder();
             for (int i = 0; i < words.length; i++) {
                 if(currentWidth > image.getWidth()-250){
-                    System.err.println(String.format("%d    %d", currentWidth, (image.getWidth()) - 250));
                     stringsForImage.add(stringBuilder.toString());
 
                     stringBuilder.delete(0,stringBuilder.length());
@@ -158,7 +162,7 @@ public class SillyCommands {
             int y = 15;
             for (int i = 0; i < stringsForImage.size(); i++) {
                 y += 40;
-                System.err.println(stringsForImage.get(i));
+
                 if(i == 0){
 
                     g2.drawString(stringsForImage.get(i),textPosition.x - (g2.getFontMetrics().stringWidth(stringsForImage.get(i))/2),textPosition.y-15);

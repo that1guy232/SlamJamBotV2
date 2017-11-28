@@ -1,14 +1,19 @@
 package com.tree.slamJamBotV2;
 
 import com.google.common.collect.Lists;
+import com.vdurmont.emoji.EmojiManager;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVRecord;
 import sx.blah.discord.api.events.EventSubscriber;
 import sx.blah.discord.api.internal.json.objects.EmbedObject;
 import sx.blah.discord.handle.impl.events.guild.channel.message.MessageReceivedEvent;
 import sx.blah.discord.handle.impl.events.guild.channel.message.reaction.ReactionAddEvent;
+import sx.blah.discord.handle.impl.obj.Reaction;
 import sx.blah.discord.handle.obj.IChannel;
+import sx.blah.discord.handle.obj.IReaction;
+import sx.blah.discord.handle.obj.IUser;
 import sx.blah.discord.util.EmbedBuilder;
+import sx.blah.discord.util.RequestBuffer;
 
 import java.io.FileReader;
 import java.io.IOException;
@@ -21,6 +26,10 @@ import java.util.List;
 public class StarFinderCommands {
     List<CSVRecord> starfinderFeats;
     ArrayList<EmbedObject> featEmbeds;
+
+    long starFinderFeatsMessageID;
+    int starFinderFeatsMessagePage;
+
     public StarFinderCommands(){
         try {
             starfinderFeats = new ArrayList<>(CSVFormat.RFC4180.withFirstRecordAsHeader().parse(new FileReader("starfinder_feats.csv")).getRecords());
@@ -46,11 +55,13 @@ public class StarFinderCommands {
         for (int i = 0; i < featnamesLists.size(); i++) {
             embedBuilder.withTitle("Page"+ (i+1) + "/" + featnamesLists.size());
             for (int j = 0; j < featnamesLists.get(i).size(); j++) {
-                System.out.println("Test#: "+i+"FeatName: "+featnamesLists.get(i).get(j).get("Name"));
+
                 stringBuilder.append(featnamesLists.get(i).get(j).get("Name"));
                 stringBuilder.append("\n");
             }
             embedBuilder.appendField("Feats",stringBuilder.toString(),false);
+
+            embedBuilder.withFooterText("To lern more about a feat type \"starfinder feat name\"");
 
             stringBuilder.delete(0,stringBuilder.length());
 
@@ -69,9 +80,20 @@ public class StarFinderCommands {
             emojiList.add("arrow_left");
             emojiList.add("arrow_right:");
             emojiList.add("x");
-            SlamUtils.sendEmbedWithReactions(channel,featEmbeds.get(0),emojiList);
 
-            SlamUtils.sendMessage(channel," Here is a google link to all starfinder feats shit\n" + "https://docs.google.com/spreadsheets/d/1s3W_CTGPk7Wt8zr-sLRB4WI1MNqWGhchTvEItDBf3uE/");
+            if(starFinderFeatsMessageID != 0){
+                channel.getMessageByID(starFinderFeatsMessageID).delete();
+            }
+
+            starFinderFeatsMessageID = SlamUtils.sendEmbedWithReactions(channel,featEmbeds.get(0));
+            starFinderFeatsMessagePage = 0;
+
+            RequestBuffer.request(() -> channel.getMessageByID(starFinderFeatsMessageID).addReaction(EmojiManager.getForAlias(emojiList.get(0)))).get();
+            RequestBuffer.request(() -> channel.getMessageByID(starFinderFeatsMessageID).addReaction(EmojiManager.getForAlias(emojiList.get(1)))).get();
+            RequestBuffer.request(() -> channel.getMessageByID(starFinderFeatsMessageID).addReaction(EmojiManager.getForAlias(emojiList.get(2)))).get();
+
+
+         //sub   SlamUtils.sendMessage(channel," Here is a google link to all starfinder feats shit\n" + "https://docs.google.com/spreadsheets/d/1s3W_CTGPk7Wt8zr-sLRB4WI1MNqWGhchTvEItDBf3uE/");
 
 
         }
@@ -107,7 +129,41 @@ public class StarFinderCommands {
 
     @EventSubscriber
     public void reactionAddEvent(ReactionAddEvent reactionAddEvent){
-        System.out.println(reactionAddEvent.getReaction().toString());
+        System.out.println(reactionAddEvent.getReaction().getEmoji().getName());
+        long messageID = reactionAddEvent.getMessageID();
+        IReaction reaction = reactionAddEvent.getReaction();
+        IUser user= reactionAddEvent.getUser();
+        if(messageID == starFinderFeatsMessageID && !user.isBot()){
+            if(reaction.getEmoji().getName().equals("⬅")){
+
+                starFinderFeatsMessagePage--;
+                if (starFinderFeatsMessagePage < 0){
+                    starFinderFeatsMessagePage = 3;
+                    RequestBuffer.request(() -> reaction.getMessage().edit(featEmbeds.get(starFinderFeatsMessagePage)));
+
+                }else {
+
+                    RequestBuffer.request(() -> reaction.getMessage().edit(featEmbeds.get(starFinderFeatsMessagePage)));
+                }
+            }
+            if(reaction.getEmoji().getName().equals("➡")){
+                starFinderFeatsMessagePage++;
+                if(starFinderFeatsMessagePage > featEmbeds.size()-1){
+                    starFinderFeatsMessagePage = 0;
+                    RequestBuffer.request(() -> reaction.getMessage().edit(featEmbeds.get(starFinderFeatsMessagePage)));
+                }else {
+                    RequestBuffer.request(() -> reaction.getMessage().edit(featEmbeds.get(starFinderFeatsMessagePage)));
+                }
+
+            }
+            if(reaction.getEmoji().getName().equals("❌")){
+                reaction.getMessage().delete();
+                starFinderFeatsMessageID = 0;
+            }
+            RequestBuffer.request(() -> reaction.getMessage().removeReaction(user,reaction));
+
+
+        }
 
     }
 
