@@ -93,7 +93,6 @@ public class StarFinderCommands {
             RequestBuffer.request(() -> channel.getMessageByID(starFinderFeatsMessageID).addReaction(EmojiManager.getForAlias(emojiList.get(2)))).get();
 
 
-         //sub   SlamUtils.sendMessage(channel," Here is a google link to all starfinder feats shit\n" + "https://docs.google.com/spreadsheets/d/1s3W_CTGPk7Wt8zr-sLRB4WI1MNqWGhchTvEItDBf3uE/");
 
 
         }
@@ -104,12 +103,22 @@ public class StarFinderCommands {
 
         if(starfinderMessage[1].equals("feat")){
             if(starfinderMessage[2] != null){
+
+                StringBuilder stringBuilder = new StringBuilder();
+
+
+
+
+                for (int i = 2; i < starfinderMessage.length-1; i++) {
+                    stringBuilder.append(starfinderMessage[i]);
+
+                       stringBuilder.append(" ");
+
+                }
+                stringBuilder.append(starfinderMessage[starfinderMessage.length - 1]);
                 for (CSVRecord starfinderFeat : starfinderFeats) {
-                    StringBuilder stringBuilder = new StringBuilder();
-                    for (int i = 2; i < starfinderMessage.length; i++) {
-                        stringBuilder.append(starfinderMessage[i]);
-                        stringBuilder.append(" ");
-                    }
+
+
 
                     if (starfinderFeat.get("Name").toLowerCase().contains(stringBuilder.toString())) {
                         EmbedBuilder embedBuilder = new EmbedBuilder();
