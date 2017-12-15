@@ -31,6 +31,7 @@ public class StarFinderCommands {
     int starFinderFeatsMessagePage;
 
     public StarFinderCommands(){
+
         try {
             starfinderFeats = new ArrayList<>(CSVFormat.RFC4180.withFirstRecordAsHeader().parse(new FileReader("starfinder_feats.csv")).getRecords());
         } catch (IOException e) {
@@ -138,7 +139,7 @@ public class StarFinderCommands {
 
     @EventSubscriber
     public void reactionAddEvent(ReactionAddEvent reactionAddEvent){
-        System.out.println(reactionAddEvent.getReaction().getEmoji().getName());
+        System.out.println(reactionAddEvent.getReaction().getEmoji().isUnicode());
         long messageID = reactionAddEvent.getMessageID();
         IReaction reaction = reactionAddEvent.getReaction();
         IUser user= reactionAddEvent.getUser();
@@ -165,6 +166,8 @@ public class StarFinderCommands {
                 }
 
             }
+
+
             if(reaction.getEmoji().getName().equals("❌")){
                 reaction.getMessage().delete();
                 starFinderFeatsMessageID = 0;

@@ -4,6 +4,7 @@ import com.vdurmont.emoji.EmojiManager;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVRecord;
 import sx.blah.discord.api.events.EventSubscriber;
+import sx.blah.discord.api.internal.json.objects.EmbedObject;
 import sx.blah.discord.handle.impl.events.guild.channel.message.MessageReceivedEvent;
 import sx.blah.discord.handle.obj.IChannel;
 import sx.blah.discord.handle.obj.IGuild;
@@ -15,6 +16,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -26,6 +28,8 @@ import java.util.concurrent.ThreadLocalRandom;
 public class SillyCommands {
 
     ArrayList<CSVRecord> drinks;
+
+
 
 
     public SillyCommands(){
@@ -106,7 +110,6 @@ public class SillyCommands {
 
 
 
-
     }
 
 
@@ -133,7 +136,7 @@ public class SillyCommands {
                                            String text, Point textPosition) throws IOException {
         Graphics2D g2 = image.createGraphics();
 
-
+        System.err.print(image);
 
         g2.setFont(new Font("KenVector Bold",Font.PLAIN,25));
 
@@ -179,7 +182,11 @@ public class SillyCommands {
 
 
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
+
         ImageIO.write(image, "png", baos);
+
+
+
         return baos.toByteArray();
     }
 

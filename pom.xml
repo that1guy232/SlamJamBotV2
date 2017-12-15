@@ -37,6 +37,7 @@
 
 
     <repositories>
+
         <repository> <!-- This repo fixes issues with transitive dependencies -->
             <id>jcenter</id>
             <url>http://jcenter.bintray.com</url>
@@ -49,6 +50,26 @@
 
 
     <dependencies>
+
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+            <version>2.8.2</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>23.5-jre</version>
+
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-csv</artifactId>
+            <version>1.5</version>
+        </dependency>
+
         <dependency>
             <groupId>com.github.Austinv11</groupId>
             <artifactId>Discord4J</artifactId>

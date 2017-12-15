@@ -22,7 +22,7 @@ public class EncounterGen {
         try {
             Reader in = new FileReader("Monsters.csv");
             Iterable<CSVRecord> records = CSVFormat.RFC4180.withFirstRecordAsHeader().parse(in);
-            //recordtmp.forEach(records::add);
+
         }
         catch (IOException e) {
             e.printStackTrace();
