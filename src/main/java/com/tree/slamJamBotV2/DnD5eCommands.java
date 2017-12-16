@@ -2,6 +2,7 @@ package com.tree.slamJamBotV2;
 
 import com.google.common.collect.Lists;
 import com.vdurmont.emoji.EmojiManager;
+import com.vdurmont.emoji.EmojiParser;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVRecord;
 import sx.blah.discord.api.events.EventSubscriber;
@@ -132,12 +133,13 @@ public class DnD5eCommands {
     }
     @EventSubscriber
     public void reactionAddEvent(ReactionAddEvent reactionAddEvent){
-        System.out.println(reactionAddEvent.getReaction().getEmoji().getName());
+        //EmojiManager.getForAlias(reactionAddEvent.getReaction().getEmoji().getName());
+       System.err.println( );
         long messageID = reactionAddEvent.getMessageID();
         IReaction reaction = reactionAddEvent.getReaction();
         IUser user= reactionAddEvent.getUser();
         if(messageID == spellListMessageID && !user.isBot()){
-            if(reaction.getEmoji().getName().equals("⬅")){
+            if(EmojiParser.parseToAliases(reactionAddEvent.getReaction().getEmoji().toString()).equals(":arrow_left:")){
 
                 spellListMessagePage--;
                 if (spellListMessagePage < 0){
@@ -149,7 +151,7 @@ public class DnD5eCommands {
                     RequestBuffer.request(() -> reaction.getMessage().edit(spellEmbeds.get(spellListMessagePage)));
                 }
             }
-            if(reaction.getEmoji().getName().equals("➡")){
+            if(EmojiParser.parseToAliases(reactionAddEvent.getReaction().getEmoji().toString()).equals(":arrow_right:")){
                 spellListMessagePage++;
                 if(spellListMessagePage > spellEmbeds.size()-1){
                     spellListMessagePage = 0;
@@ -159,7 +161,7 @@ public class DnD5eCommands {
                 }
 
             }
-            if(reaction.getEmoji().getName().equals("❌")){
+            if(EmojiParser.parseToAliases(reactionAddEvent.getReaction().getEmoji().toString()).equals(":x:")){
                 reaction.getMessage().delete();
                 messageID = 0;
             }

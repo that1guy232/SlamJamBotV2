@@ -56,6 +56,9 @@ public class SillyCommands {
         if(message.equals("traps are gay")){
             SlamUtils.sendFileWithMessage(channel,"<@284068848183934988>",new File("traps.png"));
         }
+        if(message.contains("banana peel")){
+            SlamUtils.sendMessage(channel,"https://www.youtube.com/watch?v=r5zHTHPso28");
+        }
         if(message.contains("good bot")){
 
             event.getMessage().addReaction(EmojiManager.getForAlias("smile"));

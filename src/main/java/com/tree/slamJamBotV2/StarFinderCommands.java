@@ -2,6 +2,7 @@ package com.tree.slamJamBotV2;
 
 import com.google.common.collect.Lists;
 import com.vdurmont.emoji.EmojiManager;
+import com.vdurmont.emoji.EmojiParser;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVRecord;
 import sx.blah.discord.api.events.EventSubscriber;
@@ -144,8 +145,8 @@ public class StarFinderCommands {
         IReaction reaction = reactionAddEvent.getReaction();
         IUser user= reactionAddEvent.getUser();
         if(messageID == starFinderFeatsMessageID && !user.isBot()){
-            if(reaction.getEmoji().getName().equals("⬅")){
-
+            if(EmojiParser.parseToAliases(reactionAddEvent.getReaction().getEmoji().toString()).equals(":arrow_left:")){
+                System.err.println("TES TEST TEST TEST TEST");
                 starFinderFeatsMessagePage--;
                 if (starFinderFeatsMessagePage < 0){
                     starFinderFeatsMessagePage = 3;
@@ -156,7 +157,7 @@ public class StarFinderCommands {
                     RequestBuffer.request(() -> reaction.getMessage().edit(featEmbeds.get(starFinderFeatsMessagePage)));
                 }
             }
-            if(reaction.getEmoji().getName().equals("➡")){
+            if(EmojiParser.parseToAliases(reactionAddEvent.getReaction().getEmoji().toString()).equals(":arrow_right:")){
                 starFinderFeatsMessagePage++;
                 if(starFinderFeatsMessagePage > featEmbeds.size()-1){
                     starFinderFeatsMessagePage = 0;
@@ -168,7 +169,7 @@ public class StarFinderCommands {
             }
 
 
-            if(reaction.getEmoji().getName().equals("❌")){
+            if(EmojiParser.parseToAliases(reactionAddEvent.getReaction().getEmoji().toString()).equals(":x:")){
                 reaction.getMessage().delete();
                 starFinderFeatsMessageID = 0;
             }
