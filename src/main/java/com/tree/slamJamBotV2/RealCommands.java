@@ -1,10 +1,17 @@
 package com.tree.slamJamBotV2;
 
+import com.google.gson.stream.JsonReader;
 import de.btobastian.sdcf4j.Command;
 import de.btobastian.sdcf4j.CommandExecutor;
 import sx.blah.discord.handle.obj.IChannel;
 import sx.blah.discord.handle.obj.IUser;
+import sx.blah.discord.util.EmbedBuilder;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.URL;
+import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -15,16 +22,7 @@ public class RealCommands implements CommandExecutor {
 
 
 
-    @Command(aliases = "timer", async = true)
-    public void timer(String args[], IUser user, IChannel channel){
-        if(args.length < 1){
-            SlamUtils.sendMessage(channel,user.mention() + " timer Xmins* ");
-            return;
-        }else {
 
-        }
-        System.err.println("test2");
-    }
 
     @Command(aliases = "help",async = true)
     public String help(String args[]){
@@ -149,7 +147,45 @@ public class RealCommands implements CommandExecutor {
         return "";
     }
 
+   // @Command(aliases = "r6stats", async = true)
+    public void r6stats(String args[],IChannel channel){
 
+
+        try {
+            String urlString = "https://r6db.com/api/v2/players?name=a_pinecone_man&platform=pc&exact=false";
+            URL url = new URL(urlString);
+
+            URLConnection connection = url.openConnection();
+
+            connection.setRequestProperty("x-app-id","SlamJamBot");
+
+            connection.setRequestProperty("User-Agent", "Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.4; en-US; rv:1.9.2.2) Gecko/20100316 Firefox/3.6.2");
+
+
+            InputStream is = connection.getInputStream();
+            JsonReader jsonReader = new JsonReader(new InputStreamReader(is));
+            String id = "1";
+            jsonReader.beginArray();
+            jsonReader.beginObject();
+            while (jsonReader.hasNext()){
+                String name = jsonReader.nextName();
+                if(name.equals("id")){
+                    id = jsonReader.nextString();
+                }else {
+                    jsonReader.skipValue();
+                }
+            }
+
+            EmbedBuilder embedBuilder = new EmbedBuilder();
+            embedBuilder.withTitle("test");
+            embedBuilder.withThumbnail("https://uplay-avatars.s3.amazonaws.com/"+ id+ "/default_146_146.png");
+            SlamUtils.sendEmbed(channel,embedBuilder.build());
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
 
 
 }

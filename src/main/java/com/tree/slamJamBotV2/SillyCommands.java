@@ -1,13 +1,25 @@
 package com.tree.slamJamBotV2;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonPrimitive;
+import com.google.gson.stream.JsonReader;
 import com.vdurmont.emoji.EmojiManager;
+import jdk.nashorn.internal.parser.JSONParser;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVRecord;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.json.JSONObject;
+import sun.net.www.http.HttpClient;
 import sx.blah.discord.api.events.EventSubscriber;
 import sx.blah.discord.api.internal.json.objects.EmbedObject;
 import sx.blah.discord.handle.impl.events.guild.channel.message.MessageReceivedEvent;
+import sx.blah.discord.handle.impl.obj.Guild;
 import sx.blah.discord.handle.obj.IChannel;
 import sx.blah.discord.handle.obj.IGuild;
+import sx.blah.discord.handle.obj.IUser;
 import sx.blah.discord.util.EmbedBuilder;
 import sx.blah.discord.util.RequestBuffer;
 
@@ -15,6 +27,10 @@ import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.*;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLConnection;
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -32,12 +48,13 @@ public class SillyCommands {
 
 
 
+
     public SillyCommands(){
+
         try {
-            drinks = new ArrayList<>(CSVFormat.RFC4180.withFirstRecordAsHeader().parse(new FileReader("drinks.csv")).getRecords());
-
-
-
+            FileReader fr = new FileReader("drinks.csv");
+            drinks = new ArrayList<>(CSVFormat.RFC4180.withFirstRecordAsHeader().parse(fr).getRecords());
+            fr.close();
 
 
         } catch (IOException e) {
@@ -57,7 +74,7 @@ public class SillyCommands {
             SlamUtils.sendFileWithMessage(channel,"<@284068848183934988>",new File("traps.png"));
         }
         if(message.contains("banana peel")){
-            SlamUtils.sendMessage(channel,"https://www.youtube.com/watch?v=r5zHTHPso28");
+            SlamUtils.sendMessage(channel," :banana:  :banana:  https://www.youtube.com/watch?v=r5zHTHPso28 :banana:  :banana:  ");
         }
         if(message.contains("good bot")){
 
@@ -111,10 +128,27 @@ public class SillyCommands {
             SlamUtils.sendFile(channel,new File("on_fire.jpg"));
         }
 
+        if(message.startsWith("sleepy-bye")){
+            String[] words = message.split("\\s");
+            words[1] = words[1].replaceAll("(?:[<@!>])","");
+            for (int i = 0; i < guild.getUsers().size(); i++) {
+                String UserID = guild.getUsers().get(i).mention().replaceAll("(?:[<@!>])","");
+                if(words[1].equals(UserID)){
+
+                    guild.getUserByID(Long.parseLong(UserID)).moveToVoiceChannel(guild.getVoiceChannelByID(376655874543976448L));
+                    //SlamUtils.sendMessage(channel,guild.getUsers().get(i).getName());
+                }
+            }
+        }
+
+        if(message.contains("neato") || message.contains("nito")){
+            SlamUtils.sendFile(channel,new File("nito.jpg"));
+        }
+
+
 
 
     }
-
 
 
     private void giveMeADrink(IChannel channel) {

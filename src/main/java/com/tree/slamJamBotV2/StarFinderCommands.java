@@ -9,7 +9,6 @@ import sx.blah.discord.api.events.EventSubscriber;
 import sx.blah.discord.api.internal.json.objects.EmbedObject;
 import sx.blah.discord.handle.impl.events.guild.channel.message.MessageReceivedEvent;
 import sx.blah.discord.handle.impl.events.guild.channel.message.reaction.ReactionAddEvent;
-import sx.blah.discord.handle.impl.obj.Reaction;
 import sx.blah.discord.handle.obj.IChannel;
 import sx.blah.discord.handle.obj.IReaction;
 import sx.blah.discord.handle.obj.IUser;
@@ -34,7 +33,9 @@ public class StarFinderCommands {
     public StarFinderCommands(){
 
         try {
-            starfinderFeats = new ArrayList<>(CSVFormat.RFC4180.withFirstRecordAsHeader().parse(new FileReader("starfinder_feats.csv")).getRecords());
+            FileReader fr = new FileReader("starfinder_feats.csv");
+            starfinderFeats = new ArrayList<>(CSVFormat.RFC4180.withFirstRecordAsHeader().parse(fr).getRecords());
+            fr.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -63,7 +64,7 @@ public class StarFinderCommands {
             }
             embedBuilder.appendField("Feats",stringBuilder.toString(),false);
 
-            embedBuilder.withFooterText("To lern more about a feat type \"starfinder feat name\"");
+            embedBuilder.withFooterText("To learn more about a feat type \"starfinder feat name\"");
 
             stringBuilder.delete(0,stringBuilder.length());
 
@@ -146,7 +147,6 @@ public class StarFinderCommands {
         IUser user= reactionAddEvent.getUser();
         if(messageID == starFinderFeatsMessageID && !user.isBot()){
             if(EmojiParser.parseToAliases(reactionAddEvent.getReaction().getEmoji().toString()).equals(":arrow_left:")){
-                System.err.println("TES TEST TEST TEST TEST");
                 starFinderFeatsMessagePage--;
                 if (starFinderFeatsMessagePage < 0){
                     starFinderFeatsMessagePage = 3;

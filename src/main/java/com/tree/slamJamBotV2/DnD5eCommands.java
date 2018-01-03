@@ -28,7 +28,9 @@ public class DnD5eCommands {
 
     public DnD5eCommands(){
         try {
-            dnd5eSpells = new ArrayList<>(CSVFormat.RFC4180.withFirstRecordAsHeader().parse(new FileReader("5eSpells.csv")).getRecords());
+            FileReader fr = new FileReader("5eSpells.csv");
+            dnd5eSpells = new ArrayList<>(CSVFormat.RFC4180.withFirstRecordAsHeader().parse(fr).getRecords());
+            fr.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -56,7 +58,7 @@ public class DnD5eCommands {
             }
             embedBuilder.appendField("Spells",stringBuilder.toString(),false);
 
-            embedBuilder.withFooterText("To lern more about a spell type \"dnd spell name\"");
+            embedBuilder.withFooterText("To learn more about a spell type \"dnd spell name\"");
 
             stringBuilder.delete(0,stringBuilder.length());
 
