@@ -36,33 +36,33 @@
   },
   {
     "exact" : true,
-    "name" : ["traps are gay"],
+    "names" : ["traps are gay"],
     "message" : "<@284068848183934988>",
     "filePaths" : ["traps.png"]
   },
   {
-    "exact" : false,
-    "name" : ["it's fine"],
+    "exact" : true,
+    "names" : ["it's fine"],
     "filePaths" : ["its_fine.jpg"]
   },
   {
-    "exact" : false,
-    "name" : ["on fire"],
+    "exact" : true,
+    "*-*" : ["on fire"],
     "filePaths" : ["on_fire.jpg"]
   },
   {
-    "exact" : false,
-    "name" : ["de nada"],
+    "exact" : true,
+    "names" : ["de nada"],
     "filePaths" : ["nada.jpg"]
   },
   {
     "exact" : false,
-    "name" : ["neato","nito"],
+    "names" : ["neato","nito"],
     "filePaths" : ["nito.jpg"]
   },
   {
     "exact" : false,
-    "name" : ["de way"],
+    "names" : ["de way"],
     "filePaths" : ["the_way.jpg"]
   }
 ]
