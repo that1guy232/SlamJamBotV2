@@ -41,20 +41,15 @@ public class MemeCommands  {
 
     @EventSubscriber
     public void onMessageReceived(MessageReceivedEvent event) {
+        String message = event.getMessage().getContent().toLowerCase();
         for (int i = 0; i < memeCommands.length; i++) {
             if(memeCommands[i].exact == null && memeCommands[i] != null){
                 memeCommands[i].exact = true;
             }
 
             try {
-
-
                 for (int j = 0; j < memeCommands[i].names.length; j++) {
-
-
-                    if (!memeCommands[i].exact && event.getMessage().getContent().contains(memeCommands[i].names[j]) || containsWord(event.getMessage().getContent(), memeCommands[i].names[j])) {
-                        System.err.println(memeCommands[i].names[j]);
-
+                    if (!memeCommands[i].exact && message.contains(memeCommands[i].names[j]) || containsWord(message, memeCommands[i].names[j])) {
                         if (memeCommands[i].emotes != null) {
                             for (int k = 0; k < memeCommands[i].emotes.length; k++) {
 
@@ -71,7 +66,6 @@ public class MemeCommands  {
 
                             }
                         }
-
                         if (memeCommands[i].message != null) {
                             if (memeCommands[i].message.contains("$mention")) {
                                 memeCommands[i].message = memeCommands[i].message.replace("$mention", event.getAuthor().mention());
@@ -84,7 +78,6 @@ public class MemeCommands  {
                                 SlamUtils.sendFile(event.getChannel(), new File(memeCommands[i].filePaths[k]));
                             }
                         }
-
                     }
                 }
             }catch (NullPointerException e){
@@ -94,20 +87,12 @@ public class MemeCommands  {
 
     }
 
-
-
     boolean containsWord(String sentence, String word){
         String regex = ".*\\b" + Pattern.quote(word) + "\\b.*";
         return sentence.matches(regex);
     }
 
-
-
-
-
-
 }
-
 
 
 class MemeCommand{

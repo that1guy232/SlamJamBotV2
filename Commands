@@ -47,7 +47,7 @@
   },
   {
     "exact" : true,
-    "*-*" : ["on fire"],
+    "names" : ["on fire"],
     "filePaths" : ["on_fire.jpg"]
   },
   {
@@ -56,7 +56,7 @@
     "filePaths" : ["nada.jpg"]
   },
   {
-    "exact" : false,
+    "exact" : true,
     "names" : ["neato","nito"],
     "filePaths" : ["nito.jpg"]
   },
