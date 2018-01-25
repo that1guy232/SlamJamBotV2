@@ -1,6 +1,10 @@
 package com.tree.slamJamBotV2;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonElement;
 import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonWriter;
 import de.btobastian.sdcf4j.Command;
 import de.btobastian.sdcf4j.CommandExecutor;
 import sx.blah.discord.handle.obj.IChannel;
@@ -145,46 +149,6 @@ public class RealCommands implements CommandExecutor {
             }
         }
         return "";
-    }
-
-   // @Command(aliases = "r6stats", async = true)
-    public void r6stats(String args[],IChannel channel){
-
-
-        try {
-            String urlString = "https://r6db.com/api/v2/players?name=a_pinecone_man&platform=pc&exact=false";
-            URL url = new URL(urlString);
-
-            URLConnection connection = url.openConnection();
-
-            connection.setRequestProperty("x-app-id","SlamJamBot");
-
-            connection.setRequestProperty("User-Agent", "Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.4; en-US; rv:1.9.2.2) Gecko/20100316 Firefox/3.6.2");
-
-
-            InputStream is = connection.getInputStream();
-            JsonReader jsonReader = new JsonReader(new InputStreamReader(is));
-            String id = "1";
-            jsonReader.beginArray();
-            jsonReader.beginObject();
-            while (jsonReader.hasNext()){
-                String name = jsonReader.nextName();
-                if(name.equals("id")){
-                    id = jsonReader.nextString();
-                }else {
-                    jsonReader.skipValue();
-                }
-            }
-
-            EmbedBuilder embedBuilder = new EmbedBuilder();
-            embedBuilder.withTitle("test");
-            embedBuilder.withThumbnail("https://uplay-avatars.s3.amazonaws.com/"+ id+ "/default_146_146.png");
-            SlamUtils.sendEmbed(channel,embedBuilder.build());
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
     }
 
 

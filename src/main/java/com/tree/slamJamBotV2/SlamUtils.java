@@ -20,7 +20,7 @@ public class SlamUtils {
 
 
 
-    static void sendMessage(IChannel channel, String message){
+    public static void sendMessage(IChannel channel, String message){
         //
         RequestBuffer.request(() -> {
             try{
@@ -34,7 +34,8 @@ public class SlamUtils {
     }
 
 
-    static void sendFile(IChannel channel, File file){
+
+    public static void sendFile(IChannel channel, File file){
 
         RequestBuffer.request(() -> {
             try{

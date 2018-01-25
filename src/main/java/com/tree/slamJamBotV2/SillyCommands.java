@@ -25,6 +25,7 @@ import sx.blah.discord.util.RequestBuffer;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
+import java.awt.font.TextLayout;
 import java.awt.image.BufferedImage;
 import java.io.*;
 import java.net.MalformedURLException;
@@ -64,89 +65,61 @@ public class SillyCommands {
 
 
     @EventSubscriber
-    public void onMessageReceived(MessageReceivedEvent event){
+    public void onMessageReceived(MessageReceivedEvent event) {
         String message = event.getMessage().getContent();
+
+
         IChannel channel = event.getChannel();
         message = message.toLowerCase();
         IGuild guild = event.getGuild();
+        if (!message.contains("no meme")) {
 
-        if(message.equals("traps are gay")){
-            SlamUtils.sendFileWithMessage(channel,"<@284068848183934988>",new File("traps.png"));
-        }
-        if(message.contains("banana peel")){
-            SlamUtils.sendMessage(channel," :banana:  :banana:  https://www.youtube.com/watch?v=r5zHTHPso28 :banana:  :banana:  ");
-        }
-        if(message.contains("good bot")){
+            if (message.equals("give me a drink") || message.equals("i need a drink") || message.equals("you need a drink")) {
+                giveMeADrink(channel);
 
-            event.getMessage().addReaction(EmojiManager.getForAlias("smile"));
-        }
-        if(message.equals("bad bot")){
-            event.getMessage().addReaction(EmojiManager.getForAlias("disappointed_relieved"));
-        }
-        if(message.equals("give me a drink")|| message.equals("i need a drink") || message.equals("you need a drink")){
-            giveMeADrink(channel);
-
-        }
-        if(message.contains("retarded") || message.contains("retard") || message.contains("traps are not gay")){
-            StringBuilder sb = new StringBuilder(message.length());
-            for(char c : message.toCharArray()){
-                sb.append(ThreadLocalRandom.current().nextBoolean() ? Character.toLowerCase(c) : Character.toUpperCase(c));
             }
-            try {
-                BufferedImage sponge = ImageIO.read(new File("spongebob.jpg"));
-                byte[] b = mergeImageAndText(sponge, sb.toString(), new Point(sponge.getWidth()/2, sponge.getHeight()));
+            if (message.contains("retarded") || message.contains("retard") || message.contains("traps are not gay")) {
+                StringBuilder sb = new StringBuilder(message.length());
+                for (char c : message.toCharArray()) {
+                    sb.append(ThreadLocalRandom.current().nextBoolean() ? Character.toLowerCase(c) : Character.toUpperCase(c));
+                }
+                try {
+                    BufferedImage sponge = ImageIO.read(new File("spongebob.jpg"));
+                    byte[] b = mergeImageAndText(sponge, sb.toString(), new Point(sponge.getWidth() / 2, sponge.getHeight()));
 
-                FileOutputStream fos = new FileOutputStream("so"+2+".png");
-                fos.write(b);
-                fos.close();
-            } catch (IOException e) {
-                e.printStackTrace();
+                    FileOutputStream fos = new FileOutputStream("so" + 2 + ".png");
+                    fos.write(b);
+                    fos.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                File pic = new File("so" + 2 + ".png");
+                SlamUtils.sendFile(channel, pic);
             }
-            File pic = new File("so"+2+".png");
-            SlamUtils.sendFile(channel,pic);
-        }
 
-        if(message.contains("sleepy-bye arty")){
+            if (message.contains("sleepy-bye arty")) {
 
-            guild.getUserByID(284068848183934988L).moveToVoiceChannel(guild.getVoiceChannelByID(376655874543976448L));
+                guild.getUserByID(284068848183934988L).moveToVoiceChannel(guild.getVoiceChannelByID(376655874543976448L));
 
-        }
+            }
 
-        if(message.contains("aaaa")){
-            SlamUtils.sendMessage(event.getChannel(),"https://www.youtube.com/watch?v=Y4Z7Ds_yv8o");
-        }
-        if(message.contains("reee")){
-            SlamUtils.sendMessage(event.getChannel(),"https://youtu.be/LGgWWL9lTZs");
-        }
-        if(message.equalsIgnoreCase("easy breezy beautiful crocodile") || message.equalsIgnoreCase("ebbc")){
-            SlamUtils.sendFile(channel,new File("corc.jpg"));
-        }
-        if(message.contains("it's fine") || message.contains("its fine")){
-            SlamUtils.sendFile(channel,new File("its_fine.jpg"));
-        }
-        if(message.contains("on fire")){
-            SlamUtils.sendFile(channel,new File("on_fire.jpg"));
-        }
 
-        if(message.startsWith("sleepy-bye")){
-            String[] words = message.split("\\s");
-            words[1] = words[1].replaceAll("(?:[<@!>])","");
-            for (int i = 0; i < guild.getUsers().size(); i++) {
-                String UserID = guild.getUsers().get(i).mention().replaceAll("(?:[<@!>])","");
-                if(words[1].equals(UserID)){
+            if (message.startsWith("sleepy-bye")) {
+                String[] words = message.split("\\s");
+                words[1] = words[1].replaceAll("(?:[<@!>])", "");
+                for (int i = 0; i < guild.getUsers().size(); i++) {
+                    String UserID = guild.getUsers().get(i).mention().replaceAll("(?:[<@!>])", "");
+                    if (words[1].equals(UserID)) {
 
-                    guild.getUserByID(Long.parseLong(UserID)).moveToVoiceChannel(guild.getVoiceChannelByID(376655874543976448L));
-                    //SlamUtils.sendMessage(channel,guild.getUsers().get(i).getName());
+                        guild.getUserByID(Long.parseLong(UserID)).moveToVoiceChannel(guild.getVoiceChannelByID(376655874543976448L));
+                        //SlamUtils.sendMessage(channel,guild.getUsers().get(i).getName());
+                    }
                 }
             }
+
+
+
         }
-
-        if(message.contains("neato") || message.contains("nito")){
-            SlamUtils.sendFile(channel,new File("nito.jpg"));
-        }
-
-
-
 
     }
 
@@ -169,13 +142,16 @@ public class SillyCommands {
 
 
 
+
     public static byte[] mergeImageAndText(BufferedImage image,
                                            String text, Point textPosition) throws IOException {
         Graphics2D g2 = image.createGraphics();
 
         System.err.print(image);
 
-        g2.setFont(new Font("KenVector Bold",Font.PLAIN,25));
+        Font f = new Font("KenVector Bold",Font.PLAIN,25);
+
+        g2.setFont(f);
 
         int sw =  g2.getFontMetrics().stringWidth(text);
         g2.setColor(Color.BLACK);
@@ -206,15 +182,39 @@ public class SillyCommands {
                 if(i == 0){
 
                     g2.drawString(stringsForImage.get(i),textPosition.x - (g2.getFontMetrics().stringWidth(stringsForImage.get(i))/2),textPosition.y-15);
+
+
+
+//                    TextLayout textLayout = new TextLayout(stringsForImage.get(i),f,g2.getFontRenderContext());
+//                    Shape outline = textLayout.getOutline(null);
+//                    g2.setColor(Color.BLUE);
+//                    g2.translate(textPosition.x - (g2.getFontMetrics().stringWidth(stringsForImage.get(i))/2),textPosition.y-15);
+//                    g2.draw(outline);
+
+
                 }else {
 
                     g2.drawString(stringsForImage.get(i),textPosition.x - (g2.getFontMetrics().stringWidth(stringsForImage.get(i))/2),textPosition.y+g2.getFontMetrics().getHeight()-y);
+
+//                    TextLayout textLayout = new TextLayout(stringsForImage.get(i),f,g2.getFontRenderContext());
+//                    Shape outline = textLayout.getOutline(null);
+//                    g2.setColor(Color.BLUE);
+//                    g2.translate(textPosition.x - (g2.getFontMetrics().stringWidth(stringsForImage.get(i))/2),textPosition.y+g2.getFontMetrics().getHeight()-y);
+//                    g2.draw(outline);
+
                 }
             }
 
 
         }else {
             g2.drawString(text, textPosition.x - (sw/2), textPosition.y);
+
+//            TextLayout textLayout = new TextLayout(text,f,g2.getFontRenderContext());
+//            Shape outline = textLayout.getOutline(null);
+//            g2.setColor(Color.BLUE);
+//            g2.translate(textPosition.x - (sw/2),textPosition.y);
+//            g2.draw(outline);
+
         }
 
 
@@ -226,5 +226,8 @@ public class SillyCommands {
 
         return baos.toByteArray();
     }
+
+
+
 
 }

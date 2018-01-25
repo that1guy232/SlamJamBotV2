@@ -1,5 +1,6 @@
 package com.tree.slamJamBotV2;
 
+import com.tree.slamJamBotV2.memeCommands.MemeCommands;
 import de.btobastian.sdcf4j.CommandHandler;
 import de.btobastian.sdcf4j.handler.Discord4JHandler;
 import sx.blah.discord.api.ClientBuilder;
@@ -18,9 +19,6 @@ public class SlamJamBot {
 
 
 
-
-
-
         if(args.length < 1){
             System.out.println("Please enter the bots token as the first argument e.g java -jar thisjar.jar tokenhere");
             return;
@@ -34,6 +32,8 @@ public class SlamJamBot {
         client.getDispatcher().registerListener(new SillyCommands());
         client.getDispatcher().registerListener(new StarFinderCommands());
         client.getDispatcher().registerListener(new DnD5eCommands());
+        client.getDispatcher().registerListener(new MemeCommands());
+      //  commandHandler.registerCommand(new RainbowCommands());
         commandHandler.registerCommand(new RealCommands());
 
         client.login();
