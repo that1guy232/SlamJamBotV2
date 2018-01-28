@@ -6,7 +6,7 @@
 
     <groupId>SlamJamBotV2</groupId>
     <artifactId>SlamJamBot</artifactId>
-    <version>0.2</version>
+    <version>0.5</version>
     <build>
         <plugins>
             <plugin>

@@ -3,6 +3,7 @@ package com.tree.slamJamBotV2;
 import com.tree.slamJamBotV2.memeCommands.MemeCommands;
 import de.btobastian.sdcf4j.CommandHandler;
 import de.btobastian.sdcf4j.handler.Discord4JHandler;
+import org.apache.commons.lang3.StringUtils;
 import sx.blah.discord.api.ClientBuilder;
 import sx.blah.discord.api.IDiscordClient;
 
@@ -14,9 +15,7 @@ import java.io.FileNotFoundException;
 public class SlamJamBot {
 
     public static void main(String[] args) throws FileNotFoundException {
-
-
-
+        String test = "!addcommand names: Test, Test2 message: this would do that emotes: :thumbsup: :sweat_drops: exact: true/false default true";
 
 
         if(args.length < 1){
@@ -33,7 +32,6 @@ public class SlamJamBot {
         client.getDispatcher().registerListener(new StarFinderCommands());
         client.getDispatcher().registerListener(new DnD5eCommands());
         client.getDispatcher().registerListener(new MemeCommands());
-      //  commandHandler.registerCommand(new RainbowCommands());
         commandHandler.registerCommand(new RealCommands());
 
         client.login();
