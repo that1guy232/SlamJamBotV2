@@ -123,7 +123,7 @@ public class StarFinderCommands {
 
 
 
-                    if (starfinderFeat.get("Name").toLowerCase().contains(stringBuilder.toString())) {
+                    if (starfinderFeat.get("Name").toLowerCase().matches(stringBuilder.toString())) {
                         EmbedBuilder embedBuilder = new EmbedBuilder();
                         embedBuilder.withTitle(starfinderFeat.get("Name"));
                         embedBuilder.withDescription(starfinderFeat.get("Description"));

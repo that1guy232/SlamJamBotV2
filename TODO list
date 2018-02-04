@@ -12,12 +12,9 @@ Conditions for starfinder
 random char from xnathars guide
 https://rpg.rem.uz/Dungeons%20%26%20Dragons/D%26D%205th%20Edition/Rulebooks/Supplements/Xanathar%27s%20Guide%20To%20Everything.pdf
 
-Rewrite memeCommands:
-    Have them stored in json format
-    Have a add command command
-    Have a remove command commad
-
 Spongebob meme text make text white with black border
 
 Make a togglable to have the bot in vc
 	It will say omg it my good friend, Then will text to speech the user who's joined name
+
+ add a level thing to my bot, To level up/gain exp you have to trigger commands or add commands

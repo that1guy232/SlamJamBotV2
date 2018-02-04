@@ -26,20 +26,23 @@ public class MemeCommands  {
     Gson gson;
     public MemeCommands(){
 
-        MemeCommand tmp[];
 
+
+        memeCommands = loadCommands();
+
+
+
+    }
+
+    private ArrayList<MemeCommand> loadCommands() {
+        MemeCommand tmp[];
         gson = new GsonBuilder().setPrettyPrinting().create();
         FileReader fr = null;
         try {
             fr = new FileReader("Commands.json");
-          tmp = gson.fromJson(fr,MemeCommand[].class);
+            tmp = gson.fromJson(fr,MemeCommand[].class);
 
-          memeCommands = new ArrayList<>(Arrays.asList(tmp));
-
-
-
-            System.err.println(gson.toJson(memeCommands));
-
+            return new ArrayList<>(Arrays.asList(tmp));
 
 
         } catch (FileNotFoundException e) {
@@ -47,7 +50,8 @@ public class MemeCommands  {
         }
 
         tmp = null;
-
+        System.err.println("Commands fail to load.");
+        return null;
 
     }
 
@@ -170,7 +174,6 @@ public class MemeCommands  {
                 }
                 memeCommands.add(new MemeCommand(tmpnms.toArray(new String[0]), commandmessage, emotes, exact, filePath));
 
-                System.err.println(gson.toJson(memeCommands.get(memeCommands.size() - 1)));
 
 
                 saveCommands();
@@ -188,7 +191,11 @@ public class MemeCommands  {
             }
 
 
-        }else {
+        } else if (message.startsWith("!reloadcommands")) {
+            System.err.println("test");
+            memeCommands = null;
+            memeCommands = loadCommands();
+        } else {
 
 
             for (int i = 0; i < memeCommands.size(); i++) {

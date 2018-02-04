@@ -71,7 +71,7 @@ public class DnD5eCommands {
 
 
 
-    private void starFinderCommands(IChannel channel, String message) {
+    private void spellFinderCommands(IChannel channel, String message) {
         String spellMessage[] = message.split("\\s");
 
         if (spellMessage[1].equals("spells")) {
@@ -112,8 +112,8 @@ public class DnD5eCommands {
                 stringBuilder.append(spellMessage[spellMessage.length - 1]);
                 for (CSVRecord spells : dnd5eSpells) {
 
-
-                    if (spells.get("name").toLowerCase().contains(stringBuilder.toString())) {
+                    //spells.get("name").toLowerCase().contains(stringBuilder.toString())
+                    if (spells.get("name").toLowerCase().matches(stringBuilder.toString())) {
                         EmbedBuilder embedBuilder = new EmbedBuilder();
                         embedBuilder.withTitle(spells.get("name"));
                         embedBuilder.withDesc(spells.get("description"));
@@ -183,7 +183,7 @@ public class DnD5eCommands {
         if(message.startsWith("dnd")){
 
 
-            starFinderCommands(channel,message);
+            spellFinderCommands(channel,message);
         }
     }
 }
