@@ -191,29 +191,40 @@ public class DnD5eCommands {
         }
 
         if(message.startsWith("roll")){
+			StringBuilder stringBuilder = new StringBuilder();
 			ArrayList<String> rollCommand = new ArrayList<String>(Arrays.asList(message.split("((?<=\\+|\\-|\\*|\\/)|(?=\\+|\\-|\\*|\\/))|\\s")));
+			ArrayList<ArrayList<Integer>> dicerolled = new ArrayList<>();
 			rollCommand.remove(0);
+			int x = 0;
 			for (int i = 0; i < rollCommand.size(); i++) {
 				if (rollCommand.get(i).contains("d")){
-
+					dicerolled.add(new ArrayList<>());
 					int dieToRoll;
 					String[] dice = rollCommand.get(i).split("[d]");
-					System.err.println(Arrays.toString(dice));
+					//System.err.println(Arrays.toString(dice));
 					dice[0] = dice[0].replace(" ","");
 					int amountofDice = Integer.valueOf(dice[0]);
 					dieToRoll = Integer.valueOf(dice[1]);
 
 					int total = 0;
-
 					for (int j = 0; j < amountofDice; j++) {
-						total += ThreadLocalRandom.current().nextInt(1, dieToRoll+1);
-					}
+						dicerolled.get(x).add(ThreadLocalRandom.current().nextInt(1, dieToRoll+1));
 
-					rollCommand.set(i,String.valueOf(total));
+					}
+					stringBuilder = new StringBuilder();
+					for (int j = 0; j < dicerolled.get(x).size(); j++) {
+						stringBuilder.append(dicerolled.get(x).get(j).toString());
+						if(j != dicerolled.get(x).size()-1)
+							stringBuilder.append("+");
+
+					}
+					System.err.println(stringBuilder.toString());
+					rollCommand.set(i,stringBuilder.toString());
+					x++;
 				}
 			}
 			System.err.println(rollCommand);
-			StringBuilder stringBuilder = new StringBuilder();
+			stringBuilder = new StringBuilder();
 			for (int i = 0; i < rollCommand.size() ; i++) {
 				stringBuilder.append(rollCommand.get(i));
 			}
