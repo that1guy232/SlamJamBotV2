@@ -198,6 +198,8 @@ public class DnD5eCommands {
 
 					int dieToRoll;
 					String[] dice = rollCommand.get(i).split("[d]");
+					System.err.println(Arrays.toString(dice));
+					dice[0] = dice[0].replace(" ","");
 					int amountofDice = Integer.valueOf(dice[0]);
 					dieToRoll = Integer.valueOf(dice[1]);
 
@@ -220,7 +222,7 @@ public class DnD5eCommands {
 			ScriptEngine engine = mgr.getEngineByName("JavaScript");
 			try {
 				Object eq =  engine.eval(stringBuilder.toString());
-				SlamUtils.sendMessage(channel,"Total: " + eq);
+				SlamUtils.sendMessage(channel, stringBuilder.toString() + " = " + eq);
 			} catch (ScriptException e) {
 				e.printStackTrace();
 			}
