@@ -15,10 +15,15 @@ import sx.blah.discord.handle.obj.IUser;
 import sx.blah.discord.util.EmbedBuilder;
 import sx.blah.discord.util.RequestBuffer;
 
+import javax.script.ScriptEngine;
+import javax.script.ScriptEngineManager;
+import javax.script.ScriptException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class DnD5eCommands {
     List<CSVRecord> dnd5eSpells;
@@ -71,7 +76,7 @@ public class DnD5eCommands {
 
 
 
-    private void spellFinderCommands(IChannel channel, String message) {
+    private void DndCommands(IChannel channel, String message) {
         String spellMessage[] = message.split("\\s");
 
         if (spellMessage[1].equals("spells")) {
@@ -86,7 +91,7 @@ public class DnD5eCommands {
                 channel.getMessageByID(spellListMessageID).delete();
             }
 
-            spellListMessageID = SlamUtils.sendEmbedWithReactions(channel, spellEmbeds.get(0));
+            spellListMessageID = SlamUtils.sendEmbed(channel, spellEmbeds.get(0));
             spellListMessagePage = 0;
 
             RequestBuffer.request(() -> channel.getMessageByID(spellListMessageID).addReaction(EmojiManager.getForAlias(emojiList.get(0)))).get();
@@ -182,8 +187,47 @@ public class DnD5eCommands {
         message = message.toLowerCase();
         if(message.startsWith("dnd")){
 
-
-            spellFinderCommands(channel,message);
+            DndCommands(channel,message);
         }
+
+        if(message.startsWith("roll")){
+			ArrayList<String> rollCommand = new ArrayList<String>(Arrays.asList(message.split("((?<=\\+|\\-|\\*|\\/)|(?=\\+|\\-|\\*|\\/))|\\s")));
+			rollCommand.remove(0);
+			for (int i = 0; i < rollCommand.size(); i++) {
+				if (rollCommand.get(i).contains("d")){
+
+					int dieToRoll;
+					String[] dice = rollCommand.get(i).split("[d]");
+					int amountofDice = Integer.valueOf(dice[0]);
+					dieToRoll = Integer.valueOf(dice[1]);
+
+					int total = 0;
+
+					for (int j = 0; j < amountofDice; j++) {
+						total += ThreadLocalRandom.current().nextInt(1, dieToRoll+1);
+					}
+
+					rollCommand.set(i,String.valueOf(total));
+				}
+			}
+			System.err.println(rollCommand);
+			StringBuilder stringBuilder = new StringBuilder();
+			for (int i = 0; i < rollCommand.size() ; i++) {
+				stringBuilder.append(rollCommand.get(i));
+			}
+			System.err.println(stringBuilder.toString());
+			ScriptEngineManager mgr = new ScriptEngineManager();
+			ScriptEngine engine = mgr.getEngineByName("JavaScript");
+			try {
+				Object eq =  engine.eval(stringBuilder.toString());
+				SlamUtils.sendMessage(channel,"Total: " + eq);
+			} catch (ScriptException e) {
+				e.printStackTrace();
+			}
+
+
+		}
+
+
     }
 }

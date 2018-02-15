@@ -10,7 +10,9 @@ import sx.blah.discord.util.RequestBuffer;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Pattern;
 
 /**
  * Created by Keith on 11/18/2017.
@@ -61,33 +63,38 @@ public class SlamUtils {
     }
 
 
-    static void sendEmbed(IChannel channel, EmbedObject embed) {
+    static long sendEmbed(IChannel channel, EmbedObject embed) {
+        final long[] messageID = new long[1];
         RequestBuffer.request(() -> {
             try{
-                channel.sendMessage(embed);
+				messageID[0] = channel.sendMessage(embed).getLongID();
 
             } catch (DiscordException e){
                 System.err.println("File could not be sent with error: ");
                 e.printStackTrace();
             }
         });
-    }
-/*
-[5:33 AM] dic: it's probably the issue but the id of the message on discords side likely won't be present every time immediately after, you should only have one RLE throwing method inside a request buffer at one time, the better way to do it is to send the message in one buffer, call .get on that request() to block until the message has been sent, get the id, then for each emoji do your thing, each should be in seperate requestbuffers
-[5:34 AM] dic: what's probably happening is that it does the sendmessage, works fine, then one of the addreaction methods throws a RLE because you're doing them too fast, then it re-executes the entire request block, sending the message again
- */
-    static long sendEmbedWithReactions(IChannel channel, EmbedObject embed) {
-        final long[] messageID = new long[1];
-        RequestBuffer.request(() -> {
-            try{
-                messageID[0] = channel.sendMessage(embed).getLongID();
-            } catch (DiscordException e){
-                System.err.println("File could not be sent with error: ");
-                e.printStackTrace();
-            }
-        }).get();
-        System.err.println(messageID[0]);
         return messageID[0];
-
     }
+	public static boolean containsWord(String sentence, String word){
+		String regex = ".*\\b" + Pattern.quote(word) + "\\b.*";
+		return sentence.matches(regex);
+	}
+
+	public static String[] spiltMessage(String message){
+		String regex = "\\s";
+		return message.split(regex);
+	}
+
+	public static String makeSentence(ArrayList<String> strings){
+		StringBuilder stringBuilder = new StringBuilder();
+		for (int i = 0; i < strings.size(); i++) {
+			stringBuilder.append(strings.get(i));
+			if(strings.size()-1 != i){
+
+				stringBuilder.append(" ");
+			}
+		}
+		return stringBuilder.toString();
+	}
 }

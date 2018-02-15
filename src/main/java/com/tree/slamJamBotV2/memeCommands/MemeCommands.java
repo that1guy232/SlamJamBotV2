@@ -3,11 +3,10 @@ package com.tree.slamJamBotV2.memeCommands;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.tree.slamJamBotV2.SlamUtils;
-import com.vdurmont.emoji.Emoji;
 import com.vdurmont.emoji.EmojiManager;
-import com.vdurmont.emoji.EmojiParser;
 import sx.blah.discord.api.events.EventSubscriber;
 import sx.blah.discord.handle.impl.events.guild.channel.message.MessageReceivedEvent;
+import sx.blah.discord.handle.obj.Permissions;
 import sx.blah.discord.util.DiscordException;
 import sx.blah.discord.util.RequestBuffer;
 
@@ -17,13 +16,14 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.regex.Pattern;
+
+import static com.tree.slamJamBotV2.SlamUtils.*;
 
 public class MemeCommands  {
 
     ArrayList<MemeCommand> memeCommands;
     //MemeCommand memeCommands[];
-    Gson gson;
+    private Gson gson;
     public MemeCommands(){
 
 
@@ -124,7 +124,7 @@ public class MemeCommands  {
             }
 
             if (names.size() <= 0) {
-                SlamUtils.sendMessage(event.getChannel(), "You must have at least one name for the command to trigger.");
+                sendMessage(event.getChannel(), "You must have at least one name for the command to trigger.");
             } else {
 
                 if (event.getMessage().getAttachments().size() > 0) {
@@ -179,10 +179,20 @@ public class MemeCommands  {
                 saveCommands();
 
             }
-        }else  if(message.startsWith("!removecommand")){
+        }else  if(message.startsWith("!removecommand") && event.getAuthor().getPermissionsForGuild(event.getGuild()).contains(Permissions.ADMINISTRATOR) ){
+			ArrayList<String> tmp = new ArrayList<>();
+			for (int i = 1; i < command.length; i++) {
+				tmp.add(command[i]);
+			}
+			String name = makeSentence(tmp);
+			System.err.println(name);
             for (MemeCommand memeCommand : memeCommands) {
-                for (int j = 0; j < memeCommand.names.length; j++){
-                    if(memeCommand.names[j].equalsIgnoreCase(command[1])){
+
+				for (int j = 0; j < memeCommand.names.length; j++){
+					System.err.println(memeCommand.names[j].equals("de way"));
+					System.err.println("Command: " + memeCommand.names[j] + "    Name: " + name);
+                    if(memeCommand.names[j].equals(name)){
+
                         memeCommands.remove(memeCommand);
                         saveCommands();
                         break;
@@ -205,7 +215,7 @@ public class MemeCommands  {
 
                 try {
                     for (int j = 0; j < memeCommands.get(i).names.length; j++) {
-                        if (!memeCommands.get(i).exact && message.contains(memeCommands.get(i).names[j]) || containsWord(message, memeCommands.get(i).names[j])) {
+                        if (!memeCommands.get(i).exact && message.contains(memeCommands.get(i).names[j]) || SlamUtils.containsWord(message, memeCommands.get(i).names[j])) {
                             if (memeCommands.get(i).emotes != null) {
                                 for (int k = 0; k < memeCommands.get(i).emotes.length; k++) {
 
@@ -227,12 +237,15 @@ public class MemeCommands  {
                                 if (memeCommands.get(i).message.contains("$mention")) {
                                     memeCommands.get(i).message = memeCommands.get(i).message.replace("$mention", event.getAuthor().mention());
                                 }
-                                SlamUtils.sendMessage(event.getChannel(), memeCommands.get(i).message);
+                                if (memeCommands.get(i).message.contains("/n")) {
+                                    memeCommands.get(i).message = memeCommands.get(i).message.replace("/n", event.getAuthor().mention());
+                                }
+                                sendMessage(event.getChannel(), memeCommands.get(i).message);
                             }
 
                             if (memeCommands.get(i).filePaths != null) {
                                 for (int k = 0; k < memeCommands.get(i).filePaths.length; k++) {
-                                    SlamUtils.sendFile(event.getChannel(), new File(memeCommands.get(i).filePaths[k]));
+                                    sendFile(event.getChannel(), new File(memeCommands.get(i).filePaths[k]));
                                 }
                             }
                         }
@@ -259,24 +272,7 @@ public class MemeCommands  {
         }
     }
 
-    boolean containsWord(String sentence, String word){
-        String regex = ".*\\b" + Pattern.quote(word) + "\\b.*";
-        return sentence.matches(regex);
-    }
 
-    String[] spiltMessage(String message){
-        String regex = "\\s";
-        return message.split(regex);
-    }
-
-    String makeSentence(ArrayList<String> strings){
-        StringBuilder stringBuilder = new StringBuilder();
-        for (String string : strings) {
-            stringBuilder.append(string);
-            stringBuilder.append(" ");
-        }
-        return stringBuilder.toString();
-    }
 }
 
 

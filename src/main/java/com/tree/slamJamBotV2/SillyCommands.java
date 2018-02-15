@@ -98,8 +98,7 @@ public class SillyCommands {
             }
 
             if (message.contains("sleepy-bye arty")) {
-
-                guild.getUserByID(284068848183934988L).moveToVoiceChannel(guild.getVoiceChannelByID(376655874543976448L));
+                guild.getUserByID(284068848183934988L).moveToVoiceChannel(guild.getAFKChannel());
 
             }
 
@@ -111,7 +110,7 @@ public class SillyCommands {
                     String UserID = guild.getUsers().get(i).mention().replaceAll("(?:[<@!>])", "");
                     if (words[1].equals(UserID)) {
 
-                        guild.getUserByID(Long.parseLong(UserID)).moveToVoiceChannel(guild.getVoiceChannelByID(376655874543976448L));
+                        guild.getUserByID(Long.parseLong(UserID)).moveToVoiceChannel(guild.getAFKChannel());
                         //SlamUtils.sendMessage(channel,guild.getUsers().get(i).getName());
                     }
                 }

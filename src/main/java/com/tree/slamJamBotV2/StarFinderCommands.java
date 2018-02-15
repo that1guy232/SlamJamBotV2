@@ -88,7 +88,7 @@ public class StarFinderCommands {
                 channel.getMessageByID(starFinderFeatsMessageID).delete();
             }
 
-            starFinderFeatsMessageID = SlamUtils.sendEmbedWithReactions(channel,featEmbeds.get(0));
+            starFinderFeatsMessageID = SlamUtils.sendEmbed(channel,featEmbeds.get(0));
             starFinderFeatsMessagePage = 0;
 
             RequestBuffer.request(() -> channel.getMessageByID(starFinderFeatsMessageID).addReaction(EmojiManager.getForAlias(emojiList.get(0)))).get();
