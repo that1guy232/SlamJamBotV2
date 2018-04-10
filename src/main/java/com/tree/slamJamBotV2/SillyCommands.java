@@ -1,39 +1,20 @@
 package com.tree.slamJamBotV2;
 
-import com.google.gson.Gson;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonPrimitive;
-import com.google.gson.stream.JsonReader;
-import com.vdurmont.emoji.EmojiManager;
-import jdk.nashorn.internal.parser.JSONParser;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVRecord;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.json.JSONObject;
-import sun.net.www.http.HttpClient;
 import sx.blah.discord.api.events.EventSubscriber;
-import sx.blah.discord.api.internal.json.objects.EmbedObject;
 import sx.blah.discord.handle.impl.events.guild.channel.message.MessageReceivedEvent;
-import sx.blah.discord.handle.impl.obj.Guild;
 import sx.blah.discord.handle.obj.IChannel;
 import sx.blah.discord.handle.obj.IGuild;
-import sx.blah.discord.handle.obj.IUser;
+import sx.blah.discord.handle.obj.IVoiceChannel;
 import sx.blah.discord.util.EmbedBuilder;
 import sx.blah.discord.util.RequestBuffer;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
-import java.awt.font.TextLayout;
 import java.awt.image.BufferedImage;
 import java.io.*;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.net.URLConnection;
-import java.nio.charset.Charset;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -99,23 +80,33 @@ public class SillyCommands {
 
             if (message.contains("sleepy-bye arty")) {
                 guild.getUserByID(284068848183934988L).moveToVoiceChannel(guild.getAFKChannel());
-
             }
 
 
-            if (message.startsWith("sleepy-bye")) {
+
+            if (message.startsWith("come here")) {
                 String[] words = message.split("\\s");
-                words[1] = words[1].replaceAll("(?:[<@!>])", "");
+                words[2] = words[2].replaceAll("(?:[<@!>])", "");
                 for (int i = 0; i < guild.getUsers().size(); i++) {
                     String UserID = guild.getUsers().get(i).mention().replaceAll("(?:[<@!>])", "");
-                    if (words[1].equals(UserID)) {
-
-                        guild.getUserByID(Long.parseLong(UserID)).moveToVoiceChannel(guild.getAFKChannel());
-                        //SlamUtils.sendMessage(channel,guild.getUsers().get(i).getName());
+                    if (words[2].equals(UserID)) {
+                        IVoiceChannel voiceChannel = event.getAuthor().getVoiceStates().get(guild.getLongID()).getChannel();
+                        System.err.println(voiceChannel);
+                        guild.getUserByID(Long.parseLong(UserID)).moveToVoiceChannel(voiceChannel);
                     }
                 }
             }
+                if (message.startsWith("sleepy bye")) {
+                    String[] words = message.split("\\s");
+                    words[1] = words[1].replaceAll("(?:[<@!>])", "");
+                    for (int i = 0; i < guild.getUsers().size(); i++) {
+                        String UserID = guild.getUsers().get(i).mention().replaceAll("(?:[<@!>])", "");
+                        if (words[1].equals(UserID)) {
 
+                            guild.getUserByID(Long.parseLong(UserID)).moveToVoiceChannel(guild.getAFKChannel());
+                        }
+                    }
+                }
 
 
         }
@@ -182,24 +173,9 @@ public class SillyCommands {
 
                     g2.drawString(stringsForImage.get(i),textPosition.x - (g2.getFontMetrics().stringWidth(stringsForImage.get(i))/2),textPosition.y-15);
 
-
-
-//                    TextLayout textLayout = new TextLayout(stringsForImage.get(i),f,g2.getFontRenderContext());
-//                    Shape outline = textLayout.getOutline(null);
-//                    g2.setColor(Color.BLUE);
-//                    g2.translate(textPosition.x - (g2.getFontMetrics().stringWidth(stringsForImage.get(i))/2),textPosition.y-15);
-//                    g2.draw(outline);
-
-
                 }else {
 
                     g2.drawString(stringsForImage.get(i),textPosition.x - (g2.getFontMetrics().stringWidth(stringsForImage.get(i))/2),textPosition.y+g2.getFontMetrics().getHeight()-y);
-
-//                    TextLayout textLayout = new TextLayout(stringsForImage.get(i),f,g2.getFontRenderContext());
-//                    Shape outline = textLayout.getOutline(null);
-//                    g2.setColor(Color.BLUE);
-//                    g2.translate(textPosition.x - (g2.getFontMetrics().stringWidth(stringsForImage.get(i))/2),textPosition.y+g2.getFontMetrics().getHeight()-y);
-//                    g2.draw(outline);
 
                 }
             }
@@ -207,12 +183,6 @@ public class SillyCommands {
 
         }else {
             g2.drawString(text, textPosition.x - (sw/2), textPosition.y);
-
-//            TextLayout textLayout = new TextLayout(text,f,g2.getFontRenderContext());
-//            Shape outline = textLayout.getOutline(null);
-//            g2.setColor(Color.BLUE);
-//            g2.translate(textPosition.x - (sw/2),textPosition.y);
-//            g2.draw(outline);
 
         }
 

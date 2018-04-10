@@ -34,7 +34,19 @@ public class SlamUtils {
             }
         });
     }
+	public static void sendMessage(IChannel channel, String message, String error){
+		error = "Message could not be sent with error: ";
+		String finalError = error;
+		RequestBuffer.request(() -> {
+			try{
 
+				channel.sendMessage(message);
+			} catch (DiscordException e){
+				System.err.println(finalError);
+				e.printStackTrace();
+			}
+		});
+	}
 
 
     public static void sendFile(IChannel channel, File file){
@@ -63,7 +75,7 @@ public class SlamUtils {
     }
 
 
-    static long sendEmbed(IChannel channel, EmbedObject embed) {
+    public static long sendEmbed(IChannel channel, EmbedObject embed) {
         final long[] messageID = new long[1];
         RequestBuffer.request(() -> {
             try{

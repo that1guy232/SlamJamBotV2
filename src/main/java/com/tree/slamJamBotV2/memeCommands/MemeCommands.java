@@ -142,6 +142,7 @@ public class MemeCommands  {
 
                     } catch (IOException e) {
                         e.printStackTrace();
+                        SlamUtils.sendMessage(event.getChannel(),"File must be a image.");
                     }
 
                 }
