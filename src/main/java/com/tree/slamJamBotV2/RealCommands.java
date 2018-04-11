@@ -33,22 +33,3 @@ public class RealCommands {
 
 
 }
- class test{
-
-	 public String getName() {
-		 return name;
-	 }
-
-	 public String getContent() {
-		 return content;
-	 }
-
-	 private final String name;
-	 private final String content;
-
-	 public test(String name, String content) {
-
-		 this.name = name;
-		 this.content = content;
-	 }
- }

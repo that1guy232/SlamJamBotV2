@@ -440,13 +440,13 @@ public class RandomCharacter {
 			return "21-30 years";
 		}else if(roll <= 69){
 			LifeEvents = new String[current().nextInt(1,6)];
-			return "31—40 years";
+			return "31-40 years";
 		}else if(roll <= 89){
 			LifeEvents = new String[current().nextInt(1,8)];
-			return "41—50 years";
+			return "41-50 years";
 		}else if(roll <=99){
 			LifeEvents = new String[current().nextInt(1,10)];
-			return "51~60 years";
+			return "51-60 years";
 		}else {
 			LifeEvents = new String[current().nextInt(1,12)];
 			return "61 years or older";
