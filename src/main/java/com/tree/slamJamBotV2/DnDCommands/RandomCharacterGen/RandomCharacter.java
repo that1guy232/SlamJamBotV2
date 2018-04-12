@@ -1,4 +1,4 @@
-package com.tree.slamJamBotV2.DnDCommands;
+package com.tree.slamJamBotV2.DnDCommands.RandomCharacterGen;
 
 
 
@@ -20,17 +20,27 @@ public class RandomCharacter {
 	String Whyclass;
 	String Age;
 	String[] LifeEvents;
+
+
+
+	String[] Background;
 	private static final String[] Races = {"Mountain Dwarf","Hill Dwarf","High Elf","Dark Elf","Wood Elf","Lightfoot Halfling","Stout Halfling","Human","Dragonborn","Forest Gnome","Rock Gnome","Half-Elf","Half-Orc","Tiefling"};
 	private static final String[] Classes = {"Barbarian","Bard","Cleric","Druid","Fighter","Monk","Paladin","Ranger","Rogue", "Sorcerer","Warlock","Wizard"};
 	public RandomCharacter() {
+		CharacterBackgrounds characterBackgrounds = new CharacterBackgrounds();
+		Background = characterBackgrounds.getRandomBackGround();
 		Race = Races[current().nextInt(0,Races.length-1)];
 		PClass = Classes[current().nextInt(0,Classes.length-1)];
 		genStats();
 		incressAbiltysBasedOnRace();
 		Whyclass = genWhyclass();
 		Age = genAge();
-		for (int i = 0; i < LifeEvents.length-1; i++) {
-			LifeEvents[i] = genLifeEvent();
+		if(LifeEvents.length == 1){
+			LifeEvents[0] = genLifeEvent();
+		}else {
+			for (int i = 0; i < LifeEvents.length - 1; i++) {
+				LifeEvents[i] = genLifeEvent();
+			}
 		}
 
 
@@ -294,7 +304,7 @@ public class RandomCharacter {
 			default: return "ERROR";
 			case 1: return "A friendly wizard gave you a spell scroll containing " +
 					"one cantrip (of the DM's choice).";
-			case 2: return "You saved the life ofa commoner, who now owes " +
+			case 2: return "You saved the life of a commoner, who now owes " +
 					"you a life debt. This individual accompanies you on " +
 					"your travels and performs mundane tasks for you, " +
 					"but will leave if neglected, abused, or imperiled. " +
@@ -890,5 +900,7 @@ public class RandomCharacter {
 	public String[] getLifeEvents() {
 		return LifeEvents;
 	}
-
+	public String[] getBackground() {
+		return Background;
+	}
 }

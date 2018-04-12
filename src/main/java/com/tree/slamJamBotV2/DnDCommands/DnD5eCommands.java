@@ -1,5 +1,6 @@
 package com.tree.slamJamBotV2.DnDCommands;
 
+import com.tree.slamJamBotV2.DnDCommands.RandomCharacterGen.RandomCharacter;
 import com.tree.slamJamBotV2.SlamUtils;
 import com.vdurmont.emoji.EmojiParser;
 import sx.blah.discord.api.events.EventSubscriber;
@@ -16,7 +17,6 @@ import javax.script.ScriptEngineManager;
 import javax.script.ScriptException;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class DnD5eCommands {
@@ -82,20 +82,31 @@ public class DnD5eCommands {
 
 
 		if(message.startsWith("give me a random character!")){
-			System.err.println("Test");
 			RandomCharacter rc = new RandomCharacter();
 			EmbedBuilder embedBuilder = new EmbedBuilder();
 			embedBuilder.withTitle("Your random character!");
-			embedBuilder.withDescription("This character was randomly generatored using Xanathar's Guide To Everything.");
+			embedBuilder.withFooterText("This character was randomly generatored using Xanathar's Guide To Everything.");
 			embedBuilder.appendField("Age",rc.getAge(),false);
-			embedBuilder.appendField("Race & Class", rc.Race + "\n" + rc.getPClass(),false);
-			String abilityScores = "```Str:"+rc.getStr()+"\nDex:"+rc.getDex()+"\nCon:"+rc.getCon()+
-					"\nInt:"+rc.getInt()+"\nWis:"+rc.getWis()+"\nCha:"+rc.Cha+"```";
-			embedBuilder.appendField("Why are you a "+rc.getPClass()+"?",rc.Whyclass,false);
+			embedBuilder.appendField("Race & Class", rc.getRace() + "\n" + rc.getPClass(),false);
+			String abilityScores = "```" +
+					"Str:"+rc.getStr()+
+					"\nDex:"+rc.getDex()+
+					"\nCon:"+rc.getCon()+
+					"\nInt:"+rc.getInt()+
+					"\nWis:"+rc.getWis()+
+					"\nCha:"+rc.getCha()+"```";
+			embedBuilder.appendField("Why are you a "+rc.getPClass()+"?",rc.getWhyclass(),false);
 			embedBuilder.appendField("Ability Scores",abilityScores,false);
+			StringBuilder sb = new StringBuilder();
+			sb.append("```");
+			for (int i = 0; i < rc.getBackground().length - 1; i++) {
+				sb.append(rc.getBackground()[i]).append("\n");
+			}
+			sb.append("```");
+			embedBuilder.appendField("Background - " + rc.getBackground()[0],sb.toString(),false);
 			int z = 1;
 			if(rc.getLifeEvents().length == 1){
-				embedBuilder.appendField("Life event #"+z,rc.getLifeEvents()[0],false);
+				embedBuilder.appendField("Life event #1",rc.getLifeEvents()[0],false);
 			}else {
 				for (int i = 0; i < rc.getLifeEvents().length - 1; i++) {
 					embedBuilder.appendField("Life event #" + z, rc.getLifeEvents()[i], false);
