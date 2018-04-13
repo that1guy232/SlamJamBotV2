@@ -15,6 +15,7 @@ import sx.blah.discord.util.RequestBuffer;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class SpellListCommand {
@@ -103,23 +104,31 @@ public class SpellListCommand {
 
 		setSpellListMessageID(SlamUtils.sendEmbed(channel, spellEmbeds.get(0)));
 		setSpellListMessagePage(0);
+		System.err.println(channel.getMessageByID(getSpellListMessageID()).getContent());
 
-		RequestBuffer.request(() -> channel.getMessageByID(getSpellListMessageID()).addReaction(EmojiManager.getForAlias(emojiList.get(0)))).get();
-		RequestBuffer.request(() -> channel.getMessageByID(getSpellListMessageID()).addReaction(EmojiManager.getForAlias(emojiList.get(1)))).get();
-		RequestBuffer.request(() -> channel.getMessageByID(getSpellListMessageID()).addReaction(EmojiManager.getForAlias(emojiList.get(2)))).get();
+		try {
+			RequestBuffer.request(() -> channel.getMessageByID(getSpellListMessageID()).addReaction(EmojiManager.getForAlias(emojiList.get(0)))).get();
+			RequestBuffer.request(() -> channel.getMessageByID(getSpellListMessageID()).addReaction(EmojiManager.getForAlias(emojiList.get(1)))).get();
+			RequestBuffer.request(() -> channel.getMessageByID(getSpellListMessageID()).addReaction(EmojiManager.getForAlias(emojiList.get(2)))).get();
+		}catch (NullPointerException e){
+
+			System.err.println(e.getCause().fillInStackTrace().toString());
+		}
 	}
 
 	public void getSpell(IChannel channel,String[] spellName) {
 		StringBuilder stringBuilder = new StringBuilder();
 
-
+		System.err.println(spellName.length);
+		System.err.println(Arrays.toString(spellName));
 		for (int i = 0; i < spellName.length - 1; i++) {
-			stringBuilder.append(spellName[i]);
+			stringBuilder.append(spellName[i].toLowerCase());
 
 			stringBuilder.append(" ");
 
 		}
-		stringBuilder.append(spellName[spellName.length - 1]);
+		stringBuilder.append(spellName[spellName.length - 1].toLowerCase());
+		System.err.println(stringBuilder.toString());
 		for (CSVRecord spells : dnd5eSpells) {
 
 			//spells.get("name").toLowerCase().contains(stringBuilder.toString())

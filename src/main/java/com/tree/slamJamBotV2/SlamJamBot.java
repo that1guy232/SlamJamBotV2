@@ -3,8 +3,10 @@ package com.tree.slamJamBotV2;
 import com.tree.slamJamBotV2.DnDCommands.DnD5eCommands;
 import com.tree.slamJamBotV2.DnDCommands.RandomCharacterGen.RandomCharacter;
 import com.tree.slamJamBotV2.memeCommands.MemeCommands;
+import com.vdurmont.emoji.EmojiManager;
 import sx.blah.discord.api.ClientBuilder;
 import sx.blah.discord.api.IDiscordClient;
+import sx.blah.discord.handle.obj.StatusType;
 
 /**
  * Created by Keith on 11/18/2017.
@@ -13,8 +15,8 @@ public class SlamJamBot {
 
     public static void main(String[] args) {
 
-        boolean test = false;
-		if (test){
+        boolean test = true;
+		if (false){
 			RandomCharacter randomCharacter = new RandomCharacter();
 			System.err.println("Race: " + randomCharacter.getRace());
 			System.err.println("Class: " + randomCharacter.getPClass());
@@ -39,6 +41,9 @@ public class SlamJamBot {
 			}
 			System.exit(1);
 		}
+		if(test){
+			EmojiManager.getAll().iterator().forEachRemaining(System.err::println);
+		}
 
 
 		if (args.length < 1) {
@@ -50,7 +55,7 @@ public class SlamJamBot {
 
 
 
-		IDiscordClient client = new ClientBuilder().withToken(args[0]).setMaxReconnectAttempts(Integer.MAX_VALUE).streaming("with meme's", "https://www.google.ca/").build();
+		IDiscordClient client = new ClientBuilder().withToken(args[0]).setMaxReconnectAttempts(Integer.MAX_VALUE).setStreamingPresence(StatusType.ONLINE, "With meme's","google.com").build();
 
 
 		client.getDispatcher().registerListener(new SillyCommands());

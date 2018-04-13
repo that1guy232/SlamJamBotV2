@@ -15,6 +15,7 @@ import sx.blah.discord.util.RequestBuffer;
 import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
 import javax.script.ScriptException;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.concurrent.ThreadLocalRandom;
@@ -64,17 +65,19 @@ public class DnD5eCommands {
 		String splitMessage[] = message.split("\\s");
         IChannel channel = event.getChannel();
         message = message.toLowerCase();
-
-		if(splitMessage[1].equals("spells")){
-        	spellListCommand.sendSpellList(channel);
-		}
-		if (splitMessage[1].equals("spell")) {
-			if (splitMessage[2] != null) {
-				spellListCommand.getSpell(channel,Arrays.copyOfRange(splitMessage,2,splitMessage.length-1));
+		if(splitMessage[0].equals("dnd")) {
+			if (splitMessage[1].equals("spells")) {
+				spellListCommand.sendSpellList(channel);
 			}
+			if (splitMessage[1].equals("spell")) {
+				if (splitMessage[2] != null) {
+					String[] test = Arrays.copyOfRange(splitMessage, 2, splitMessage.length );
+					System.err.println(Arrays.toString(test));
+					spellListCommand.getSpell(channel, test);
+				}
 
+			}
 		}
-
         if(message.startsWith("roll")){
 			roll(channel,message);
 		}

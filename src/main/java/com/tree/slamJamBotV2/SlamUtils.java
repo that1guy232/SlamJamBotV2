@@ -1,9 +1,6 @@
 package com.tree.slamJamBotV2;
 
-import com.vdurmont.emoji.EmojiManager;
 import sx.blah.discord.api.internal.json.objects.EmbedObject;
-import sx.blah.discord.handle.impl.obj.Reaction;
-import sx.blah.discord.handle.impl.obj.ReactionEmoji;
 import sx.blah.discord.handle.obj.IChannel;
 import sx.blah.discord.util.DiscordException;
 import sx.blah.discord.util.RequestBuffer;
@@ -11,7 +8,6 @@ import sx.blah.discord.util.RequestBuffer;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.regex.Pattern;
 
 /**
@@ -77,16 +73,24 @@ public class SlamUtils {
 
     public static long sendEmbed(IChannel channel, EmbedObject embed) {
         final long[] messageID = new long[1];
+
         RequestBuffer.request(() -> {
             try{
-				messageID[0] = channel.sendMessage(embed).getLongID();
+
+				long t = channel.sendMessage(embed).getLongID();
+
+            	System.err.println(t + "    Printing T");   //prints a long
+
+				messageID[0] = t;
 
             } catch (DiscordException e){
                 System.err.println("File could not be sent with error: ");
                 e.printStackTrace();
             }
         });
-        return messageID[0];
+        System.err.println(messageID[0]  + "   Printing the mssage ID");  //prints 0
+
+        return messageID[0];												//returns 0
     }
 	public static boolean containsWord(String sentence, String word){
 		String regex = ".*\\b" + Pattern.quote(word) + "\\b.*";

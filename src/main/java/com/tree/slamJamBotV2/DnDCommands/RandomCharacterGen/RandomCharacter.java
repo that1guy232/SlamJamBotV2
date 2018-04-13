@@ -277,8 +277,7 @@ public class RandomCharacter {
 					"during your adventure. Remove one trinket from   " +
 					"your possessions.";
 		}else if(roll <= 70){
-			return "You were terribly frightened by something you en—   " +
-					"countered and ran away, abandoning your companions   " +
+			return "You were terribly frightened by something you encountered and ran away, abandoning your companions   " +
 					"to their fate.";
 		}else if(roll <= 80){
 			return "You learned a great deal during your adventure.   " +
