@@ -87,7 +87,7 @@ public class SlamUtils {
                 System.err.println("File could not be sent with error: ");
                 e.printStackTrace();
             }
-        });
+        }).get();
         System.err.println(messageID[0]  + "   Printing the mssage ID");  //prints 0
 
         return messageID[0];												//returns 0

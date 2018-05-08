@@ -91,24 +91,21 @@ public class SillyCommands {
                     String UserID = guild.getUsers().get(i).mention().replaceAll("(?:[<@!>])", "");
                     if (words[2].equals(UserID)) {
                         IVoiceChannel voiceChannel = event.getAuthor().getVoiceStates().get(guild.getLongID()).getChannel();
-                        System.err.println(voiceChannel);
                         guild.getUserByID(Long.parseLong(UserID)).moveToVoiceChannel(voiceChannel);
                     }
                 }
             }
-                if (message.startsWith("sleepy bye")) {
-                    String[] words = message.split("\\s");
-                    words[1] = words[1].replaceAll("(?:[<@!>])", "");
-                    for (int i = 0; i < guild.getUsers().size(); i++) {
-                        String UserID = guild.getUsers().get(i).mention().replaceAll("(?:[<@!>])", "");
-                        if (words[1].equals(UserID)) {
+            if (message.startsWith("sleepy-bye")) {
+                String[] words = message.split("\\s");
+                words[1] = words[1].replaceAll("(?:[<@!>])", "");
 
-                            guild.getUserByID(Long.parseLong(UserID)).moveToVoiceChannel(guild.getAFKChannel());
-                        }
+				for (int i = 0; i < guild.getUsers().size(); i++) {
+                    String UserID = guild.getUsers().get(i).mention().replaceAll("(?:[<@!>])", "");
+                    if (words[1].equals(UserID)) {
+                        guild.getUserByID(Long.parseLong(UserID)).moveToVoiceChannel(guild.getAFKChannel());
                     }
                 }
-
-
+            }
         }
 
     }
@@ -137,14 +134,14 @@ public class SillyCommands {
                                            String text, Point textPosition) throws IOException {
         Graphics2D g2 = image.createGraphics();
 
-        System.err.print(image);
 
-        Font f = new Font("KenVector Bold",Font.PLAIN,25);
+
+        Font f = new Font("chlorinar",Font.PLAIN,50);
 
         g2.setFont(f);
 
         int sw =  g2.getFontMetrics().stringWidth(text);
-        g2.setColor(Color.BLACK);
+        g2.setColor(Color.black);
         ArrayList<String> stringsForImage = new ArrayList<>();
         if(image.getWidth() < sw){
             String[] words = text.split("\\s");
@@ -152,7 +149,7 @@ public class SillyCommands {
 
             StringBuilder stringBuilder = new StringBuilder();
             for (int i = 0; i < words.length; i++) {
-                if(currentWidth > image.getWidth()-250){
+                if(currentWidth > image.getWidth()-320){
                     stringsForImage.add(stringBuilder.toString());
 
                     stringBuilder.delete(0,stringBuilder.length());
@@ -165,9 +162,9 @@ public class SillyCommands {
             }
             stringsForImage.add(stringBuilder.toString());
             Collections.reverse(stringsForImage);
-            int y = 15;
+            int y = 25;
             for (int i = 0; i < stringsForImage.size(); i++) {
-                y += 40;
+                y += 45;
 
                 if(i == 0){
 

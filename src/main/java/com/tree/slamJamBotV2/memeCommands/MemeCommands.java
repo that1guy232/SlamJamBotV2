@@ -203,7 +203,6 @@ public class MemeCommands  {
 
 
         } else if (message.startsWith("!reloadcommands")) {
-            System.err.println("test");
             memeCommands = null;
             memeCommands = loadCommands();
         } else {
@@ -280,7 +279,7 @@ public class MemeCommands  {
 class MemeCommand{
     String emotes[];
 
-    public MemeCommand(String[] names,String message,  String[] emotes, Boolean exact, String[] filePaths) {
+     MemeCommand(String[] names,String message,  String[] emotes, Boolean exact, String[] filePaths) {
         this.names = names;
         this.message = message;
         this.emotes = emotes;

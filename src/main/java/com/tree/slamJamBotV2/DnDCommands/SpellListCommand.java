@@ -6,7 +6,6 @@ import com.vdurmont.emoji.EmojiManager;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVRecord;
 import sx.blah.discord.api.internal.json.objects.EmbedObject;
-import sx.blah.discord.handle.impl.obj.Channel;
 import sx.blah.discord.handle.obj.IChannel;
 import sx.blah.discord.handle.obj.IReaction;
 import sx.blah.discord.util.EmbedBuilder;
@@ -18,37 +17,27 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class SpellListCommand {
+ class SpellListCommand {
 
-	public long getSpellListMessageID() {
+	 long getSpellListMessageID() {
 		return spellListMessageID;
 	}
 
-	public void setSpellListMessageID(long spellListMessageID) {
+	 void setSpellListMessageID(long spellListMessageID) {
 		this.spellListMessageID = spellListMessageID;
 	}
 
-	public int getSpellListMessagePage() {
-		return spellListMessagePage;
-	}
 
-	public void setSpellListMessagePage(int spellListMessagePage) {
+	 private void setSpellListMessagePage(int spellListMessagePage) {
 		this.spellListMessagePage = spellListMessagePage;
 	}
 
-	public ArrayList<EmbedObject> getSpellEmbeds() {
-		return spellEmbeds;
-	}
-
-	public void setSpellEmbeds(ArrayList<EmbedObject> spellEmbeds) {
-		this.spellEmbeds = spellEmbeds;
-	}
 
 	private long spellListMessageID;
 	private int spellListMessagePage;
-	List<CSVRecord> dnd5eSpells;
-	ArrayList<EmbedObject> spellEmbeds;
-	public SpellListCommand() {
+	private List<CSVRecord> dnd5eSpells;
+	private ArrayList<EmbedObject> spellEmbeds;
+	 SpellListCommand() {
 		try {
 			FileReader fr = new FileReader("5eSpells.csv");
 			dnd5eSpells = new ArrayList<>(CSVFormat.RFC4180.withFirstRecordAsHeader().parse(fr).getRecords());
@@ -92,7 +81,7 @@ public class SpellListCommand {
 	}
 
 
-	public void sendSpellList(IChannel channel) {
+	void sendSpellList(IChannel channel) {
 		ArrayList<String> emojiList = new ArrayList<>();
 		emojiList.add("arrow_left");
 		emojiList.add("arrow_right:");
@@ -104,7 +93,6 @@ public class SpellListCommand {
 
 		setSpellListMessageID(SlamUtils.sendEmbed(channel, spellEmbeds.get(0)));
 		setSpellListMessagePage(0);
-		System.err.println(channel.getMessageByID(getSpellListMessageID()).getContent());
 
 		try {
 			RequestBuffer.request(() -> channel.getMessageByID(getSpellListMessageID()).addReaction(EmojiManager.getForAlias(emojiList.get(0)))).get();
@@ -116,7 +104,7 @@ public class SpellListCommand {
 		}
 	}
 
-	public void getSpell(IChannel channel,String[] spellName) {
+	void getSpell(IChannel channel, String[] spellName) {
 		StringBuilder stringBuilder = new StringBuilder();
 
 		System.err.println(spellName.length);
@@ -151,7 +139,7 @@ public class SpellListCommand {
 		}
 	}
 
-	public void decrementPage(IReaction reaction) {
+	 void decrementPage(IReaction reaction) {
 		spellListMessagePage--;
 		if (spellListMessagePage < 0){
 			spellListMessagePage = spellEmbeds.size()-1;
@@ -163,7 +151,7 @@ public class SpellListCommand {
 		}
 	}
 
-	public void incrementPage(IReaction reaction) {
+	 void incrementPage(IReaction reaction) {
 		spellListMessagePage++;
 		if(spellListMessagePage > spellEmbeds.size()-1){
 			spellListMessagePage = 0;

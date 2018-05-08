@@ -2,7 +2,6 @@ package com.tree.slamJamBotV2;
 
 import sx.blah.discord.api.events.EventSubscriber;
 import sx.blah.discord.handle.impl.events.guild.channel.message.MessageReceivedEvent;
-import sx.blah.discord.handle.impl.events.guild.voice.user.UserVoiceChannelJoinEvent;
 import sx.blah.discord.handle.obj.IChannel;
 
 import java.io.File;
@@ -13,12 +12,6 @@ import java.io.File;
 public class RealCommands {
 
 	@EventSubscriber
-	public void UserVoiceChannelEvent(UserVoiceChannelJoinEvent event){
-		System.err.println(event.getUser().getName());
-		event.getVoiceChannel().join();
-
-	}
-    @EventSubscriber
     public void onMessageReceived(MessageReceivedEvent event) {
     	IChannel channel = event.getChannel();
 		String message = event.getMessage().getContent().toLowerCase();
@@ -29,7 +22,6 @@ public class RealCommands {
 		if(message.contains("miles to km")||message.contains("km to miles")){
 			SlamUtils.sendMessage(channel,String.valueOf(convertDistance(message)));
 		}
-
 
 		if(message.equals("get commands")) {
 			File f = new File("Commands.json");
