@@ -136,7 +136,7 @@ public class SillyCommands {
 
 
 
-        Font f = new Font("chlorinar",Font.PLAIN,50);
+        Font f = new Font("KenVector Bold",Font.PLAIN,25);
 
         g2.setFont(f);
 
@@ -149,7 +149,7 @@ public class SillyCommands {
 
             StringBuilder stringBuilder = new StringBuilder();
             for (int i = 0; i < words.length; i++) {
-                if(currentWidth > image.getWidth()-320){
+                if(currentWidth > image.getWidth()-250){
                     stringsForImage.add(stringBuilder.toString());
 
                     stringBuilder.delete(0,stringBuilder.length());
@@ -162,9 +162,9 @@ public class SillyCommands {
             }
             stringsForImage.add(stringBuilder.toString());
             Collections.reverse(stringsForImage);
-            int y = 25;
+            int y = 15;
             for (int i = 0; i < stringsForImage.size(); i++) {
-                y += 45;
+                y += 40;
 
                 if(i == 0){
 
