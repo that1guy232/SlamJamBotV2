@@ -5,8 +5,8 @@ import sx.blah.discord.handle.obj.IChannel;
 import sx.blah.discord.util.DiscordException;
 import sx.blah.discord.util.RequestBuffer;
 
-import java.io.File;
-import java.io.FileNotFoundException;
+import java.io.*;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.regex.Pattern;
 
@@ -113,4 +113,31 @@ public class SlamUtils {
 		}
 		return stringBuilder.toString();
 	}
+
+	public static String readUrl(String urlString) {
+		BufferedReader reader = null;
+		try {
+			URL url = new URL(urlString);
+			reader = new BufferedReader(new InputStreamReader(url.openStream()));
+			StringBuffer buffer = new StringBuffer();
+			int read;
+			char[] chars = new char[1024];
+			while ((read = reader.read(chars)) != -1)
+				buffer.append(chars, 0, read);
+
+			return buffer.toString();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			if (reader != null) {
+				try {
+					reader.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		return null;
+	}
+
 }
