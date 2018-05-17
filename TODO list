@@ -1,20 +1,43 @@
-Encounter gen(5e)
-Timer
-Weapon lister for starfinder
-    starfiner heavy two handed melee
-temp converter
+Priority
 
-Conditions for starfinder
-    starfinder condition blind || blinded
-    http://prntscr.com/hekqnc
-    https://docs.google.com/document/d/1Eeas3zElNSvvkU-PMRrDerw9P9fuEMogmGHYa__qQ1g/edit#heading=h.j8d5lk4i7goh
+Rewrite MemeCommand
+    commands are global rewrite so they are on a guild based system
+    let Commands have more versatility so i could have something like $query so i can get info from a table or a api.
 
-random char from xnathars guide
-https://rpg.rem.uz/Dungeons%20%26%20Dragons/D%26D%205th%20Edition/Rulebooks/Supplements/Xanathar%27s%20Guide%20To%20Everything.pdf
+
+Rewrite DnDCharacter gen so the character info is in json format.
+
+
+Add a quote thing to my bot
+    !qoute add Keith "I like memes"
+        This will add it to a guild based quote system so GuildID-NameQoutes.json
+
+
 
 Spongebob meme text make text white with black border
 
+rewrite convertCurrancy so it cna take differnt arguments instead of just usd & cad
+
+
+add a level thing to my bot, To level up/gain exp you have to trigger commands
+
+
+Timer
+    !timer set 1 week 1 day 6 hour 5 min 30 sec
+
+
+Encounter gen(5e)
+
+Starfinder
+    Weapon lister for starfinder
+        starfiner heavy two handed melee
+
+    Conditions for starfinder
+        starfinder condition blind || blinded
+        http://prntscr.com/hekqnc
+        https://docs.google.com/document/d/1Eeas3zElNSvvkU-PMRrDerw9P9fuEMogmGHYa__qQ1g/edit#heading=h.j8d5lk4i7goh
+
 Make a togglable to have the bot in vc
 	It will say omg it my good friend, Then will text to speech the user who's joined name
+	Or say something else. Have a settings file were the guild owner/admin can set it say something else.
 
- add a level thing to my bot, To level up/gain exp you have to trigger commands or add commands
