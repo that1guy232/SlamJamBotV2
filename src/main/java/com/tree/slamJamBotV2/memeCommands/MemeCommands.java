@@ -24,6 +24,7 @@ public class MemeCommands  {
     ArrayList<MemeCommand> memeCommands;
     //MemeCommand memeCommands[];
     private Gson gson;
+
     public MemeCommands(){
 
 
@@ -34,9 +35,12 @@ public class MemeCommands  {
 
     }
 
+
+
+
     private ArrayList<MemeCommand> loadCommands() {
         MemeCommand tmp[];
-        gson = new GsonBuilder().setPrettyPrinting().create();
+        gson = new GsonBuilder().setPrettyPrinting().disableHtmlEscaping().create();
         FileReader fr = null;
         try {
             fr = new FileReader("Commands.json");
@@ -58,11 +62,12 @@ public class MemeCommands  {
 
     @EventSubscriber
     public void onMessageReceived(MessageReceivedEvent event) {
-        String message = event.getMessage().getContent().toLowerCase();
+        String message = event.getMessage().getContent();
 
         String[] command = spiltMessage(message);
 
         if (message.startsWith("!addcommand")) {
+
             //!addcommand names: Test, Test2 message: this would do that emotes: :thumbsup: :sweat_drops: exact: true/false default true
 
 
@@ -119,7 +124,6 @@ public class MemeCommands  {
                     }
                 }
                 justset = false;
-
 
             }
 
@@ -180,6 +184,7 @@ public class MemeCommands  {
                 saveCommands();
 
             }
+
         }else  if(message.startsWith("!removecommand") && event.getAuthor().getPermissionsForGuild(event.getGuild()).contains(Permissions.ADMINISTRATOR) ){
 			ArrayList<String> tmp = new ArrayList<>();
 			for (int i = 1; i < command.length; i++) {
@@ -190,8 +195,6 @@ public class MemeCommands  {
             for (MemeCommand memeCommand : memeCommands) {
 
 				for (int j = 0; j < memeCommand.names.length; j++){
-					System.err.println(memeCommand.names[j].equals("de way"));
-					System.err.println("Command: " + memeCommand.names[j] + "    Name: " + name);
                     if(memeCommand.names[j].equals(name)){
 
                         memeCommands.remove(memeCommand);
@@ -213,51 +216,54 @@ public class MemeCommands  {
                     memeCommands.get(i).exact = true;
                 }
 
-                try {
-                    for (int j = 0; j < memeCommands.get(i).names.length; j++) {
-                        if (!memeCommands.get(i).exact && message.contains(memeCommands.get(i).names[j]) || SlamUtils.containsWord(message, memeCommands.get(i).names[j])) {
-                            if (memeCommands.get(i).emotes != null) {
-                                for (int k = 0; k < memeCommands.get(i).emotes.length; k++) {
 
-                                    int finalI = i;
-                                    int finalK = k;
-                                    RequestBuffer.request(() -> {
-                                        try {
+                boolean sent = false;
+                for (int j = 0; j < memeCommands.get(i).names.length; j++) {
 
-                                            event.getMessage().addReaction(EmojiManager.getForAlias(memeCommands.get(finalI).emotes[finalK]));
-                                        } catch (DiscordException e) {
-                                            e.printStackTrace();
-                                        }
-                                    });
+                    if (!memeCommands.get(i).exact && message.startsWith(memeCommands.get(i).names[j]) || message.contains( memeCommands.get(i).names[j])) {
+                        if (memeCommands.get(i).emotes != null) {
+                            for (int k = 0; k < memeCommands.get(i).emotes.length; k++) {
+								sent = true;
+                                int finalI = i;
+                                int finalK = k;
+                                RequestBuffer.request(() -> {
+                                    try {
 
-
-                                }
-                            }
-                            if (memeCommands.get(i).message != null) {
-                                if (memeCommands.get(i).message.contains("$mention")) {
-                                    memeCommands.get(i).message = memeCommands.get(i).message.replace("$mention", event.getAuthor().mention());
-                                }
-                                if (memeCommands.get(i).message.contains("/n")) {
-                                    memeCommands.get(i).message = memeCommands.get(i).message.replace("/n", event.getAuthor().mention());
-                                }
-                                sendMessage(event.getChannel(), memeCommands.get(i).message);
-                            }
-
-                            if (memeCommands.get(i).filePaths != null) {
-                                for (int k = 0; k < memeCommands.get(i).filePaths.length; k++) {
-                                    sendFile(event.getChannel(), new File(memeCommands.get(i).filePaths[k]));
-                                }
+                                        event.getMessage().addReaction(EmojiManager.getForAlias(memeCommands.get(finalI).emotes[finalK]));
+                                    } catch (DiscordException e) {
+                                        e.printStackTrace();
+                                    }
+                                });
                             }
                         }
-                    }
-                } catch (NullPointerException e) {
+                        if (memeCommands.get(i).message != null && !sent) {
+                            if (memeCommands.get(i).message.contains("$mention")) {
+                                memeCommands.get(i).message = memeCommands.get(i).message.replace("$mention", event.getAuthor().mention());
+                            }
+                            if (memeCommands.get(i).message.contains("/n")) {
+                            }
+                            sendMessage(event.getChannel(), memeCommands.get(i).message);
+                            break;
+                        }
+
+                        if (memeCommands.get(i).filePaths != null && !sent) {
+                            for (int k = 0; k < memeCommands.get(i).filePaths.length; k++) {
+                                sendFile(event.getChannel(), new File(memeCommands.get(i).filePaths[k]));
+                            }
+                            break;
+                        }
+						sent = true;
+
+					}
 
                 }
+
             }
         }
     }
 
     private void saveCommands() {
+
         try {
             FileWriter fileWriter = new FileWriter("Commands.json");
             BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
@@ -276,23 +282,5 @@ public class MemeCommands  {
 }
 
 
-class MemeCommand{
-    String emotes[];
 
-     MemeCommand(String[] names,String message,  String[] emotes, Boolean exact, String[] filePaths) {
-        this.names = names;
-        this.message = message;
-        this.emotes = emotes;
-        this.filePaths = filePaths;
-        this.exact = exact;
-    }
-
-    String names[];
-    String message;
-    String filePaths[];
-    Boolean exact;
-
-
-
-}
 
