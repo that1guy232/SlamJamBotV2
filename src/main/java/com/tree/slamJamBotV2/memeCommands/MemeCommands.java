@@ -2,285 +2,293 @@ package com.tree.slamJamBotV2.memeCommands;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
 import com.tree.slamJamBotV2.SlamUtils;
 import com.vdurmont.emoji.EmojiManager;
 import sx.blah.discord.api.events.EventSubscriber;
+import sx.blah.discord.handle.impl.events.guild.GuildCreateEvent;
 import sx.blah.discord.handle.impl.events.guild.channel.message.MessageReceivedEvent;
-import sx.blah.discord.handle.obj.Permissions;
-import sx.blah.discord.util.DiscordException;
+import sx.blah.discord.handle.obj.IChannel;
+import sx.blah.discord.handle.obj.IMessage;
 import sx.blah.discord.util.RequestBuffer;
 
 import javax.imageio.ImageIO;
 import java.io.*;
 import java.net.URL;
 import java.net.URLConnection;
-import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.*;
 
 import static com.tree.slamJamBotV2.SlamUtils.*;
 
-public class MemeCommands  {
+public class MemeCommands {
+	Map<Long, ArrayList<MemeCommand>> memeCommands;
 
-    ArrayList<MemeCommand> memeCommands;
-    //MemeCommand memeCommands[];
-    private Gson gson;
+	private Gson gson;
 
-    public MemeCommands(){
-
-
-
-        memeCommands = loadCommands();
+	public MemeCommands() {
+		gson = new GsonBuilder().setPrettyPrinting().disableHtmlEscaping().create();
+		memeCommands = new HashMap<>();
+	}
 
 
+	@EventSubscriber
+	public void onGuildJoinEven(GuildCreateEvent event){
 
-    }
+		Long key = event.getGuild().getLongID();
+		try {
+			memeCommands.putIfAbsent(key,loadCommands(key));
 
-
-
-
-    private ArrayList<MemeCommand> loadCommands() {
-        MemeCommand tmp[];
-        gson = new GsonBuilder().setPrettyPrinting().disableHtmlEscaping().create();
-        FileReader fr = null;
-        try {
-            fr = new FileReader("Commands.json");
-            tmp = gson.fromJson(fr,MemeCommand[].class);
-
-            return new ArrayList<>(Arrays.asList(tmp));
+		}catch (NullPointerException e){
+			memeCommands.putIfAbsent(key,loadCommands(key));
+		}
 
 
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
+	}
 
-        tmp = null;
-        System.err.println("Commands fail to load.");
-        return null;
-
-    }
-
-
-    @EventSubscriber
-    public void onMessageReceived(MessageReceivedEvent event) {
-        String message = event.getMessage().getContent();
-
-        String[] command = spiltMessage(message);
-
-        if (message.startsWith("!addcommand")) {
-
-            //!addcommand names: Test, Test2 message: this would do that emotes: :thumbsup: :sweat_drops: exact: true/false default true
+	private ArrayList<MemeCommand> loadCommands(long key) {
+		ArrayList<MemeCommand> tmp = null;
+		gson = new GsonBuilder().setPrettyPrinting().create();
+		FileReader fr = null;
+		try {
+			fr = new FileReader("commands/"+key+"Commands.json");
+			tmp = gson.fromJson(fr,new TypeToken<ArrayList<MemeCommand>>(){}.getType());
 
 
 
-            ArrayList<String> names = new ArrayList<>();
-            ArrayList<String> commandMessageWords = new ArrayList<>();
-            String commandmessage = null;
-            ArrayList<String> tmpemotes = new ArrayList<>();
-            String[] filePath = null;
-            boolean exact = true;
 
-            /*
-                0 = none
-                1 = names
-                2 = message
-                3 = emotes
-                4 = exact;
-             */
-            int state = 0;
-            boolean justset = false;
-            for (int i = 0; i < command.length; i++) {
-                if (command[i].equalsIgnoreCase("names:")) {
-                    justset = true;
-                    state = 1;
-                }
-                if (command[i].equalsIgnoreCase("message:")) {
-                    justset = true;
-                    state = 2;
-                }
-                if (command[i].equalsIgnoreCase("emotes:")) {
-                    justset = true;
-                    state = 3;
-                }
-                if (command[i].equalsIgnoreCase("exact:")) {
-                    justset = true;
-                    state = 4;
-                }
+		} catch (FileNotFoundException e) {
+			System.err.println("Commands Failed to load creating Commands file.");
+			File file = new File("commands/"+key+"Commands.json");
+			try {
+
+				file.createNewFile();
 
 
-                if (!justset) {
-                    switch (state) {
-                        case 1:
-                            names.add(command[i]);
-                            break;
-                        case 2:
-                            commandMessageWords.add(command[i]);
-                            break;
-                        case 3:
-                            tmpemotes.add(command[i]);
-                            break;
-                        case 4:
-                            exact = Boolean.parseBoolean(command[i]);
-                            break;
-                    }
-                }
-                justset = false;
-
-            }
-
-            if (names.size() <= 0) {
-                sendMessage(event.getChannel(), "You must have at least one name for the command to trigger.");
-            } else {
-
-                if (event.getMessage().getAttachments().size() > 0) {
-                    filePath = new String[]{event.getMessage().getAttachments().get(0).getFilename()};
-                    try {
-
-                        URL url = new URL(event.getMessage().getAttachments().get(0).getUrl());
-
-                        URLConnection hc = url.openConnection();
-
-                        hc.setRequestProperty("User-Agent", "Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.4; en-US; rv:1.9.2.2) Gecko/20100316 Firefox/3.6.2");
-
-                        ImageIO.write(ImageIO.read(hc.getInputStream()), "png", new File(event.getMessage().getAttachments().get(0).getFilename()));
-
-
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                        SlamUtils.sendMessage(event.getChannel(),"File must be a image.");
-                    }
-
-                }
-
-
-
-                ArrayList<String> tmpnms = new ArrayList<>();
-
-                StringBuilder stringBuilder = new StringBuilder();
-                for (int i = 0; i < names.size(); i++) {
-                    stringBuilder.append(names.get(i));
-                    if (names.get(i).contains(",") || i == names.size() - 1) {
-                        tmpnms.add(stringBuilder.toString().replace(",", ""));
-                        stringBuilder = new StringBuilder();
-                    } else {
-                        stringBuilder.append(" ");
-                    }
-
-                }
-                if (commandMessageWords.size() > 0) {
-                    commandmessage = makeSentence(commandMessageWords);
-                } else {
-                    commandmessage = null;
-                }
-                String[] emotes;
-                if (tmpemotes.size() > 0) {
-                    emotes = tmpemotes.toArray(new String[0]);
-                } else {
-                    emotes = null;
-                }
-                memeCommands.add(new MemeCommand(tmpnms.toArray(new String[0]), commandmessage, emotes, exact, filePath));
-
-
-
-                saveCommands();
-
-            }
-
-        }else  if(message.startsWith("!removecommand") && event.getAuthor().getPermissionsForGuild(event.getGuild()).contains(Permissions.ADMINISTRATOR) ){
-			ArrayList<String> tmp = new ArrayList<>();
-			for (int i = 1; i < command.length; i++) {
-				tmp.add(command[i]);
+			} catch (IOException e1) {
+				e1.printStackTrace();
 			}
-			String name = makeSentence(tmp);
-			System.err.println(name);
-            for (MemeCommand memeCommand : memeCommands) {
 
-				for (int j = 0; j < memeCommand.names.length; j++){
-                    if(memeCommand.names[j].equals(name)){
+		}
 
-                        memeCommands.remove(memeCommand);
-                        saveCommands();
-                        break;
-                    }
-                }
-            }
+		
 
 
-        } else if (message.startsWith("!reloadcommands")) {
-            memeCommands = null;
-            memeCommands = loadCommands();
-        } else {
+		return tmp;
 
 
-            for (int i = 0; i < memeCommands.size(); i++) {
-                if (memeCommands.get(i).exact == null && memeCommands.get(i) != null) {
-                    memeCommands.get(i).exact = true;
-                }
+	}
 
 
-                boolean sent = false;
-                for (int j = 0; j < memeCommands.get(i).names.length; j++) {
+	@EventSubscriber
+	public void onMessageReceived(MessageReceivedEvent event){
 
-                    if (!memeCommands.get(i).exact && message.startsWith(memeCommands.get(i).names[j]) || message.contains( memeCommands.get(i).names[j])) {
-                        if (memeCommands.get(i).emotes != null) {
-                            for (int k = 0; k < memeCommands.get(i).emotes.length; k++) {
-								sent = true;
-                                int finalI = i;
-                                int finalK = k;
-                                RequestBuffer.request(() -> {
-                                    try {
+		String message = event.getMessage().getContent();
+		IMessage iMessage = event.getMessage();
+		String[] command = spiltMessage(message);
+		Long key = event.getGuild().getLongID();
+		//todo make a user need a certin permission
+		if (message.startsWith("!addcommand")) {
+			addCommand(event.getGuild().getLongID(),command,event);
+		}
+		if(message.startsWith("!removecommand")){
+			removeCommand(key,command);
+		}
+		if(message.startsWith("!reloadcommands")){
+			memeCommands.remove(key);
+			memeCommands.put(key,loadCommands(key));
+		}
+		else {
+			sendCommand(key,message,iMessage,event.getChannel());
+		}
 
-                                        event.getMessage().addReaction(EmojiManager.getForAlias(memeCommands.get(finalI).emotes[finalK]));
-                                    } catch (DiscordException e) {
-                                        e.printStackTrace();
-                                    }
-                                });
-                            }
-                        }
-                        if (memeCommands.get(i).message != null && !sent) {
-                            if (memeCommands.get(i).message.contains("$mention")) {
-                                memeCommands.get(i).message = memeCommands.get(i).message.replace("$mention", event.getAuthor().mention());
-                            }
-                            if (memeCommands.get(i).message.contains("/n")) {
-                            }
-                            sendMessage(event.getChannel(), memeCommands.get(i).message);
-                            break;
-                        }
 
-                        if (memeCommands.get(i).filePaths != null && !sent) {
-                            for (int k = 0; k < memeCommands.get(i).filePaths.length; k++) {
-                                sendFile(event.getChannel(), new File(memeCommands.get(i).filePaths[k]));
-                            }
-                            break;
-                        }
-						sent = true;
+	}
 
+	private void removeCommand(Long key,String[] command) {
+		ArrayList<String> tmp = new ArrayList<>();
+		for (int i = 1; i < command.length; i++) {
+			tmp.add(command[i]);
+		}
+		String name = makeSentence(tmp);
+		for (MemeCommand memeCommand:memeCommands.get(key)) {
+			for (String commandName:memeCommand.names) {
+				if(commandName.equalsIgnoreCase(name)){
+					memeCommands.get(key).remove(memeCommand);
+					saveCommands(key);
+				}
+			}
+		}
+	}
+
+	private void sendCommand(Long key, String message, IMessage iMessage, IChannel channel) {
+		boolean sent = false;
+		for (MemeCommand memeCommand: memeCommands.get(key)) {
+
+			if(memeCommand.exact == null){
+				memeCommand.exact = true;
+			}
+
+
+			for (String name: memeCommand.names) {
+				if(memeCommand.exact && message.startsWith(name) || message.contains(name)){
+					if(memeCommand.emotes != null){
+						for (String emote:memeCommand.emotes) {
+							sent = true;
+							RequestBuffer.request(()-> {
+								iMessage.addReaction(EmojiManager.getForAlias(emote));
+							});
+						}
 					}
-
-                }
-
-            }
-        }
-    }
-
-    private void saveCommands() {
-
-        try {
-            FileWriter fileWriter = new FileWriter("Commands.json");
-            BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
-            bufferedWriter.write(gson.toJson(memeCommands));
-            bufferedWriter.flush();
-            bufferedWriter.close();
-            fileWriter.close();
+					if(memeCommand.message != null && !sent){
+						String tmp = memeCommand.message;
+						tmp = tmp.replace("$mention",iMessage.getAuthor().mention());
+						sendMessage(channel,tmp);
+					}
+					if(memeCommand.filePaths != null && !sent){ //todo rewrite so it's in a folder for that specific guild
+						for (String filePath: memeCommand.filePaths) {
+							sendFile(channel,new File(filePath));
+						}
+					}
+					sent = true;
+				}
+			}
 
 
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
+		}
+
+	}
+
+	private void addCommand(long key, String[] command, MessageReceivedEvent event) {
+		ArrayList<String> names = new ArrayList<>();
+		ArrayList<String> commandMessageWords = new ArrayList<>();
+		String commandmessage = null;
+		ArrayList<String> tmpemotes = new ArrayList<>();
+		String[] filePath = null;
+		boolean exact = true;
+
+
+		State state1 = null;
+
+		for (String sCommand : command) {
+			switch (sCommand.toLowerCase()) {
+				case "names:":
+					state1 = State.names;
+					break;
+				case "message:":
+					state1 = State.message;
+					break;
+				case "emotes:":
+					state1 = State.emotes;
+					break;
+				case "exact:":
+					state1 = State.exact;
+					break;
+
+					default:switch (state1){
+						case names:
+							names.add(sCommand);
+							break;
+						case message:
+							commandMessageWords.add(sCommand);
+							break;
+						case emotes:
+							tmpemotes.add(sCommand);
+							break;
+						case exact:
+							exact = Boolean.parseBoolean(sCommand);
+							break;
+					}
+			}
+		}
+
+		if (names.size() <= 0) {
+			sendMessage(event.getChannel(), "You must have at least one name for the command to trigger.");
+		} else {
+
+			if (event.getMessage().getAttachments().size() > 0) {
+				filePath = new String[]{event.getMessage().getAttachments().get(0).getFilename()};
+				try {
+
+					URL url = new URL(event.getMessage().getAttachments().get(0).getUrl());
+
+					URLConnection hc = url.openConnection();
+
+					hc.setRequestProperty("User-Agent", "Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.4; en-US; rv:1.9.2.2) Gecko/20100316 Firefox/3.6.2");
+
+					ImageIO.write(ImageIO.read(hc.getInputStream()), "png", new File(event.getMessage().getAttachments().get(0).getFilename()));
+
+
+				} catch (IOException e) {
+					e.printStackTrace();
+					SlamUtils.sendMessage(event.getChannel(),"File must be a image.");
+				}
+
+			}
+
+
+
+			ArrayList<String> tmpnms = new ArrayList<>();
+
+			StringBuilder stringBuilder = new StringBuilder();
+			for (int i = 0; i < names.size(); i++) {
+				stringBuilder.append(names.get(i));
+				if (names.get(i).contains(",") || i == names.size() - 1) {
+					tmpnms.add(stringBuilder.toString().replace(",", ""));
+					stringBuilder = new StringBuilder();
+				} else {
+					stringBuilder.append(" ");
+				}
+
+			}
+			if (commandMessageWords.size() > 0) {
+				commandmessage = makeSentence(commandMessageWords);
+			}
+			String[] emotes;
+			if (tmpemotes.size() > 0) {
+				emotes = tmpemotes.toArray(new String[0]);
+			} else {
+				emotes = null;
+			}
+			MemeCommand m = new MemeCommand(tmpnms.toArray(new String[0]), commandmessage, emotes, exact, filePath);
+			System.err.println(m.message);
+			memeCommands.get(key).add(m);
+
+
+
+			saveCommands(key);
+
+		}
+
+
+	}
+
+	private void saveCommands(long key) {
+		try {
+			FileWriter fileWriter = new FileWriter("commands/"+key+"Commands.json");
+			BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+			bufferedWriter.write(gson.toJson(memeCommands.get(key)));
+			bufferedWriter.flush();
+			bufferedWriter.close();
+			fileWriter.close();
+
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 
 
 }
 
+enum State{
+	names("names"),
+	message("message"),
+	emotes("emotes"),
+	exact("exact");
 
-
+	String state;
+	State(String state) {
+		this.state = state;
+	}
+}
 

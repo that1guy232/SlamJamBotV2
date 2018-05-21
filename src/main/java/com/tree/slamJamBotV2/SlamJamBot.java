@@ -2,7 +2,6 @@ package com.tree.slamJamBotV2;
 
 import com.tree.slamJamBotV2.DnDCommands.DnD5eCommands;
 import com.tree.slamJamBotV2.memeCommands.MemeCommands;
-import com.tree.slamJamBotV2.memeCommands.MemeCommandsV2;
 import sx.blah.discord.api.ClientBuilder;
 import sx.blah.discord.api.IDiscordClient;
 import sx.blah.discord.handle.obj.StatusType;
@@ -40,7 +39,7 @@ public class SlamJamBot {
 
 
 
-		client.getDispatcher().registerListener(new MemeCommandsV2());
+		client.getDispatcher().registerListener(new MemeCommands());
 
 
 
