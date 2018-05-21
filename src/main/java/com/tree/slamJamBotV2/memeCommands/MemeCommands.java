@@ -21,14 +21,9 @@ import java.util.*;
 import static com.tree.slamJamBotV2.SlamUtils.*;
 
 public class MemeCommands {
-	Map<Long, ArrayList<MemeCommand>> memeCommands;
+	private Map<Long, ArrayList<MemeCommand>> memeCommands = new HashMap<>();
+	private Gson gson = new GsonBuilder().setPrettyPrinting().disableHtmlEscaping().create();
 
-	private Gson gson;
-
-	public MemeCommands() {
-		gson = new GsonBuilder().setPrettyPrinting().disableHtmlEscaping().create();
-		memeCommands = new HashMap<>();
-	}
 
 
 	@EventSubscriber
@@ -47,7 +42,6 @@ public class MemeCommands {
 
 	private ArrayList<MemeCommand> loadCommands(long key) {
 		ArrayList<MemeCommand> tmp = null;
-		gson = new GsonBuilder().setPrettyPrinting().create();
 		FileReader fr = null;
 		try {
 			fr = new FileReader("commands/"+key+"Commands.json");
@@ -263,22 +257,16 @@ public class MemeCommands {
 	}
 
 	private void saveCommands(long key) {
-		try {
-			FileWriter fileWriter = new FileWriter("commands/"+key+"Commands.json");
-			BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+		try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter("commands/"+key+"Commands.json"))) {
 			bufferedWriter.write(gson.toJson(memeCommands.get(key)));
-			bufferedWriter.flush();
-			bufferedWriter.close();
-			fileWriter.close();
-
-
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
-
-
 }
+
+
+
 
 enum State{
 	names("names"),
