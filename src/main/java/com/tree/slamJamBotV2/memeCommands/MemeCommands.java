@@ -9,6 +9,7 @@ import sx.blah.discord.api.events.EventSubscriber;
 import sx.blah.discord.handle.impl.events.guild.GuildCreateEvent;
 import sx.blah.discord.handle.impl.events.guild.channel.message.MessageReceivedEvent;
 import sx.blah.discord.handle.obj.IChannel;
+import sx.blah.discord.handle.obj.IGuild;
 import sx.blah.discord.handle.obj.IMessage;
 import sx.blah.discord.util.RequestBuffer;
 
@@ -16,7 +17,10 @@ import javax.imageio.ImageIO;
 import java.io.*;
 import java.net.URL;
 import java.net.URLConnection;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 import static com.tree.slamJamBotV2.SlamUtils.*;
 
@@ -28,23 +32,22 @@ public class MemeCommands {
 
 	@EventSubscriber
 	public void onGuildJoinEven(GuildCreateEvent event){
-
-		Long key = event.getGuild().getLongID();
+		IGuild guild = event.getGuild();
 		try {
-			memeCommands.putIfAbsent(key,loadCommands(key));
+			memeCommands.putIfAbsent(guild.getLongID(),loadCommands(guild));
 
 		}catch (NullPointerException e){
-			memeCommands.putIfAbsent(key,loadCommands(key));
+			memeCommands.putIfAbsent(guild.getLongID(),loadCommands(guild));
 		}
 
 
 	}
 
-	private ArrayList<MemeCommand> loadCommands(long key) {
+	private ArrayList<MemeCommand> loadCommands(IGuild guild) {
 		ArrayList<MemeCommand> tmp = null;
-		FileReader fr = null;
+		FileReader fr;
 		try {
-			fr = new FileReader("commands/"+key+"Commands.json");
+			fr = new FileReader("commands/"+guild.getName()+"/Commands.json");
 			tmp = gson.fromJson(fr,new TypeToken<ArrayList<MemeCommand>>(){}.getType());
 
 
@@ -52,19 +55,22 @@ public class MemeCommands {
 
 		} catch (FileNotFoundException e) {
 			System.err.println("Commands Failed to load creating Commands file.");
-			File file = new File("commands/"+key+"Commands.json");
-			try {
 
+
+			try {
+				new File("commands/"+guild.getName()).mkdirs();
+				File file = new File("commands/"+guild.getName()+"/Commands.json");
 				file.createNewFile();
 
 
 			} catch (IOException e1) {
+
 				e1.printStackTrace();
 			}
 
 		}
 
-		
+
 
 
 		return tmp;
@@ -75,21 +81,26 @@ public class MemeCommands {
 
 	@EventSubscriber
 	public void onMessageReceived(MessageReceivedEvent event){
-
-		String message = event.getMessage().getContent();
+		IGuild guild = event.getGuild();
+		String message = event.getMessage().getContent().toLowerCase();
 		IMessage iMessage = event.getMessage();
 		String[] command = spiltMessage(message);
 		Long key = event.getGuild().getLongID();
 		//todo make a user need a certin permission
 		if (message.startsWith("!addcommand")) {
-			addCommand(event.getGuild().getLongID(),command,event);
+			addCommand(guild,command,event);
 		}
 		if(message.startsWith("!removecommand")){
-			removeCommand(key,command);
+			removeCommand(guild,command);
 		}
 		if(message.startsWith("!reloadcommands")){
 			memeCommands.remove(key);
-			memeCommands.put(key,loadCommands(key));
+			memeCommands.put(key,loadCommands(guild));
+		}
+
+		if(message.equals("get commands")) {
+			File f = new File("commands/"+guild.getName()+"/Commands.json");
+			SlamUtils.sendFile(event.getChannel(), f);
 		}
 		else {
 			sendCommand(key,message,iMessage,event.getChannel());
@@ -98,22 +109,20 @@ public class MemeCommands {
 
 	}
 
-	private void removeCommand(Long key,String[] command) {
-		ArrayList<String> tmp = new ArrayList<>();
-		for (int i = 1; i < command.length; i++) {
-			tmp.add(command[i]);
-		}
+	private void removeCommand(IGuild guild,String[] command) {
+
+		ArrayList<String> tmp = new ArrayList<>(Arrays.asList(command).subList(1, command.length));
+
 		String name = makeSentence(tmp);
-		for (MemeCommand memeCommand:memeCommands.get(key)) {
+		for (MemeCommand memeCommand:memeCommands.get(guild.getLongID())) {
 			for (String commandName:memeCommand.names) {
 				if(commandName.equalsIgnoreCase(name)){
-					memeCommands.get(key).remove(memeCommand);
-					saveCommands(key);
+					memeCommands.get(guild.getLongID()).remove(memeCommand);
+					saveCommands(guild);
 				}
 			}
 		}
 	}
-
 	private void sendCommand(Long key, String message, IMessage iMessage, IChannel channel) {
 		boolean sent = false;
 		for (MemeCommand memeCommand: memeCommands.get(key)) {
@@ -128,9 +137,7 @@ public class MemeCommands {
 					if(memeCommand.emotes != null){
 						for (String emote:memeCommand.emotes) {
 							sent = true;
-							RequestBuffer.request(()-> {
-								iMessage.addReaction(EmojiManager.getForAlias(emote));
-							});
+							RequestBuffer.request(()-> iMessage.addReaction(EmojiManager.getForAlias(emote)));
 						}
 					}
 					if(memeCommand.message != null && !sent){
@@ -138,7 +145,8 @@ public class MemeCommands {
 						tmp = tmp.replace("$mention",iMessage.getAuthor().mention());
 						sendMessage(channel,tmp);
 					}
-					if(memeCommand.filePaths != null && !sent){ //todo rewrite so it's in a folder for that specific guild
+
+					if(memeCommand.filePaths != null && !sent){
 						for (String filePath: memeCommand.filePaths) {
 							sendFile(channel,new File(filePath));
 						}
@@ -152,7 +160,7 @@ public class MemeCommands {
 
 	}
 
-	private void addCommand(long key, String[] command, MessageReceivedEvent event) {
+	private void addCommand(IGuild guild, String[] command, MessageReceivedEvent event) {
 		ArrayList<String> names = new ArrayList<>();
 		ArrayList<String> commandMessageWords = new ArrayList<>();
 		String commandmessage = null;
@@ -161,24 +169,24 @@ public class MemeCommands {
 		boolean exact = true;
 
 
-		State state1 = null;
+		State state = null;
 
 		for (String sCommand : command) {
 			switch (sCommand.toLowerCase()) {
 				case "names:":
-					state1 = State.names;
+					state = State.names;
 					break;
 				case "message:":
-					state1 = State.message;
+					state = State.message;
 					break;
 				case "emotes:":
-					state1 = State.emotes;
+					state = State.emotes;
 					break;
 				case "exact:":
-					state1 = State.exact;
+					state = State.exact;
 					break;
 
-					default:switch (state1){
+					default:switch (state){
 						case names:
 							names.add(sCommand);
 							break;
@@ -245,38 +253,37 @@ public class MemeCommands {
 			}
 			MemeCommand m = new MemeCommand(tmpnms.toArray(new String[0]), commandmessage, emotes, exact, filePath);
 			System.err.println(m.message);
-			memeCommands.get(key).add(m);
+			memeCommands.get(guild.getLongID()).add(m);
 
 
 
-			saveCommands(key);
+			saveCommands(guild);
 
 		}
 
 
 	}
 
-	private void saveCommands(long key) {
-		try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter("commands/"+key+"Commands.json"))) {
-			bufferedWriter.write(gson.toJson(memeCommands.get(key)));
+	private void saveCommands(IGuild guild) {
+		File file = new File("commands/"+guild.getName()+"/Commands.json");
+		try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(file))) {
+			bufferedWriter.write(gson.toJson(memeCommands.get(guild.getLongID())));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
+
+
 }
 
 
 
 
 enum State{
-	names("names"),
-	message("message"),
-	emotes("emotes"),
-	exact("exact");
+	names,
+	message,
+	emotes,
+	exact
 
-	String state;
-	State(String state) {
-		this.state = state;
-	}
 }
 

@@ -25,10 +25,6 @@ public class RealCommands {
 			SlamUtils.sendMessage(channel,String.valueOf(convertDistance(message)));
 		}
 
-		if(message.equals("get commands")) {
-			File f = new File("commands/"+event.getGuild().getLongID()+"Commands.json");
-			SlamUtils.sendFile(event.getChannel(), f);
-		}
 		if (message.contains("cad to usd")|| message.contains("usd to cad")){
 			SlamUtils.sendMessage(channel, String.valueOf(convertCurrancy(message)));
 		}

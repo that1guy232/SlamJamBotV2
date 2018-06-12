@@ -81,7 +81,13 @@ public class DnD5eCommands {
 
 
         if(message.startsWith("roll")){
-			roll(channel,message);
+			try{
+				roll(channel,message);
+			}catch (StackOverflowError error){
+				error.printStackTrace();
+				SlamUtils.sendMessage(channel,"You rolled so many dice you broke the bot or something went horribly wrong, Good Job!");
+			}
+
 		}
 
 
@@ -182,13 +188,14 @@ public class DnD5eCommands {
 		System.err.println(rollCommand);
 		// make the entire thing a string so JS can deal with it.
 		stringBuilder = new StringBuilder();
-		for (int i = 0; i < rollCommand.size() ; i++) {
-			stringBuilder.append(rollCommand.get(i));
+		for (String aRollCommand : rollCommand) {
+			stringBuilder.append(aRollCommand);
 		}
 		//use javascript to calculate it because i'm a lazy fuck
 		System.err.println(stringBuilder.toString());
 		ScriptEngineManager mgr = new ScriptEngineManager();
 		ScriptEngine engine = mgr.getEngineByName("JavaScript");
+
 		try {
 			int eq = (Integer) engine.eval(stringBuilder.toString());
 			String tosend = stringBuilder.toString() + " = " + eq;
