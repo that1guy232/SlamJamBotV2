@@ -34,7 +34,6 @@ public class SlamJamBot {
 		client.getDispatcher().registerListener(new SillyCommands());
 		client.getDispatcher().registerListener(new StarFinderCommands());
 		client.getDispatcher().registerListener(new DnD5eCommands());
-		//client.getDispatcher().registerListener(new MemeCommands());
 		client.getDispatcher().registerListener(new RealCommands());
 
 

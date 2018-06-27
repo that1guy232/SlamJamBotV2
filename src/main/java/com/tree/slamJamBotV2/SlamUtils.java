@@ -52,13 +52,14 @@ public class SlamUtils {
                 channel.sendFile(file);
             } catch (DiscordException | FileNotFoundException e){
                 System.err.println("File could not be sent with error: ");
+                System.err.println(file.getAbsoluteFile());
                 e.printStackTrace();
             }
         });
     }
 
 
-    static void sendFileWithMessage(IChannel channel, String message,File file){
+    public static void sendFileWithMessage(IChannel channel, String message,File file){
         RequestBuffer.request(() -> {
             try{
                 channel.sendFile(message,file);
@@ -70,7 +71,11 @@ public class SlamUtils {
         });
     }
 
+	private static int rollDie(int amount, int die){
 
+
+    	return 0;
+	}
     public static long sendEmbed(IChannel channel, EmbedObject embed) {
         final long[] messageID = new long[1];
 
