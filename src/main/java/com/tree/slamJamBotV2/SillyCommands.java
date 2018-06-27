@@ -53,6 +53,20 @@ public class SillyCommands {
         IChannel channel = event.getChannel();
         message = message.toLowerCase();
         IGuild guild = event.getGuild();
+
+
+        if (message.contains("keith") && message.contains("roll")){
+            String[] splitMessage = SlamUtils.spiltMessage(message);
+            for (String aSplitMessage : splitMessage) {
+                if(aSplitMessage.contains("keith") && aSplitMessage.contains("d")){
+                    SlamUtils.sendMessage(channel,"Thanks for rolling a Keith " + event.getAuthor().mention() + " He loves you too or hates you, Idk i'm just a bot");
+                }
+            }
+        }
+
+
+
+
         if (!message.contains("no meme")) {
 
             if (message.equals("give me a drink") || message.equals("i need a drink") || message.equals("you need a drink")) {
@@ -84,7 +98,7 @@ public class SillyCommands {
 
 
 
-            if (message.startsWith("come here")) {
+            if (message.startsWith("come here") && event.getAuthor().getVoiceStates().get(guild.getLongID()).getChannel() != guild.getAFKChannel()) {
                 String[] words = message.split("\\s");
                 words[2] = words[2].replaceAll("(?:[<@!>])", "");
                 for (int i = 0; i < guild.getUsers().size(); i++) {
@@ -102,7 +116,11 @@ public class SillyCommands {
 				for (int i = 0; i < guild.getUsers().size(); i++) {
                     String UserID = guild.getUsers().get(i).mention().replaceAll("(?:[<@!>])", "");
                     if (words[1].equals(UserID)) {
-                        guild.getUserByID(Long.parseLong(UserID)).moveToVoiceChannel(guild.getAFKChannel());
+                        if(words[1].equals("145676409078022144")){
+                            guild.getUserByID(event.getAuthor().getLongID()).moveToVoiceChannel(guild.getAFKChannel());
+                        }else {
+                            guild.getUserByID(Long.parseLong(UserID)).moveToVoiceChannel(guild.getAFKChannel());
+                        }
                     }
                 }
             }
