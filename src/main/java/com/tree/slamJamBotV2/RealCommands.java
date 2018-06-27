@@ -21,7 +21,9 @@ public class RealCommands {
 		if(message.contains("f to c")||message.contains("c to f")) {
 			SlamUtils.sendMessage(channel,String.valueOf(convertTemp(message)));
 		}
-		if(message.contains("miles to km")||message.contains("km to miles")){
+		if(message.contains("miles to km")||message.contains("km to miles")||
+				message.contains("m to ft") || message.contains("ft to m")
+				){
 			SlamUtils.sendMessage(channel,String.valueOf(convertDistance(message)));
 		}
 
@@ -63,7 +65,6 @@ public class RealCommands {
 		String[] s = SlamUtils.spiltMessage(message);
 
 		double numberOnly= Double.parseDouble(s[0].replaceAll("[^0-9/-]", ""));
-
 		if(s[0].contains("miles")){
 			double m = numberOnly*1.60934;
 			return Math.round(m*100.0)/100.0;
@@ -74,7 +75,19 @@ public class RealCommands {
 			double km = numberOnly/1.60934;
 			return Math.round(km*100.0)/100.0;
 
+		}else if(s[0].contains("ft")){
+			double m = numberOnly*0.3048;
+			return m;
+
+
 		}
+		else if(s[0].contains("m")){
+			double ft = numberOnly/0.3048;
+			return Math.round(ft*100.0)/100.0;
+
+
+		}
+
 		return 0;
 	}
 
