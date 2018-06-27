@@ -39,12 +39,20 @@ public class MemeCommands {
 		}catch (NullPointerException e){
 			memeCommands.putIfAbsent(guild.getLongID(),loadCommands(guild));
 		}
+		saveCommands(guild);
 
 
 	}
 
 	private ArrayList<MemeCommand> loadCommands(IGuild guild) {
-		ArrayList<MemeCommand> tmp = null;
+		ArrayList<MemeCommand> tmp = new ArrayList<>();
+
+		String[] names = {"addcommand help"};
+		String message =  "```To use the !addcommand function you have to have at least one name to do that you do the following: \n!addcommand names: This is one name, anotherName \nThat will create a empty command that will do nothing. \n\nIf you want the bot to send a message when someone types a name of a command you do this:\n!addcommand names: name message: This will be the message    This will send the message \"This will be the message\" when ever someone types \"name\" into chat.  \n\nIf you would also like it to react to the user who sent the message you do the following \n!addcommand names: name emotes: sunglasses heart (any normal emotes will work just remove the : )   \n\nIf you want the bot to send a image with a command you drag the image over to discord and then were it says   \nadd comment you do the !addcommand with what ever you want.   \n\nIf you want a command like the AAAAAAAA command all you have to do is the following  \n!addcommand names: AAAA message: https://www.youtube.com/watch?v=Y4Z7Ds_yv8o exact: false \nWhat that does is let the word be in another word or as in this case let it be a bunch of a's minim of 4. \n\nTo remove a command all you have to do is type : !removecommand name```";
+		MemeCommand addCommandHelp = new MemeCommand(names,message,null,true,null);
+
+
+
 		FileReader fr;
 		try {
 			fr = new FileReader("commands/"+guild.getName()+"/Commands.json");
@@ -53,24 +61,29 @@ public class MemeCommands {
 
 
 
+
 		} catch (FileNotFoundException e) {
-			System.err.println("Commands Failed to load creating Commands file.");
+			System.err.println("Commands Failed to load creating Commands file for: " + guild.getName());
+
+
+
 
 
 			try {
+				System.err.println("test");
 				new File("commands/"+guild.getName()).mkdirs();
 				File file = new File("commands/"+guild.getName()+"/Commands.json");
 				file.createNewFile();
-
 
 			} catch (IOException e1) {
 
 				e1.printStackTrace();
 			}
 
+			tmp = new ArrayList<>();
+			tmp.add(addCommandHelp);
+
 		}
-
-
 
 
 		return tmp;
@@ -103,7 +116,8 @@ public class MemeCommands {
 			SlamUtils.sendFile(event.getChannel(), f);
 		}
 		else {
-			sendCommand(key,message,iMessage,event.getChannel());
+			sendCommand2(guild,message,iMessage,event.getChannel());
+			//sendCommand(guild.getLongID(),message,iMessage,event.getChannel());
 		}
 
 
@@ -123,42 +137,75 @@ public class MemeCommands {
 			}
 		}
 	}
-	private void sendCommand(Long key, String message, IMessage iMessage, IChannel channel) {
-		boolean sent = false;
-		for (MemeCommand memeCommand: memeCommands.get(key)) {
+
+
+
+
+
+
+	private void sendCommand2(IGuild guild, String message, IMessage imessage, IChannel channel) {
+		String[] splitMessage = SlamUtils.spiltMessage(message);
+
+
+
+		for (MemeCommand memeCommand: memeCommands.get(guild.getLongID())) {
+
+
+			if(memeCommand.exact){
+				for (String name : memeCommand.names) {
+					for (String aSplitMessage : splitMessage) {
+						if(name.equals(aSplitMessage)){
+							send(guild,imessage,channel,memeCommand);
+							break;
+						}
+					}
+				}
+
+
+			}
+			if(!memeCommand.exact) {
+				System.err.println(Arrays.toString(memeCommand.names));
+				for (String name : memeCommand.names) {
+					if(message.contains(name)){
+						send(guild,imessage,channel,memeCommand);
+						break;
+					}
+				}
+			}
 
 			if(memeCommand.exact == null){
 				memeCommand.exact = true;
 			}
-
-
-			for (String name: memeCommand.names) {
-				if(memeCommand.exact && message.startsWith(name) || message.contains(name)){
-					if(memeCommand.emotes != null){
-						for (String emote:memeCommand.emotes) {
-							sent = true;
-							RequestBuffer.request(()-> iMessage.addReaction(EmojiManager.getForAlias(emote)));
-						}
-					}
-					if(memeCommand.message != null && !sent){
-						String tmp = memeCommand.message;
-						tmp = tmp.replace("$mention",iMessage.getAuthor().mention());
-						sendMessage(channel,tmp);
-					}
-
-					if(memeCommand.filePaths != null && !sent){
-						for (String filePath: memeCommand.filePaths) {
-							sendFile(channel,new File(filePath));
-						}
-					}
-					sent = true;
-				}
-			}
-
-
 		}
 
 	}
+		private void send(IGuild guild, IMessage iMessage, IChannel channel,MemeCommand memeCommand){
+			boolean sent = false;
+			if(memeCommand.emotes != null){
+				for (String emote:memeCommand.emotes) {
+					sent = true;
+					RequestBuffer.request(()-> iMessage.addReaction(EmojiManager.getForAlias(emote)));
+				}
+			}
+			if(memeCommand.message != null && memeCommand.filePaths != null && !sent){
+				String tmp = memeCommand.message;
+				tmp = tmp.replace("$mention",iMessage.getAuthor().mention());
+				String filePath = memeCommand.filePaths[0];
+				SlamUtils.sendFileWithMessage(channel,tmp,new File("commands/"+guild.getName()+"/"+filePath));
+			}else if(memeCommand.filePaths != null && !sent){
+				for (String filePath: memeCommand.filePaths) {
+					sendFile(channel,new File("commands/"+guild.getName()+"/"+filePath));
+				}
+			}else if(memeCommand.message != null && !sent){
+				String tmp = memeCommand.message;
+				tmp = tmp.replace("$mention",iMessage.getAuthor().mention());
+				sendMessage(channel,tmp);
+			}
+
+		}
+
+
+
 
 	private void addCommand(IGuild guild, String[] command, MessageReceivedEvent event) {
 		ArrayList<String> names = new ArrayList<>();
