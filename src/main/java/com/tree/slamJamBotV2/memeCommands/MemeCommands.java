@@ -70,7 +70,6 @@ public class MemeCommands {
 
 
 			try {
-				System.err.println("test");
 				new File("commands/"+guild.getName()).mkdirs();
 				File file = new File("commands/"+guild.getName()+"/Commands.json");
 				file.createNewFile();
@@ -115,6 +114,7 @@ public class MemeCommands {
 			File f = new File("commands/"+guild.getName()+"/Commands.json");
 			SlamUtils.sendFile(event.getChannel(), f);
 		}
+
 		else {
 			sendCommand2(guild,message,iMessage,event.getChannel());
 			//sendCommand(guild.getLongID(),message,iMessage,event.getChannel());
@@ -147,32 +147,36 @@ public class MemeCommands {
 		String[] splitMessage = SlamUtils.spiltMessage(message);
 
 
-
+		boolean sent = false;
 		for (MemeCommand memeCommand: memeCommands.get(guild.getLongID())) {
 
 
-			if(memeCommand.exact){
-				for (String name : memeCommand.names) {
-					for (String aSplitMessage : splitMessage) {
-						if(name.equals(aSplitMessage)){
-							send(guild,imessage,channel,memeCommand);
+			if(!sent) {
+				if (memeCommand.exact) {
+					for (String name : memeCommand.names) {
+						for (String aSplitMessage : splitMessage) {
+							if (name.equals(aSplitMessage)) {
+
+								send(guild, imessage, channel, memeCommand);
+								sent = true;
+								break;
+							}
+						}
+					}
+
+
+				}
+				if (!memeCommand.exact) {
+					for (String name : memeCommand.names) {
+						if (message.contains(name)) {
+
+							send(guild, imessage, channel, memeCommand);
+							sent = true;
 							break;
 						}
 					}
 				}
-
-
 			}
-			if(!memeCommand.exact) {
-				System.err.println(Arrays.toString(memeCommand.names));
-				for (String name : memeCommand.names) {
-					if(message.contains(name)){
-						send(guild,imessage,channel,memeCommand);
-						break;
-					}
-				}
-			}
-
 			if(memeCommand.exact == null){
 				memeCommand.exact = true;
 			}
@@ -299,7 +303,6 @@ public class MemeCommands {
 				emotes = null;
 			}
 			MemeCommand m = new MemeCommand(tmpnms.toArray(new String[0]), commandmessage, emotes, exact, filePath);
-			System.err.println(m.message);
 			memeCommands.get(guild.getLongID()).add(m);
 
 

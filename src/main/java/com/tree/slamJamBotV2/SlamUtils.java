@@ -84,7 +84,6 @@ public class SlamUtils {
 
 				long t = channel.sendMessage(embed).getLongID();
 
-            	System.err.println(t + "    Printing T");   //prints a long
 
 				messageID[0] = t;
 
@@ -93,7 +92,6 @@ public class SlamUtils {
                 e.printStackTrace();
             }
         }).get();
-        System.err.println(messageID[0]  + "   Printing the mssage ID");  //prints 0
 
         return messageID[0];												//returns 0
     }

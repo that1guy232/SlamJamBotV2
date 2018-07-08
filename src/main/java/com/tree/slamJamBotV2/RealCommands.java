@@ -4,17 +4,36 @@ import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import sx.blah.discord.api.events.EventSubscriber;
 import sx.blah.discord.handle.impl.events.guild.channel.message.MessageReceivedEvent;
+import sx.blah.discord.handle.impl.events.guild.member.UserJoinEvent;
 import sx.blah.discord.handle.obj.IChannel;
+import sx.blah.discord.handle.obj.IMessage;
 
 import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * Created by Keith on 11/18/2017.
  */
 public class RealCommands {
 	Gson gson = new Gson();
+
 	@EventSubscriber
-    public void onMessageReceived(MessageReceivedEvent event) {
+	public void onUserJoin(UserJoinEvent event){
+		if (event.getUser().getLongID() == 73669669172555776L && event.getGuild().getLongID() == 284976055922458624L){
+			event.getGuild().getUserByID(73669669172555776L).addRole(event.getGuild().getRoleByID(348225438973296653L));
+			event.getGuild().getUserByID(73669669172555776L).addRole(event.getGuild().getRoleByID(433149215258968065L));
+		}
+	}
+	ArrayList<String> messages = new ArrayList<>();
+
+
+	@EventSubscriber
+	public void onMessageReceived(MessageReceivedEvent event) {
+
     	IChannel channel = event.getChannel();
 		String message = event.getMessage().getContent().toLowerCase();
 
@@ -31,17 +50,18 @@ public class RealCommands {
 			SlamUtils.sendMessage(channel, String.valueOf(convertCurrancy(message)));
 		}
 
+
     }
 
 
     private double convertCurrancy(String message){
 		String[] s = SlamUtils.spiltMessage(message);
-		double x;
+		double x = 0;
 		double numberOnly= Double.parseDouble(s[0].replaceAll("[^0-9/-]", ""));
-		String json = null;
+		String json;
 		if(s[0].contains("cad")){
 			 json = SlamUtils.readUrl("http://free.currencyconverterapi.com/api/v5/convert?q=CAD_USD&compact=y.json");
-			x = gson.fromJson(json,JsonObject.class).get("results")
+			gson.fromJson(json,JsonObject.class).get("results")
 					.getAsJsonObject().get("CAD_USD")
 					.getAsJsonObject().get("val").getAsDouble();
 			return numberOnly * x;
