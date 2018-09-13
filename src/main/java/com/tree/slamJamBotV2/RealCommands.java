@@ -57,21 +57,27 @@ public class RealCommands {
     private double convertCurrancy(String message){
 		String[] s = SlamUtils.spiltMessage(message);
 		double x = 0;
-		double numberOnly= Double.parseDouble(s[0].replaceAll("[^0-9/-]", ""));
+		double numberOnly= Double.parseDouble(s[0].replaceAll("[^0-9./-]", ""));
 		String json;
 		if(s[0].contains("cad")){
 			 json = SlamUtils.readUrl("http://free.currencyconverterapi.com/api/v5/convert?q=CAD_USD&compact=y.json");
-			gson.fromJson(json,JsonObject.class).get("results")
+			x = gson.fromJson(json,JsonObject.class).get("results")
 					.getAsJsonObject().get("CAD_USD")
 					.getAsJsonObject().get("val").getAsDouble();
-			return numberOnly * x;
+			double a = numberOnly * x;
+			double roundOff = (double) Math.round(a * 100) / 100;
+					 return roundOff;
 		}
 		if(s[0].contains("usd")){
 			 json = SlamUtils.readUrl("http://free.currencyconverterapi.com/api/v5/convert?q=USD_CAD&compact=y.json");
 			x = gson.fromJson(json,JsonObject.class).get("results")
 					.getAsJsonObject().get("USD_CAD")
 					.getAsJsonObject().get("val").getAsDouble();
-			return numberOnly * x;
+			double a = numberOnly * x;
+
+			double roundOff = (double) Math.round(a * 100) / 100;
+			return roundOff;
+					 
 		}
 
 
