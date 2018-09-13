@@ -2,6 +2,7 @@ package com.tree.slamJamBotV2.DnDCommands;
 
 import com.tree.slamJamBotV2.DnDCommands.RandomCharacterGen.RandomCharacter;
 import com.tree.slamJamBotV2.SlamUtils;
+import com.tree.slamJamBotV2.miniGames.PointlessPoints;
 import com.vdurmont.emoji.EmojiParser;
 import sx.blah.discord.api.events.EventSubscriber;
 import sx.blah.discord.handle.impl.events.guild.channel.message.MessageReceivedEvent;
@@ -15,25 +16,25 @@ import sx.blah.discord.util.RequestBuffer;
 import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
 import javax.script.ScriptException;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class DnD5eCommands {
 
-    SpellListCommand spellListCommand;
+	private final PointlessPoints pointlesspoints;
+	SpellListCommand spellListCommand;
 
 
-    public DnD5eCommands(){
-		spellListCommand = new SpellListCommand();
+    public DnD5eCommands(PointlessPoints pointlesspoints){
+	    this.pointlesspoints = pointlesspoints;
+	    spellListCommand = new SpellListCommand();
 
     }
 
 
 
-
-    @EventSubscriber
+	@EventSubscriber
     public void reactionAddEvent(ReactionAddEvent reactionAddEvent){
         //EmojiManager.getForAlias(reactionAddEvent.getReaction().getEmoji().getName());
        System.err.println( );
@@ -195,7 +196,6 @@ public class DnD5eCommands {
 		System.err.println(stringBuilder.toString());
 		ScriptEngineManager mgr = new ScriptEngineManager();
 		ScriptEngine engine = mgr.getEngineByName("JavaScript");
-
 		try {
 			int eq = (Integer) engine.eval(stringBuilder.toString());
 			String tosend = stringBuilder.toString() + " = " + eq;

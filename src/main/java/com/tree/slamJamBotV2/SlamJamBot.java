@@ -4,6 +4,7 @@ import com.tree.slamJamBotV2.DnDCommands.DnD5eCommands;
 import com.tree.slamJamBotV2.memeCommands.MemeCommands;
 import com.tree.slamJamBotV2.miniGames.PointlessPoints;
 import com.tree.slamJamBotV2.miniGames.wordScramble;
+import com.tree.slamJamBotV2.userQuotes.UserQuotes;
 import sx.blah.discord.api.ClientBuilder;
 import sx.blah.discord.api.IDiscordClient;
 import sx.blah.discord.handle.obj.StatusType;
@@ -37,10 +38,10 @@ public class SlamJamBot {
 		client.getDispatcher().registerListener(pointlessPoints);
 		client.getDispatcher().registerListener(new SillyCommands());
 		client.getDispatcher().registerListener(new StarFinderCommands());
-		client.getDispatcher().registerListener(new DnD5eCommands());
+		client.getDispatcher().registerListener(new DnD5eCommands(pointlessPoints));
 		client.getDispatcher().registerListener(new RealCommands());
 		client.getDispatcher().registerListener(new wordScramble(pointlessPoints));
-		//client.getDispatcher().registerListener(new TicTacToeCommands());
+		client.getDispatcher().registerListener(new UserQuotes());
 
 
 		client.getDispatcher().registerListener(new MemeCommands());

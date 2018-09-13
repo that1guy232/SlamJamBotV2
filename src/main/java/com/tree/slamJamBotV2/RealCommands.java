@@ -85,6 +85,7 @@ public class RealCommands {
 		String[] s = SlamUtils.spiltMessage(message);
 
 		double numberOnly= Double.parseDouble(s[0].replaceAll("[^0-9/-]", ""));
+
 		if(s[0].contains("miles")){
 			double m = numberOnly*1.60934;
 			return Math.round(m*100.0)/100.0;
@@ -114,7 +115,7 @@ public class RealCommands {
 	private double convertTemp(String message) {
 		String[] s = SlamUtils.spiltMessage(message);
 
-		double numberOnly= Double.parseDouble(s[0].replaceAll("[^0-9/-]", ""));
+		double numberOnly= Double.parseDouble(s[0].replaceAll("[f | to | c]", ""));
 
 		if(s[0].contains("-")){
 

@@ -7,6 +7,7 @@ import com.google.gson.stream.JsonReader;
 import com.tree.slamJamBotV2.SlamUtils;
 import sx.blah.discord.api.events.EventSubscriber;
 import sx.blah.discord.handle.impl.events.guild.channel.message.MessageReceivedEvent;
+import sx.blah.discord.handle.obj.IChannel;
 
 import java.io.FileReader;
 import java.io.IOException;
@@ -14,11 +15,12 @@ import java.lang.reflect.Type;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class PointlessPoints {
-	ArrayList<User> users = new ArrayList<>();
-	Gson gson = new GsonBuilder().setPrettyPrinting().create();
-	public User getUser(long longID) {
+	public ArrayList<User> users = new ArrayList<>();
+	private Gson gson = new GsonBuilder().setPrettyPrinting().create();
+	 public User getUser(long longID) {
 		for (User user: users) {
 			if(user.getUserID() == longID){
 				saveUsers();
@@ -38,7 +40,7 @@ public class PointlessPoints {
 		}
 	}
 
-	public void saveUsers() {
+	 void saveUsers() {
 		try {
 			Files.write(Paths.get("pointlesspoints.json"),gson.toJson(users).getBytes());
 		} catch (IOException e) {
@@ -51,12 +53,44 @@ public class PointlessPoints {
 	public void onMessageReceived(MessageReceivedEvent event) {
 		String message = event.getMessage().getContent().toLowerCase();
 
-		if(message.equals("!ppoints")){
-			if(getUser(event.getAuthor().getLongID()) != null){
-				SlamUtils.sendMessage(event.getChannel(),"You have " + getUser(event.getAuthor().getLongID()).getPoints() + " pointless points. Good job.");
+
+		if(message.startsWith("!ppoints")){
+			if(message.contains("daily")){
+				System.err.println( getUser(event.getAuthor().getLongID()).getTimeClaimed());
+				if(getUser(event.getAuthor().getLongID()).getTimeClaimed() + 86400000L == System.currentTimeMillis() || getUser(event.getAuthor().getLongID()).getTimeClaimed() == 0 ){
+					dailyPoints(event.getChannel(),event.getAuthor().getLongID());
+				}else {
+					SlamUtils.sendMessage(event.getChannel(),"Sorry you gotta wait till you can collect more daily pointless points");
+				}
+
 			}else {
-				SlamUtils.sendMessage(event.getChannel(),"Wow your the best! You have no pointless points!");
+				if (getUser(event.getAuthor().getLongID()) != null) {
+					SlamUtils.sendMessage(event.getChannel(), "You have " + getUser(event.getAuthor().getLongID()).getPoints() + " pointless points. Good job.");
+				} else {
+					SlamUtils.sendMessage(event.getChannel(), "Wow your the best! You have no pointless points!");
+				}
 			}
+		}
+
+
+
+
+
+	}
+
+	private void dailyPoints(IChannel channel, Long id) {
+		int points = ThreadLocalRandom.current().nextInt(-100, 100);
+		User user = getUser(id);
+		user.addPoints(points);
+		user.setTimeClaimed(System.currentTimeMillis());
+		if (points == 0) {
+			SlamUtils.sendMessage(channel, "Oh so close, You didn't lose any Pointless points this time");
+		}
+		if (points > 0) {
+			SlamUtils.sendMessage(channel, "Here are some free ppoint's. +" + points + " ppoint's.");
+		}
+		if (points < 0) {
+			SlamUtils.sendMessage(channel, "Congrats! You lost " + points + " ppoint's!");
 		}
 
 	}
@@ -68,22 +102,28 @@ public class PointlessPoints {
 class User{
 
 
-	private int points;
+	private long points;
 	private long userID;
 
 
-	public int getPoints() {
+
+	private long timeClaimed = 0L;
+
+	 long getPoints() {
 		return points;
 	}
-	public void addPoints(int points) {
+	 void addPoints(int points) {
 		this.points = this.points + points;
 	}
-
-	public long getUserID() {
+	 void setTimeClaimed(long timeClaimed){this.timeClaimed = timeClaimed;}
+	 long getTimeClaimed() {
+		return timeClaimed;
+	}
+	 long getUserID() {
 		return userID;
 	}
 
-	public User(int points, long userID) {
+	 User(int points, long userID) {
 		this.points = points;
 		this.userID = userID;
 	}
