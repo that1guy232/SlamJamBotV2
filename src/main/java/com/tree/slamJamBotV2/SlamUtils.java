@@ -71,11 +71,7 @@ public class SlamUtils {
         });
     }
 
-	private static int rollDie(int amount, int die){
 
-
-    	return 0;
-	}
     public static long sendEmbed(IChannel channel, EmbedObject embed) {
         final long[] messageID = new long[1];
 

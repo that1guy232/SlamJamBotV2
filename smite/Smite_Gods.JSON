@@ -1,0 +1,681 @@
+[
+  {
+    "name": "achilles",
+    "image": "https://web2.hirez.com/smite/god-skins/achilles_standard-achilles.jpg",
+    "type": "physical",
+    "godclass": "warrior",
+    "heals": "true"
+  },
+  {
+    "name": "agni",
+    "image": "https://web2.hirez.com/smite/god-skins/agni_standard-agni.jpg",
+    "type": "magical",
+    "godclass": "mage",
+    "heals": "false"
+  },
+  {
+    "name": "ah muzen cab",
+    "image": "https://web2.hirez.com/smite/god-skins/ah_muzen_cab_standard-ah-muzen-cab.jpg",
+    "type": "physical",
+    "godclass": "hunter",
+    "heals": "false"
+  },
+  {
+    "name": "ah puch",
+    "image": "https://web2.hirez.com/smite/god-skins/ah_puch_standard-ah-puch.jpg",
+    "type": "magical",
+    "godclass": "mage",
+    "heals": "true"
+  },
+  {
+    "name": "amaterasu",
+    "image": "https://web2.hirez.com/smite/god-skins/amaterasu_standard-amaterasu.jpg",
+    "type": "physical",
+    "godclass": "warrior",
+    "heals": "true"
+  },
+  {
+    "name": "anhur",
+    "image": "https://web2.hirez.com/smite/god-skins/anhur_standard-anhur.jpg",
+    "type": "physical",
+    "godclass": "hunter",
+    "heals": "false"
+  },
+  {
+    "name": "anubis",
+    "image": "https://web2.hirez.com/smite/god-skins/anubis_standard-anubis.jpg",
+    "type": "magical",
+    "godclass": "mage",
+    "heals": "false"
+  },
+  {
+    "name": "ao kuang",
+    "image": "https://web2.hirez.com/smite/god-skins/ao_kuang_standard-ao-kuang.jpg",
+    "type": "magical",
+    "godclass": "mage",
+    "heals": "false"
+  },
+  {
+    "name": "aphrodite",
+    "image": "https://web2.hirez.com/smite/god-skins/aphrodite_standard-aphrodite.jpg",
+    "type": "magical",
+    "godclass": "mage",
+    "heals": "true"
+  },
+  {
+    "name": "apollo",
+    "image": "https://web2.hirez.com/smite/god-skins/apollo_standard-apollo.jpg",
+    "type": "physical",
+    "godclass": "hunter",
+    "heals": "false"
+  },
+  {
+    "name": "arachne",
+    "image": "https://web2.hirez.com/smite/god-skins/arachne_standard-arachne.jpg",
+    "type": "physical",
+    "godclass": "assassin",
+    "heals": "true"
+  },
+  {
+    "name": "ares",
+    "image": "https://web2.hirez.com/smite/god-skins/ares_standard-ares.jpg",
+    "type": "magical",
+    "godclass": "guardian",
+    "heals": "false"
+  },
+  {
+    "name": "artemis",
+    "image": "https://web2.hirez.com/smite/god-skins/artemis_standard-artemis.jpg",
+    "type": "physical",
+    "godclass": "hunter",
+    "heals": "false"
+  },
+  {
+    "name": "artio",
+    "image": "https://web2.hirez.com/smite/god-skins/artio_standard-artio.jpg",
+    "type": "magical",
+    "godclass": "guardian",
+    "heals": "true"
+  },
+  {
+    "name": "athena",
+    "image": "https://web2.hirez.com/smite/god-skins/athena_standard-athena.jpg",
+    "type": "magical",
+    "godclass": "guardian",
+    "heals": "false"
+  },
+  {
+    "name": "awilix",
+    "image": "https://web2.hirez.com/smite/god-skins/awilix_standard-awilix.jpg",
+    "type": "physical",
+    "godclass": "assassin",
+    "heals": "false"
+  },
+  {
+    "name": "bacchus",
+    "image": "https://web2.hirez.com/smite/god-skins/bacchus_standard-bacchus.jpg",
+    "type": "magical",
+    "godclass": "guardian",
+    "heals": "false"
+  },
+  {
+    "name": "bakasura",
+    "image": "https://web2.hirez.com/smite/god-skins/bakasura_standard-bakasura.jpg",
+    "type": "physical",
+    "godclass": "assassin",
+    "heals": "true"
+  },
+  {
+    "name": "baron samedi",
+    "image": "https://web2.hirez.com/smite/god-skins/baron_samedi_standard-baron-samedi.jpg",
+    "type": "magical",
+    "godclass": "mage",
+    "heals": "true"
+  },
+  {
+    "name": "bastet",
+    "image": "https://web2.hirez.com/smite/god-skins/bastet_standard-bastet.jpg",
+    "type": "physical",
+    "godclass": "assassin",
+    "heals": "false"
+  },
+  {
+    "name": "bellona",
+    "image": "https://web2.hirez.com/smite/god-skins/bellona_standard-bellona.jpg",
+    "type": "physical",
+    "godclass": "warrior",
+    "heals": "true"
+  },
+  {
+    "name": "cabrakan",
+    "image": "https://web2.hirez.com/smite/god-skins/cabrakan_standard-cabrakan.jpg",
+    "type": "magical",
+    "godclass": "guardian",
+    "heals": "false"
+  },
+  {
+    "name": "camazotz",
+    "image": "https://web2.hirez.com/smite/god-skins/camazotz_standard-camazotz.jpg",
+    "type": "physical",
+    "godclass": "assassin",
+    "heals": "true"
+  },
+  {
+    "name": "cerberus",
+    "image": "https://web2.hirez.com/smite/god-skins/cerberus_standard-cerberus.jpg",
+    "type": "magical",
+    "godclass": "guardian",
+    "heals": "true"
+  },
+  {
+    "name": "cernunnos",
+    "image": "https://web2.hirez.com/smite/god-skins/cernunnos_standard-cernunnos.jpg",
+    "type": "physical",
+    "godclass": "hunter",
+    "heals": "false"
+  },
+  {
+    "name": "chaac",
+    "image": "https://web2.hirez.com/smite/god-skins/chaac_standard-chaac.jpg",
+    "type": "physical",
+    "godclass": "warrior",
+    "heals": "true"
+  },
+  {
+    "name": "chang'e",
+    "image": "https://web2.hirez.com/smite/god-skins/change_standard-change.jpg",
+    "type": "magical",
+    "godclass": "mage",
+    "heals": "true"
+  },
+  {
+    "name": "chernobog",
+    "image": "https://web2.hirez.com/smite/god-skins/chernobog_standard-chernobog.jpg",
+    "type": "physical",
+    "godclass": "hunter",
+    "heals": "false"
+  },
+  {
+    "name": "chiron",
+    "image": "https://web2.hirez.com/smite/god-skins/chiron_standard-chiron.jpg",
+    "type": "physical",
+    "godclass": "hunter",
+    "heals": "true"
+  },
+  {
+    "name": "chronos",
+    "image": "https://web2.hirez.com/smite/god-skins/chronos_standard-chronos.jpg",
+    "type": "magical",
+    "godclass": "mage",
+    "heals": "true"
+  },
+  {
+    "name": "cu chulainn",
+    "image": "https://web2.hirez.com/smite/god-skins/cu_chulainn_standard-cu-chulainn.jpg",
+    "type": "physical",
+    "godclass": "warrior",
+    "heals": "false"
+  },
+  {
+    "name": "cupid",
+    "image": "https://web2.hirez.com/smite/god-skins/cupid_standard-cupid.jpg",
+    "type": "physical",
+    "godclass": "hunter",
+    "heals": "true"
+  },
+  {
+    "name": "da ji",
+    "image": "https://web2.hirez.com/smite/god-skins/da_ji_standard-daji.jpg",
+    "type": "physical",
+    "godclass": "assassin",
+    "heals": "false"
+  },
+  {
+    "name": "discordia",
+    "image": "https://web2.hirez.com/smite/god-skins/discordia_standard-discordia.jpg",
+    "type": "magical",
+    "godclass": "mage",
+    "heals": "false"
+  },
+  {
+    "name": "erlang shen",
+    "image": "https://web2.hirez.com/smite/god-skins/erlang_shen_standard-erlang-shen.jpg",
+    "type": "physical",
+    "godclass": "warrior",
+    "heals": "true"
+  },
+  {
+    "name": "fafnir",
+    "image": "https://web2.hirez.com/smite/god-skins/fafnir_standard-fafnir.jpg",
+    "type": "magical",
+    "godclass": "guardian",
+    "heals": "true"
+  },
+  {
+    "name": "fenrir",
+    "image": "https://web2.hirez.com/smite/god-skins/fenrir_standard-fenrir.jpg",
+    "type": "physical",
+    "godclass": "assassin",
+    "heals": "false"
+  },
+  {
+    "name": "freya",
+    "image": "https://web2.hirez.com/smite/god-skins/freya_standard-freya.jpg",
+    "type": "magical",
+    "godclass": "mage",
+    "heals": "false"
+  },
+  {
+    "name": "ganesha",
+    "image": "https://web2.hirez.com/smite/god-skins/ganesha_standard-ganesha.jpg",
+    "type": "magical",
+    "godclass": "guardian",
+    "heals": "false"
+  },
+  {
+    "name": "geb",
+    "image": "https://web2.hirez.com/smite/god-skins/geb_standard-geb.jpg",
+    "type": "magical",
+    "godclass": "guardian",
+    "heals": "false"
+  },
+  {
+    "name": "guan yu",
+    "image": "https://web2.hirez.com/smite/god-skins/guan_yu_standard-guan-yu.jpg",
+    "type": "physical",
+    "godclass": "warrior",
+    "heals": "true"
+  },
+  {
+    "name": "hachiman",
+    "image": "https://web2.hirez.com/smite/god-skins/hachiman_standard-hachiman.jpg",
+    "type": "physical",
+    "godclass": "hunter",
+    "heals": "false"
+  },
+  {
+    "name": "hades",
+    "image": "https://web2.hirez.com/smite/god-skins/hades_standard-hades.jpg",
+    "type": "magical",
+    "godclass": "mage",
+    "heals": "true"
+  },
+  {
+    "name": "he bo",
+    "image": "https://web2.hirez.com/smite/god-skins/he_bo_standard-he-bo.jpg",
+    "type": "magical",
+    "godclass": "mage",
+    "heals": "false"
+  },
+  {
+    "name": "hel",
+    "image": "https://web2.hirez.com/smite/god-skins/hel_standard-hel.jpg",
+    "type": "magical",
+    "godclass": "mage",
+    "heals": "true"
+  },
+  {
+    "name": "hercules",
+    "image": "https://web2.hirez.com/smite/god-skins/hercules_standard-hercules.jpg",
+    "type": "physical",
+    "godclass": "warrior",
+    "heals": "true"
+  },
+  {
+    "name": "hou yi",
+    "image": "https://web2.hirez.com/smite/god-skins/hou_yi_standard-hou-yi.jpg",
+    "type": "physical",
+    "godclass": "hunter",
+    "heals": "false"
+  },
+  {
+    "name": "hun batz",
+    "image": "https://web2.hirez.com/smite/god-skins/hun_batz_standard-hun-batz.jpg",
+    "type": "physical",
+    "godclass": "assassin",
+    "heals": "false"
+  },
+  {
+    "name": "isis",
+    "image": "https://web2.hirez.com/smite/god-skins/isis_standard-isis.jpg",
+    "type": "magical",
+    "godclass": "mage",
+    "heals": "true"
+  },
+  {
+    "name": "izanami",
+    "image": "https://web2.hirez.com/smite/god-skins/izanami_standard-izanami.jpg",
+    "type": "physical",
+    "godclass": "hunter",
+    "heals": "false"
+  },
+  {
+    "name": "janus",
+    "image": "https://web2.hirez.com/smite/god-skins/janus_standard-janus.jpg",
+    "type": "magical",
+    "godclass": "mage",
+    "heals": "false"
+  },
+  {
+    "name": "jing wei",
+    "image": "https://web2.hirez.com/smite/god-skins/jing_wei_standard-jing-wei.jpg",
+    "type": "physical",
+    "godclass": "hunter",
+    "heals": "false"
+  },
+  {
+    "name": "kali",
+    "image": "https://web2.hirez.com/smite/god-skins/kali_standard-kali.jpg",
+    "type": "physical",
+    "godclass": "assassin",
+    "heals": "true"
+  },
+  {
+    "name": "khepri",
+    "image": "https://web2.hirez.com/smite/god-skins/khepri_standard-khepri.jpg",
+    "type": "magical",
+    "godclass": "guardian",
+    "heals": "false"
+  },
+  {
+    "name": "kukulkan",
+    "image": "https://web2.hirez.com/smite/god-skins/kukulkan_standard-kukulkan.jpg",
+    "type": "magical",
+    "godclass": "mage",
+    "heals": "false"
+  },
+  {
+    "name": "kumbhakarna",
+    "image": "https://web2.hirez.com/smite/god-skins/kumbhakarna_standard-kumbhakarna.jpg",
+    "type": "magical",
+    "godclass": "guardian",
+    "heals": "false"
+  },
+  {
+    "name": "kuzenbo",
+    "image": "https://web2.hirez.com/smite/god-skins/kuzenbo_standard-kuzenbo.jpg",
+    "type": "magical",
+    "godclass": "guardian",
+    "heals": "false"
+  },
+  {
+    "name": "loki",
+    "image": "https://web2.hirez.com/smite/god-skins/loki_standard-loki.jpg",
+    "type": "physical",
+    "godclass": "assassin",
+    "heals": "false"
+  },
+  {
+    "name": "medusa",
+    "image": "https://web2.hirez.com/smite/god-skins/medusa_standard-medusa.jpg",
+    "type": "physical",
+    "godclass": "hunter",
+    "heals": "false"
+  },
+  {
+    "name": "mercury",
+    "image": "https://web2.hirez.com/smite/god-skins/mercury_standard-mercury.jpg",
+    "type": "physical",
+    "godclass": "assassin",
+    "heals": "false"
+  },
+  {
+    "name": "ne zha",
+    "image": "https://web2.hirez.com/smite/god-skins/ne_zha_standard-ne-zha.jpg",
+    "type": "physical",
+    "godclass": "assassin",
+    "heals": "true"
+  },
+  {
+    "name": "neith",
+    "image": "https://web2.hirez.com/smite/god-skins/neith_standard-neith.jpg",
+    "type": "physical",
+    "godclass": "hunter",
+    "heals": "true"
+  },
+  {
+    "name": "nemesis",
+    "image": "https://web2.hirez.com/smite/god-skins/nemesis_standard-nemesis.jpg",
+    "type": "physical",
+    "godclass": "assassin",
+    "heals": "false"
+  },
+  {
+    "name": "nike",
+    "image": "https://web2.hirez.com/smite/god-skins/nike_standard-nike.jpg",
+    "type": "physical",
+    "godclass": "warrior",
+    "heals": "false"
+  },
+  {
+    "name": "nox",
+    "image": "https://web2.hirez.com/smite/god-skins/nox_standard-nox.jpg",
+    "type": "magical",
+    "godclass": "mage",
+    "heals": "false"
+  },
+  {
+    "name": "nu wa",
+    "image": "https://web2.hirez.com/smite/god-skins/nu_wa_standard-nu-wa.jpg",
+    "type": "magical",
+    "godclass": "mage",
+    "heals": "false"
+  },
+  {
+    "name": "odin",
+    "image": "https://web2.hirez.com/smite/god-skins/odin_standard-odin.jpg",
+    "type": "physical",
+    "godclass": "warrior",
+    "heals": "false"
+  },
+  {
+    "name": "osiris",
+    "image": "https://web2.hirez.com/smite/god-skins/osiris_standard-osiris.jpg",
+    "type": "physical",
+    "godclass": "warrior",
+    "heals": "false"
+  },
+  {
+    "name": "pele",
+    "image": "https://web2.hirez.com/smite/god-skins/pele_standard-pele.jpg",
+    "type": "physical",
+    "godclass": "assassin",
+    "heals": "false"
+  },
+  {
+    "name": "poseidon",
+    "image": "https://web2.hirez.com/smite/god-skins/poseidon_standard-poseidon.jpg",
+    "type": "magical",
+    "godclass": "mage",
+    "heals": "false"
+  },
+  {
+    "name": "ra",
+    "image": "https://web2.hirez.com/smite/god-skins/ra_standard-ra.jpg",
+    "type": "magical",
+    "godclass": "mage",
+    "heals": "true"
+  },
+  {
+    "name": "raijin",
+    "image": "https://web2.hirez.com/smite/god-skins/raijin_standard-raijin.jpg",
+    "type": "magical",
+    "godclass": "mage",
+    "heals": "false"
+  },
+  {
+    "name": "rama",
+    "image": "https://web2.hirez.com/smite/god-skins/rama_standard-rama.jpg",
+    "type": "physical",
+    "godclass": "hunter",
+    "heals": "false"
+  },
+  {
+    "name": "ratatoskr",
+    "image": "https://web2.hirez.com/smite/god-skins/ratatoskr_standard-ratatoskr.jpg",
+    "type": "physical",
+    "godclass": "assassin",
+    "heals": "true"
+  },
+  {
+    "name": "ravana",
+    "image": "https://web2.hirez.com/smite/god-skins/ravana_standard-ravana.jpg",
+    "type": "physical",
+    "godclass": "warrior",
+    "heals": "true"
+  },
+  {
+    "name": "scylla",
+    "image": "https://web2.hirez.com/smite/god-skins/scylla_standard-scylla.jpg",
+    "type": "magical",
+    "godclass": "mage",
+    "heals": "false"
+  },
+  {
+    "name": "serqet",
+    "image": "https://web2.hirez.com/smite/god-skins/serqet_standard-serqet.jpg",
+    "type": "physical",
+    "godclass": "assassin",
+    "heals": "false"
+  },
+  {
+    "name": "skadi",
+    "image": "https://web2.hirez.com/smite/god-skins/skadi_standard-skadi.jpg",
+    "type": "physical",
+    "godclass": "hunter",
+    "heals": "false"
+  },
+  {
+    "name": "sobek",
+    "image": "https://web2.hirez.com/smite/god-skins/sobek_standard-sobek.jpg",
+    "type": "magical",
+    "godclass": "guardian",
+    "heals": "true"
+  },
+  {
+    "name": "sol",
+    "image": "https://web2.hirez.com/smite/god-skins/sol_standard-sol.jpg",
+    "type": "magical",
+    "godclass": "mage",
+    "heals": "true"
+  },
+  {
+    "name": "sun wukong",
+    "image": "https://web2.hirez.com/smite/god-skins/sun_wukong_standard-sun-wukong.jpg",
+    "type": "physical",
+    "godclass": "warrior",
+    "heals": "true"
+  },
+  {
+    "name": "susano",
+    "image": "https://web2.hirez.com/smite/god-skins/susano_standard-susano.jpg",
+    "type": "physical",
+    "godclass": "assassin",
+    "heals": "false"
+  },
+  {
+    "name": "sylvanus",
+    "image": "https://web2.hirez.com/smite/god-skins/sylvanus_standard-sylvanus.jpg",
+    "type": "magical",
+    "godclass": "guardian",
+    "heals": "true"
+  },
+  {
+    "name": "terra",
+    "image": "https://web2.hirez.com/smite/god-skins/terra_standard-terra.jpg",
+    "type": "magical",
+    "godclass": "guardian",
+    "heals": "true"
+  },
+  {
+    "name": "thanatos",
+    "image": "https://web2.hirez.com/smite/god-skins/thanatos_standard-thanatos.jpg",
+    "type": "physical",
+    "godclass": "assassin",
+    "heals": "true"
+  },
+  {
+    "name": "the morrigan",
+    "image": "https://web2.hirez.com/smite/god-skins/the_morrigan_standard-the-morrigan.jpg",
+    "type": "magical",
+    "godclass": "mage",
+    "heals": "false"
+  },
+  {
+    "name": "thor",
+    "image": "https://web2.hirez.com/smite/god-skins/thor_standard-thor.jpg",
+    "type": "physical",
+    "godclass": "assassin",
+    "heals": "false"
+  },
+  {
+    "name": "thoth",
+    "image": "https://web2.hirez.com/smite/god-skins/thoth_standard-thoth.jpg",
+    "type": "magical",
+    "godclass": "mage",
+    "heals": "false"
+  },
+  {
+    "name": "tyr",
+    "image": "https://web2.hirez.com/smite/god-skins/tyr_standard-tyr.jpg",
+    "type": "physical",
+    "godclass": "warrior",
+    "heals": "true"
+  },
+  {
+    "name": "ullr",
+    "image": "https://web2.hirez.com/smite/god-skins/ullr_standard-ullr.jpg",
+    "type": "physical",
+    "godclass": "hunter",
+    "heals": "false"
+  },
+  {
+    "name": "vamana",
+    "image": "https://web2.hirez.com/smite/god-skins/vamana_standard-vamana.jpg",
+    "type": "physical",
+    "godclass": "warrior",
+    "heals": "true"
+  },
+  {
+    "name": "vulcan",
+    "image": "https://web2.hirez.com/smite/god-skins/vulcan_standard-vulcan.jpg",
+    "type": "magical",
+    "godclass": "mage",
+    "heals": "false"
+  },
+  {
+    "name": "xbalanque",
+    "image": "https://web2.hirez.com/smite/god-skins/xbalanque_standard-xbalanque.jpg",
+    "type": "physical",
+    "godclass": "hunter",
+    "heals": "false"
+  },
+  {
+    "name": "xing tian",
+    "image": "https://web2.hirez.com/smite/god-skins/xing_tian_standard-xing-tian.jpg",
+    "type": "magical",
+    "godclass": "guardian",
+    "heals": "false"
+  },
+  {
+    "name": "ymir",
+    "image": "https://web2.hirez.com/smite/god-skins/ymir_standard-ymir.jpg",
+    "type": "magical",
+    "godclass": "guardian",
+    "heals": "false"
+  },
+  {
+    "name": "zeus",
+    "image": "https://web2.hirez.com/smite/god-skins/zeus_standard-zeus.jpg",
+    "type": "magical",
+    "godclass": "mage",
+    "heals": "false"
+  },
+  {
+    "name": "zhong kui",
+    "image": "https://web2.hirez.com/smite/god-skins/zhong_kui_standard-zhong-kui.jpg",
+    "type": "magical",
+    "godclass": "mage",
+    "heals": "true"
+  }
+]

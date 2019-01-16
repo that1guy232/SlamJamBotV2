@@ -5,6 +5,7 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import com.tree.slamJamBotV2.SlamUtils;
 import com.vdurmont.emoji.EmojiManager;
+import org.omg.PortableInterceptor.SYSTEM_EXCEPTION;
 import sx.blah.discord.api.events.EventSubscriber;
 import sx.blah.discord.handle.impl.events.guild.GuildCreateEvent;
 import sx.blah.discord.handle.impl.events.guild.channel.message.MessageReceivedEvent;
@@ -223,6 +224,8 @@ public class MemeCommands {
 		State state = null;
 
 		for (String sCommand : command) {
+			System.err.println(state);
+			System.err.println(sCommand);
 			switch (sCommand.toLowerCase()) {
 				case "names:":
 					state = State.names;
@@ -252,6 +255,7 @@ public class MemeCommands {
 							break;
 					}
 			}
+
 		}
 
 		if (names.size() <= 0) {

@@ -1,6 +1,7 @@
 package com.tree.slamJamBotV2;
 
 import com.tree.slamJamBotV2.DnDCommands.DnD5eCommands;
+import com.tree.slamJamBotV2.SmiteCommands.SmiteCommands;
 import com.tree.slamJamBotV2.memeCommands.MemeCommands;
 import com.tree.slamJamBotV2.miniGames.PointlessPoints;
 import com.tree.slamJamBotV2.miniGames.wordScramble;
@@ -41,6 +42,7 @@ public class SlamJamBot {
 		client.getDispatcher().registerListener(new DnD5eCommands(pointlessPoints));
 		client.getDispatcher().registerListener(new RealCommands());
 		client.getDispatcher().registerListener(new wordScramble(pointlessPoints));
+		client.getDispatcher().registerListener(new SmiteCommands());
 		//client.getDispatcher().registerListener(new UserQuotes());
 
 

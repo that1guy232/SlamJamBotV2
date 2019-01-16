@@ -6,14 +6,9 @@ import sx.blah.discord.api.events.EventSubscriber;
 import sx.blah.discord.handle.impl.events.guild.channel.message.MessageReceivedEvent;
 import sx.blah.discord.handle.impl.events.guild.member.UserJoinEvent;
 import sx.blah.discord.handle.obj.IChannel;
-import sx.blah.discord.handle.obj.IMessage;
 
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
+import java.sql.Time;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 /**
  * Created by Keith on 11/18/2017.
@@ -33,7 +28,7 @@ public class RealCommands {
 
 	@EventSubscriber
 	public void onMessageReceived(MessageReceivedEvent event) {
-
+		System.err.println(Time.from(event.getMessage().getTimestamp()).getTime());
     	IChannel channel = event.getChannel();
 		String message = event.getMessage().getContent().toLowerCase();
 
