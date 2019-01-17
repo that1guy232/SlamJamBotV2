@@ -16,6 +16,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.concurrent.ThreadLocalRandom;
+import java.util.concurrent.TimeUnit;
 
 public class PointlessPoints {
 	public ArrayList<User> users = new ArrayList<>();
@@ -57,10 +58,22 @@ public class PointlessPoints {
 		if(message.startsWith("!ppoints")){
 			if(message.contains("daily")){
 				System.err.println( getUser(event.getAuthor().getLongID()).getTimeClaimed());
-				if(getUser(event.getAuthor().getLongID()).getTimeClaimed() + 86400000L == System.currentTimeMillis() || getUser(event.getAuthor().getLongID()).getTimeClaimed() == 0 ){
+				Long UserLastCLamied = getUser(event.getAuthor().getLongID()).getTimeClaimed();
+				if(UserLastCLamied + 86400000L <= System.currentTimeMillis() || getUser(event.getAuthor().getLongID()).getTimeClaimed() == 0 ){
 					dailyPoints(event.getChannel(),event.getAuthor().getLongID());
+
 				}else {
-					SlamUtils.sendMessage(event.getChannel(),"Sorry you gotta wait till you can collect more daily pointless points");
+					Long TimeRemaining = (UserLastCLamied +  86400000L) - System.currentTimeMillis();
+
+
+					String Timeremaining =String.format("%d Hours, %d Minutes, %d Seconds",
+							TimeUnit.MILLISECONDS.toHours(TimeRemaining),
+							TimeUnit.MILLISECONDS.toMinutes(TimeRemaining) - TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(TimeRemaining)),
+							TimeUnit.MILLISECONDS.toSeconds(TimeRemaining) - TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(TimeRemaining))
+
+					);
+
+					SlamUtils.sendMessage(event.getChannel(),"Sorry you gotta wait till you can collect more daily pointless points" + "\n Time remaining: " + Timeremaining);
 				}
 
 			}else {
