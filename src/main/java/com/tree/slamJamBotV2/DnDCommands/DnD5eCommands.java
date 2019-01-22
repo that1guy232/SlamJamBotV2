@@ -2,7 +2,6 @@ package com.tree.slamJamBotV2.DnDCommands;
 
 import com.tree.slamJamBotV2.DnDCommands.RandomCharacterGen.RandomCharacter;
 import com.tree.slamJamBotV2.SlamUtils;
-import com.tree.slamJamBotV2.miniGames.PointlessPoints;
 import com.vdurmont.emoji.EmojiParser;
 import sx.blah.discord.api.events.EventSubscriber;
 import sx.blah.discord.handle.impl.events.guild.channel.message.MessageReceivedEvent;
@@ -22,12 +21,10 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class DnD5eCommands {
 
-	private final PointlessPoints pointlesspoints;
 	SpellListCommand spellListCommand;
 
 
-    public DnD5eCommands(PointlessPoints pointlesspoints){
-	    this.pointlesspoints = pointlesspoints;
+    public DnD5eCommands(){
 	    spellListCommand = new SpellListCommand();
 
     }

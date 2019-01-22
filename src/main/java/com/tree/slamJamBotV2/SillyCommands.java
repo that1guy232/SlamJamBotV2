@@ -1,5 +1,9 @@
 package com.tree.slamJamBotV2;
 
+
+import com.mashape.unirest.http.HttpResponse;
+import com.mashape.unirest.http.Unirest;
+import com.mashape.unirest.http.exceptions.UnirestException;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVRecord;
 import sx.blah.discord.api.events.EventSubscriber;
@@ -25,7 +29,7 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class SillyCommands {
 
-    ArrayList<CSVRecord> drinks;
+    private ArrayList<CSVRecord> drinks;
 
 
 
@@ -53,18 +57,33 @@ public class SillyCommands {
         IChannel channel = event.getChannel();
         message = message.toLowerCase();
         IGuild guild = event.getGuild();
+		String[] splitMessage = SlamUtils.spiltMessage(message);
 
 
-        if (message.contains("keith") && message.contains("roll")){
-            String[] splitMessage = SlamUtils.spiltMessage(message);
-            for (String aSplitMessage : splitMessage) {
-                if(aSplitMessage.contains("keith") && aSplitMessage.contains("d")){
-                    SlamUtils.sendMessage(channel,"Thanks for rolling a Keith " + event.getAuthor().mention() + " He loves you too or hates you, Idk i'm just a bot");
-                }
-            }
+
+        if(message.startsWith("insult")){
+	        try {
+		        HttpResponse<String> response = Unirest.get("https://lakerolmaker-insult-generator-v1.p.mashape.com/?mode=random")
+				        .header("X-Mashape-Key", "0mnOHhNeC8mshrGhzHzG8kqCDcG3p1i9khajsnL2q0cWjyLHok")
+				        .header("Accept", "text/plain")
+				        .asString();
+
+		        if(splitMessage.length > 1){
+		            if(splitMessage[1].equals("me")) {
+                        SlamUtils.sendMessage(channel,event.getAuthor().mention() + " " + response.getBody());
+                    }else {
+                        SlamUtils.sendMessage(channel,splitMessage[1] + " " + response.getBody());
+                    }
+		        }else {
+					SlamUtils.sendMessage(channel,response.getBody());
+		        }
+
+	        } catch (UnirestException e) {
+		        e.printStackTrace();
+	        }
+
+
         }
-
-
 
 
         if (!message.contains("no meme")) {
@@ -73,6 +92,9 @@ public class SillyCommands {
                 giveMeADrink(channel);
 
             }
+            /*
+
+
             if (message.contains("retarded") || message.contains("retard") || message.contains("traps are not gay")) {
                 StringBuilder sb = new StringBuilder(message.length());
                 for (char c : message.toCharArray()) {
@@ -91,7 +113,7 @@ public class SillyCommands {
                 File pic = new File("so" + 2 + ".png");
                 SlamUtils.sendFile(channel, pic);
             }
-
+ */
             if (message.contains("sleepy-bye arty")) {
                 guild.getUserByID(284068848183934988L).moveToVoiceChannel(guild.getAFKChannel());
             }

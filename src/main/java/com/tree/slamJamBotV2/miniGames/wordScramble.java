@@ -37,7 +37,19 @@ public class wordScramble {
 			e.printStackTrace();
 		}
 	}
+	public wordScramble(){
 
+		execService = Executors.newScheduledThreadPool(3);
+
+		this.pointlessPoints = pointlessPoints;
+
+
+		try {
+			words = Files.readAllLines(Paths.get("words.txt"));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 	private void checkGames() {
 			if(games.size() != 0) {
 				games.forEach((k, v) -> {

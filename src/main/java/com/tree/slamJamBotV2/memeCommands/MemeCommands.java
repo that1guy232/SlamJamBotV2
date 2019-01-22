@@ -5,7 +5,6 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import com.tree.slamJamBotV2.SlamUtils;
 import com.vdurmont.emoji.EmojiManager;
-import org.omg.PortableInterceptor.SYSTEM_EXCEPTION;
 import sx.blah.discord.api.events.EventSubscriber;
 import sx.blah.discord.handle.impl.events.guild.GuildCreateEvent;
 import sx.blah.discord.handle.impl.events.guild.channel.message.MessageReceivedEvent;
@@ -102,6 +101,7 @@ public class MemeCommands {
 		Long key = event.getGuild().getLongID();
 		//todo make a user need a certin permission
 		if (message.startsWith("!addcommand")) {
+			System.err.println(Arrays.toString(command));
 			addCommand(guild,command,event);
 		}
 		if(message.startsWith("!removecommand")){
@@ -222,10 +222,13 @@ public class MemeCommands {
 
 
 		State state = null;
+		State laststate = null;
+
+
+
 
 		for (String sCommand : command) {
-			System.err.println(state);
-			System.err.println(sCommand);
+
 			switch (sCommand.toLowerCase()) {
 				case "names:":
 					state = State.names;
@@ -239,22 +242,28 @@ public class MemeCommands {
 				case "exact:":
 					state = State.exact;
 					break;
-
-					default:switch (state){
-						case names:
-							names.add(sCommand);
-							break;
-						case message:
-							commandMessageWords.add(sCommand);
-							break;
-						case emotes:
-							tmpemotes.add(sCommand);
-							break;
-						case exact:
-							exact = Boolean.parseBoolean(sCommand);
-							break;
-					}
+				default:
+					if(state != null)
+						switch (state){
+							case names:
+								if(!sCommand.equals(" "))
+									names.add(sCommand);
+								System.err.println("Name:" + sCommand);
+								break;
+							case message:
+								commandMessageWords.add(sCommand);
+								break;
+							case emotes:
+								tmpemotes.add(sCommand);
+								break;
+							case exact:
+								exact = Boolean.getBoolean(sCommand);
+								break;
+						}
 			}
+
+
+
 
 		}
 
@@ -284,29 +293,22 @@ public class MemeCommands {
 
 
 
-			ArrayList<String> tmpnms = new ArrayList<>();
 
-			StringBuilder stringBuilder = new StringBuilder();
-			for (int i = 0; i < names.size(); i++) {
-				stringBuilder.append(names.get(i));
-				if (names.get(i).contains(",") || i == names.size() - 1) {
-					tmpnms.add(stringBuilder.toString().replace(",", ""));
-					stringBuilder = new StringBuilder();
-				} else {
-					stringBuilder.append(" ");
-				}
 
-			}
+
+
 			if (commandMessageWords.size() > 0) {
 				commandmessage = makeSentence(commandMessageWords);
 			}
+
 			String[] emotes;
 			if (tmpemotes.size() > 0) {
 				emotes = tmpemotes.toArray(new String[0]);
 			} else {
 				emotes = null;
 			}
-			MemeCommand m = new MemeCommand(tmpnms.toArray(new String[0]), commandmessage, emotes, exact, filePath);
+
+			MemeCommand m = new MemeCommand(names.toArray(new String[0]), commandmessage, emotes, exact, filePath);
 			memeCommands.get(guild.getLongID()).add(m);
 
 
