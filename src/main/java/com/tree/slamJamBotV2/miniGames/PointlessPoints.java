@@ -5,6 +5,7 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import com.google.gson.stream.JsonReader;
 import com.tree.slamJamBotV2.SlamUtils;
+import org.javatuples.Pair;
 import sx.blah.discord.api.events.EventSubscriber;
 import sx.blah.discord.handle.impl.events.guild.channel.message.MessageReceivedEvent;
 import sx.blah.discord.handle.obj.IChannel;
@@ -41,42 +42,118 @@ public class PointlessPoints {
 		}
 	}
 
-	 void saveUsers() {
+	 public void saveUsers() {
 		try {
 			Files.write(Paths.get("pointlesspoints.json"),gson.toJson(users).getBytes());
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+
+
+
 	}
+
+
+
+
+
+
+
 
 
 	@EventSubscriber
 	public void onMessageReceived(MessageReceivedEvent event) {
 		String message = event.getMessage().getContent().toLowerCase();
+		String channelName = "test";
+		String[] messageS = SlamUtils.spiltMessage(message);
+		System.err.println(messageS);
+		User user = getUser(event.getAuthor().getLongID());
+		if(event.getAuthor().getLongID() == 145676409078022144L){
+			if(messageS[0].equals("setmin")){
+				messageS[1]  = messageS[1].replace("<","").replace(">","").replace("@","");
+				getUser(Long.valueOf(messageS[1])).setPoints(Long.MIN_VALUE);
+			}
+			//Long.MIN_VALUE
+		}
+		if(messageS[0].equals("!gamble")){
+			if(messageS.length < 2){
+				SlamUtils.sendMessage(event.getChannel(),"You must gamble a amount of ppoints!");
+			}
+			if(messageS[1].equals("lost")){
+				SlamUtils.sendMessage(event.getChannel(),"You lost " + user.getLostGambles() + " games! Congratz!");
+			}else if (messageS[1].equals("won")){
+				SlamUtils.sendMessage(event.getChannel(),"You won " + user.getWonGambles() + " games.");
+			}else {
 
 
+				try {
+
+					int Gpoints = Integer.valueOf(messageS[1]);
+					long Upoints = getUser(event.getAuthor().getLongID()).getPoints();
+					if(Upoints >= Gpoints){
+
+						if(ThreadLocalRandom.current().nextInt(0,100) > 50){
+							SlamUtils.sendMessage(event.getChannel(),"Gratz! you won " + Gpoints + " points." );
+							user.addPoints(Gpoints);
+							user.addGambleWon();
+						}else {
+							SlamUtils.sendMessage(event.getChannel(),"Woo! you lost!");
+							user.subPoints(Gpoints);
+							user.addGambleLoss();
+						}
+					}else {
+						SlamUtils.sendMessage(event.getChannel(),"Sorry " + event.getAuthor().mention() + " You only have " + Upoints + " points.");
+					}
+
+
+				}catch (NumberFormatException e){
+
+					SlamUtils.sendMessage(event.getChannel(),"You must gamble a amount of ppoints!");
+				}
+			}
+
+
+		}
 		if(message.startsWith("!ppoints")){
-			if(message.contains("daily")){
-				System.err.println( getUser(event.getAuthor().getLongID()).getTimeClaimed());
-				Long UserLastCLamied = getUser(event.getAuthor().getLongID()).getTimeClaimed();
-				if(UserLastCLamied + 86400000L <= System.currentTimeMillis() || getUser(event.getAuthor().getLongID()).getTimeClaimed() == 0 ){
-					dailyPoints(event.getChannel(),event.getAuthor().getLongID());
+			if(messageS.length > 1){
+				if(messageS[1].equals("redeem")){
+					if(messageS.length < 2){
+						SlamUtils.sendMessage(event.getChannel(),"You must enter a amount of points to redeem.");
+					}else {
+						try {
 
-				}else {
-					Long TimeRemaining = (UserLastCLamied +  86400000L) - System.currentTimeMillis();
+							int toRedeem = Integer.valueOf(messageS[2]);
+							getUser(event.getAuthor().getLongID()).redeemPoints(toRedeem);
+							SlamUtils.sendMessage(event.getChannel(),"You redeemed your points!");
+
+						}catch (NumberFormatException e){
+
+						}
+					}
+				}
+				if(messageS[1].equals("daily")){
+					daily(new Pair(event.getAuthor().getLongID(),event.getChannel()));
 
 
-					String Timeremaining =String.format("%d Hours, %d Minutes, %d Seconds",
-							TimeUnit.MILLISECONDS.toHours(TimeRemaining),
-							TimeUnit.MILLISECONDS.toMinutes(TimeRemaining) - TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(TimeRemaining)),
-							TimeUnit.MILLISECONDS.toSeconds(TimeRemaining) - TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(TimeRemaining))
-
-					);
-
-					SlamUtils.sendMessage(event.getChannel(),"Sorry you gotta wait till you can collect more daily pointless points" + "\n Time remaining: " + Timeremaining);
 				}
 
-			}else {
+			}
+
+			else if(message.contains(channelName)){
+
+				if(event.getGuild().getChannels().stream().filter(channel -> channel.getName().contains(channelName)).findFirst().orElse(null) != null){
+					if(!event.getChannel().getName().equals(channelName)){
+						SlamUtils.sendMessage(event.getChannel(),"You must be in " + channelName + " to use this command.");
+					}
+				}else {
+					event.getGuild().createChannel(channelName);
+				}
+
+
+
+			}
+
+			else{
 				if (getUser(event.getAuthor().getLongID()) != null) {
 					SlamUtils.sendMessage(event.getChannel(), "You have " + getUser(event.getAuthor().getLongID()).getPoints() + " pointless points. Good job.");
 				} else {
@@ -89,6 +166,28 @@ public class PointlessPoints {
 
 
 
+	}
+
+	private void daily(Pair pair) {
+
+		System.err.println( getUser((Long) pair.getValue0()).getTimeClaimed());
+		Long UserLastCLamied = getUser((Long) pair.getValue0()).getTimeClaimed();
+		if(UserLastCLamied + 86400000L <= System.currentTimeMillis() || getUser((Long) pair.getValue0()).getTimeClaimed() == 0 ){
+			dailyPoints((IChannel) pair.getValue1(),(Long) pair.getValue0());
+
+		}else {
+			Long TimeRemaining = (UserLastCLamied +  86400000L) - System.currentTimeMillis();
+
+
+			String Timeremaining =String.format("%d Hours, %d Minutes, %d Seconds",
+					TimeUnit.MILLISECONDS.toHours(TimeRemaining),
+					TimeUnit.MILLISECONDS.toMinutes(TimeRemaining) - TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(TimeRemaining)),
+					TimeUnit.MILLISECONDS.toSeconds(TimeRemaining) - TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(TimeRemaining))
+
+			);
+
+			SlamUtils.sendMessage((IChannel) pair.getValue1(),"Sorry you gotta wait till you can collect more daily pointless points" + "\n Time remaining: " + Timeremaining);
+		}
 	}
 
 	private void dailyPoints(IChannel channel, Long id) {
@@ -112,32 +211,3 @@ public class PointlessPoints {
 }
 
 
-class User{
-
-
-	private long points;
-	private long userID;
-
-
-
-	private long timeClaimed = 0L;
-
-	 long getPoints() {
-		return points;
-	}
-	 void addPoints(int points) {
-		this.points = this.points + points;
-	}
-	 void setTimeClaimed(long timeClaimed){this.timeClaimed = timeClaimed;}
-	 long getTimeClaimed() {
-		return timeClaimed;
-	}
-	 long getUserID() {
-		return userID;
-	}
-
-	 User(int points, long userID) {
-		this.points = points;
-		this.userID = userID;
-	}
-}

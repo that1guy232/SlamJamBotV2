@@ -53,18 +53,24 @@ public class RealCommands {
 		String[] s = SlamUtils.spiltMessage(message);
 		double x = 0;
 		double numberOnly= Double.parseDouble(s[0].replaceAll("[^0-9./-]", ""));
-		String json;
+		String json = null;
+
+
+		System.out.println(s[0]); //todo this is fucked up fix rplace with get first kinda thing in the whole string instead of slpiting?
 		if(s[0].contains("cad")){
-			 json = SlamUtils.readUrl("http://free.currencyconverterapi.com/api/v5/convert?q=CAD_USD&compact=y.json");
+			System.out.println("t");
+			 json = SlamUtils.readUrl("http://free.currencyconverterapi.com/api/v5/convert?q=CAD_USD&apiKey=5dad0dc5806422010fd1&compact=y.json");
 			x = gson.fromJson(json,JsonObject.class).get("results")
 					.getAsJsonObject().get("CAD_USD")
 					.getAsJsonObject().get("val").getAsDouble();
+			System.out.println(json);
 			double a = numberOnly * x;
 			double roundOff = (double) Math.round(a * 100) / 100;
 					 return roundOff;
 		}
 		if(s[0].contains("usd")){
-			 json = SlamUtils.readUrl("http://free.currencyconverterapi.com/api/v5/convert?q=USD_CAD&compact=y.json");
+			System.out.println("z");
+			 json = SlamUtils.readUrl("http://free.currencyconverterapi.com/api/v5/convert?q=USD_CAD&apiKey=5dad0dc5806422010fd1&compact=y.json");
 			x = gson.fromJson(json,JsonObject.class).get("results")
 					.getAsJsonObject().get("USD_CAD")
 					.getAsJsonObject().get("val").getAsDouble();
@@ -75,6 +81,7 @@ public class RealCommands {
 					 
 		}
 
+	    System.out.println(json);
 
 
 
