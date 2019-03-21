@@ -151,16 +151,21 @@ public class DnD5eCommands {
 				//add it to the list of the dice rolled
 				dicerolled.add(new ArrayList<>());
 
-				int dieToRoll;
+				int dieToRoll = 0;
 				//spilt the dice into something i can use
 
 
 
 				//if it has a space in it for some reason remove it.
 				dice[0] = dice[0].replace(" ","");
+				int amountofDice = 0;
+				try {
+					amountofDice = Integer.valueOf(dice[0]);
+					dieToRoll = Integer.valueOf(dice[1]);
+				}catch (NumberFormatException e){
+					SlamUtils.sendMessage(channel,"The amount you entered is not a integer.");
+				}
 
-				int amountofDice = Integer.valueOf(dice[0]);
-				dieToRoll = Integer.valueOf(dice[1]);
 
 				int total = 0;
 				for (int j = 0; j < amountofDice; j++) {
