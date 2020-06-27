@@ -811,40 +811,8 @@ public class RandomCharacter {
 			while (rSkill2 == rSkill1){
 				 rSkill2 = current().nextInt(0,4);
 			}
-			switch (rSkill1){
-				case 0:
-					Str+=1;
-					break;
-				case 1:
-					Dex+=1;
-					break;
-				case 2:
-					Con+=1;
-					break;
-				case 3:
-					Int+=1;
-					break;
-				case 4:
-					Wis+=1;
-					break;
-			}
-			switch (rSkill2){
-				case 0:
-					Str+=1;
-					break;
-				case 1:
-					Dex+=1;
-					break;
-				case 2:
-					Con+=1;
-					break;
-				case 3:
-					Int+=1;
-					break;
-				case 4:
-					Wis+=1;
-					break;
-			}
+			randomSKill(rSkill1);
+			randomSKill(rSkill2);
 		}
 		if(Race.equals("Half-Orc")){
 			Str+=2;
@@ -853,6 +821,26 @@ public class RandomCharacter {
 		if(Race.equals("Tiefling")){
 			Int+=1;
 			Cha+=2;
+		}
+	}
+
+	private void randomSKill(int rSkill2) {
+		switch (rSkill2){
+			case 0:
+				Str+=1;
+				break;
+			case 1:
+				Dex+=1;
+				break;
+			case 2:
+				Con+=1;
+				break;
+			case 3:
+				Int+=1;
+				break;
+			case 4:
+				Wis+=1;
+				break;
 		}
 	}
 

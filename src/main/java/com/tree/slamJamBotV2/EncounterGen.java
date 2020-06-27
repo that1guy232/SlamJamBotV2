@@ -46,40 +46,40 @@ public class EncounterGen {
 
 			records.forEach(a->{
 
-				if(a.get("Arctic").equals("x")){
+				if(a.get("Arctic").equals("placeInActivites")){
 					ArcticCreatures.add(a);
 				}
-				if(a.get("Coastal").equals("x")){
+				if(a.get("Coastal").equals("placeInActivites")){
 					CoastalCreatures.add(a);
 				}
-				if(a.get("Desert").equals("x")){
+				if(a.get("Desert").equals("placeInActivites")){
 					DesertCreatures.add(a);
 				}
-				if(a.get("Forest").equals("x")){
+				if(a.get("Forest").equals("placeInActivites")){
 					ForestCreatures.add(a);
 				}
-				if(a.get("Grassland").equals("x")){
+				if(a.get("Grassland").equals("placeInActivites")){
 					GrasslandCreatures.add(a);
 				}
-				if(a.get("Hill").equals("x")){
+				if(a.get("Hill").equals("placeInActivites")){
 					HillCreatures.add(a);
 				}
-				if(a.get("Mountain").equals("x")){
+				if(a.get("Mountain").equals("placeInActivites")){
 					MountainCreatures.add(a);
 				}
-				if(a.get("Swamp").equals("x")){
+				if(a.get("Swamp").equals("placeInActivites")){
 					SwampCreatures.add(a);
 				}
-				if(a.get("Underdark").equals("x")){
+				if(a.get("Underdark").equals("placeInActivites")){
 					UnderdarkCreatures.add(a);
 				}
-				if(a.get("Underwater").equals("x")){
+				if(a.get("Underwater").equals("placeInActivites")){
 					UnderwaterCreatures.add(a);
 				}
-				if(a.get("Urban").equals("x")){
+				if(a.get("Urban").equals("placeInActivites")){
 					urbanCreatures.add(a);
 				}
-				if(a.get("Other Plane").equals("x")){
+				if(a.get("Other Plane").equals("placeInActivites")){
 					OtherPlaneCreatures.add(a);
 				}
 			});

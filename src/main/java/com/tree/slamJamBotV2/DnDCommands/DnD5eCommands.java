@@ -1,16 +1,10 @@
 package com.tree.slamJamBotV2.DnDCommands;
 
 import com.tree.slamJamBotV2.DnDCommands.RandomCharacterGen.RandomCharacter;
-import com.tree.slamJamBotV2.SlamUtils;
-import com.vdurmont.emoji.EmojiParser;
-import sx.blah.discord.api.events.EventSubscriber;
-import sx.blah.discord.handle.impl.events.guild.channel.message.MessageReceivedEvent;
-import sx.blah.discord.handle.impl.events.guild.channel.message.reaction.ReactionAddEvent;
-import sx.blah.discord.handle.obj.IChannel;
-import sx.blah.discord.handle.obj.IReaction;
-import sx.blah.discord.handle.obj.IUser;
-import sx.blah.discord.util.EmbedBuilder;
-import sx.blah.discord.util.RequestBuffer;
+import org.javacord.api.entity.channel.Channel;
+import org.javacord.api.entity.message.embed.EmbedBuilder;
+import org.javacord.api.event.message.MessageCreateEvent;
+import org.javacord.api.listener.message.MessageCreateListener;
 
 import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
@@ -19,71 +13,73 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.concurrent.ThreadLocalRandom;
 
-public class DnD5eCommands {
+public class DnD5eCommands implements MessageCreateListener {
 
-	SpellListCommand spellListCommand;
+//	SpellListCommand spellListCommand;
 
 
     public DnD5eCommands(){
-	    spellListCommand = new SpellListCommand();
+	   // spellListCommand = new SpellListCommand();
 
     }
 
+//This is for the spell list command to give it pages you can go through
+//
+//	@EventSubscriber
+//    public void reactionAddEvent(ReactionAddEvent reactionAddEvent){
+//        //EmojiManager.getForAlias(reactionAddEvent.getReaction().getEmoji().getName());
+//       System.err.println( );
+//        long messageID = reactionAddEvent.getMessageID();
+//        IReaction reaction = reactionAddEvent.getReaction();
+//        IUser user= reactionAddEvent.getUser();
+//        if(messageID == spellListCommand.getSpellListMessageID() && !user.isBot()){
+//            if(EmojiParser.parseToAliases(reactionAddEvent.getReaction().getEmoji().toString()).equals(":arrow_left:")){
+//				spellListCommand.decrementPage(reaction);
+//
+//            }
+//            if(EmojiParser.parseToAliases(reactionAddEvent.getReaction().getEmoji().toString()).equals(":arrow_right:")){
+//            	spellListCommand.incrementPage(reaction);
+//
+//            }
+//            if(EmojiParser.parseToAliases(reactionAddEvent.getReaction().getEmoji().toString()).equals(":x:")){
+//                reaction.getMessage().delete();
+//                spellListCommand.setSpellListMessageID(0);
+//            }
+//            RequestBuffer.request(() -> reaction.getMessage().removeReaction(user,reaction));
+//        }
+//
+//    }
 
 
-	@EventSubscriber
-    public void reactionAddEvent(ReactionAddEvent reactionAddEvent){
-        //EmojiManager.getForAlias(reactionAddEvent.getReaction().getEmoji().getName());
-       System.err.println( );
-        long messageID = reactionAddEvent.getMessageID();
-        IReaction reaction = reactionAddEvent.getReaction();
-        IUser user= reactionAddEvent.getUser();
-        if(messageID == spellListCommand.getSpellListMessageID() && !user.isBot()){
-            if(EmojiParser.parseToAliases(reactionAddEvent.getReaction().getEmoji().toString()).equals(":arrow_left:")){
-				spellListCommand.decrementPage(reaction);
-
-            }
-            if(EmojiParser.parseToAliases(reactionAddEvent.getReaction().getEmoji().toString()).equals(":arrow_right:")){
-            	spellListCommand.incrementPage(reaction);
-
-            }
-            if(EmojiParser.parseToAliases(reactionAddEvent.getReaction().getEmoji().toString()).equals(":x:")){
-                reaction.getMessage().delete();
-                spellListCommand.setSpellListMessageID(0);
-            }
-            RequestBuffer.request(() -> reaction.getMessage().removeReaction(user,reaction));
-        }
-
-    }
-
-
-    @EventSubscriber
-    public void onMessageReceived(MessageReceivedEvent event){
+    @Override
+    public void onMessageCreate(MessageCreateEvent event){
         String message = event.getMessage().getContent();
 		String splitMessage[] = message.split("\\s");
-        IChannel channel = event.getChannel();
+        Channel channel = event.getChannel();
         message = message.toLowerCase();
-		if(splitMessage[0].equals("dnd")) {
-			if (splitMessage[1].equals("spells")) {
-				spellListCommand.sendSpellList(channel);
-			}
-			if (splitMessage[1].equals("spell")) {
-				if (splitMessage[2] != null) {
-					String[] test = Arrays.copyOfRange(splitMessage, 2, splitMessage.length );
-					System.err.println(Arrays.toString(test));
-					spellListCommand.getSpell(channel, test);
-				}
 
-			}
-		}
+//		if(splitMessage[0].equals("dnd")) {
+//			if (splitMessage[1].equals("spells")) {
+//				spellListCommand.sendSpellList(channel);
+//			}
+//			if (splitMessage[1].equals("spell")) {
+//				if (splitMessage[2] != null) {
+//					String[] test = Arrays.copyOfRange(splitMessage, 2, splitMessage.length );
+//					System.err.println(Arrays.toString(test));
+//					spellListCommand.getSpell(channel, test);
+//				}
+//
+//			}
+//		}
 
-
+        System.err.println(message);
         if(message.startsWith("roll")){
+            System.err.println("made it to roll");
 			try{
 				roll(channel,message);
 			}catch (StackOverflowError error){
 				error.printStackTrace();
-				SlamUtils.sendMessage(channel,"You rolled so many dice you broke the bot or something went horribly wrong, Good Job!");
+				channel.asTextChannel().get().sendMessage("You rolled so many dice you broke the bot or something went horribly wrong, Good Job!");
 			}
 
 		}
@@ -97,13 +93,14 @@ public class DnD5eCommands {
 
     }
 
-	private void randomCharacter(IChannel channel) {
+	private void randomCharacter(Channel channel) {
+    	System.err.println("test");
 		RandomCharacter rc = new RandomCharacter();
 		EmbedBuilder embedBuilder = new EmbedBuilder();
-		embedBuilder.withTitle("Your random character!");
-		embedBuilder.withFooterText("This character was randomly generatored using Xanathar's Guide To Everything.");
-		embedBuilder.appendField("Age",rc.getAge(),false);
-		embedBuilder.appendField("Race & Class", rc.getRace() + "\n" + rc.getPClass(),false);
+		embedBuilder.setTitle("Your random character!");
+		embedBuilder.setFooter("This character was randomly generatored using Xanathar's Guide To Everything.");
+		embedBuilder.addField("Age",rc.getAge(),false);
+		embedBuilder.addField("Race & Class", rc.getRace() + "\n" + rc.getPClass(),false);
 		String abilityScores = "```" +
 				"Str:"+rc.getStr()+
 				"\nDex:"+rc.getDex()+
@@ -111,28 +108,29 @@ public class DnD5eCommands {
 				"\nInt:"+rc.getInt()+
 				"\nWis:"+rc.getWis()+
 				"\nCha:"+rc.getCha()+"```";
-		embedBuilder.appendField("Why are you a "+rc.getPClass()+"?",rc.getWhyclass(),false);
-		embedBuilder.appendField("Ability Scores",abilityScores,false);
+		embedBuilder.addField("Why are you a "+rc.getPClass()+"?",rc.getWhyclass(),false);
+		embedBuilder.addField("Ability Scores",abilityScores,false);
 		StringBuilder sb = new StringBuilder();
 		sb.append("```");
 		for (int i = 0; i < rc.getBackground().length - 1; i++) {
 			sb.append(rc.getBackground()[i]).append("\n");
 		}
 		sb.append("```");
-		embedBuilder.appendField("Background - " + rc.getBackground()[0],sb.toString(),false);
+		embedBuilder.addField("Background - " + rc.getBackground()[0],sb.toString(),false);
 		int z = 1;
 		if(rc.getLifeEvents().length == 1){
-			embedBuilder.appendField("Life event #1",rc.getLifeEvents()[0],false);
+			embedBuilder.addField("Life event #1",rc.getLifeEvents()[0],false);
 		}else {
 			for (int i = 0; i < rc.getLifeEvents().length - 1; i++) {
-				embedBuilder.appendField("Life event #" + z, rc.getLifeEvents()[i], false);
+				embedBuilder.addField("Life event #" + z, rc.getLifeEvents()[i], false);
 				z++;
 			}
 		}
-		SlamUtils.sendEmbed(channel,embedBuilder.build());
+		channel.asTextChannel().get().sendMessage(embedBuilder);
+
 	}
 
-	private void roll(IChannel channel, String message) {
+	private void roll(Channel channel, String message) {
 		StringBuilder stringBuilder;
 		//spilting the command to things i can use
 		ArrayList<String> rollCommand = new ArrayList<>(Arrays.asList(message.split("((?<=\\+|\\-|\\*|\\/)|(?=\\+|\\-|\\*|\\/))|\\s")));
@@ -163,7 +161,7 @@ public class DnD5eCommands {
 					amountofDice = Integer.valueOf(dice[0]);
 					dieToRoll = Integer.valueOf(dice[1]);
 				}catch (NumberFormatException e){
-					SlamUtils.sendMessage(channel,"The amount you entered is not a integer.");
+					channel.asTextChannel().get().sendMessage("The amount you entered is not a integer.");
 				}
 
 
@@ -195,7 +193,6 @@ public class DnD5eCommands {
 			stringBuilder.append(aRollCommand);
 		}
 		//use javascript to calculate it because i'm a lazy fuck
-		System.err.println(stringBuilder.toString());
 		ScriptEngineManager mgr = new ScriptEngineManager();
 		ScriptEngine engine = mgr.getEngineByName("JavaScript");
 		try {
@@ -203,13 +200,12 @@ public class DnD5eCommands {
 			String tosend = stringBuilder.toString() + " = " + eq;
 
 			if(Meme){
-				System.err.println("test");
-				SlamUtils.sendMessage(channel,stringBuilder.toString() + "+" + ThreadLocalRandom.current().nextInt(eq-20,eq+50));
+                channel.asTextChannel().get().sendMessage(stringBuilder.toString() + "=" + ThreadLocalRandom.current().nextInt(eq-20,eq+50));
 			}else if (tosend.length() > 2000){
-				SlamUtils.sendMessage(channel,"Message to long! here is the total: "+eq);
+                channel.asTextChannel().get().sendMessage("Message to long! here is the total: "+eq);
 
 			}else {
-				SlamUtils.sendMessage(channel, stringBuilder.toString() + " = " + eq);
+                channel.asTextChannel().get().sendMessage( stringBuilder.toString() + " = " + eq);
 
 			}
 		} catch (ScriptException e) {

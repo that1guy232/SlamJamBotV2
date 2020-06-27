@@ -1,0 +1,1533 @@
+[
+ {
+   "Name": "Bond Famulus",
+   "Discipline": "Animalism",
+   "Amalgam": "",
+   "LVL": 1,
+   "Breach": "L",
+   "Res": "Animal",
+   "Cost": "Free",
+   "CastRoll": "Charisma + Animal Ken",
+   "TargetRoll": "",
+   "Duration": "Only death breaks it",
+   "PG": "245",
+  
+      "Notes": "Vamp creates a permanent bond with any animal they choose. Death of animal is the only way bond breaks"
+   },
+ {
+   "Name": "Sense the Beast",
+   "Discipline": "Animalism",
+   "Amalgam": "",
+   "LVL": 1,
+   "Breach": "L",
+   "Res": "Animal",
+   "Cost": "Free",
+   "Caster": "Resolve + Animalism",
+   "Target": "Composure + Subterfuge",
+   "Duration": "Passive",
+   "PG": "245",
+  
+      "Notes": "Vampire can sense beast in other vampires gaining sense of their nature, hunger & hostility"
+   },
+ {
+   "Name": "Feral Whispers",
+   "Discipline": "Animalism",
+   "Amalgam": "",
+   "LVL": 2,
+   "Breach": "L",
+   "Res": "Animal",
+   "Cost": "one Rouse",
+   "Caster": "",
+   "Target": "",
+   "Duration": "One Scene",
+   "PG": "245",
+  
+      "Notes": "Vampire can communicate with animals and summon one or more. Will scatter if attacked "
+   },
+ {
+   "Name": "Animal Succulence",
+   "Discipline": "Animalism",
+   "Amalgam": "",
+   "LVL": 3,
+   "Breach": "M",
+   "Res": "Animal",
+   "Cost": "one Rouse",
+   "Caster": "",
+   "Target": "",
+   "Duration": "Passive",
+   "PG": "246",
+  
+      "Notes": "Feeding from an animal slakes 1 hunger Blood potency drops by 2."
+   },
+ {
+   "Name": "Quell the Beast",
+   "Discipline": "Animalism",
+   "Amalgam": "",
+   "LVL": 3,
+   "Breach": "M",
+   "Res": "Animal",
+   "Cost": "one Rouse",
+   "Caster": "Charisma + Animalism",
+   "Target": "Stamina + Resolve",
+   "Duration": "One Scene + Margin",
+   "PG": "246",
+  
+      "Notes": "Mortals become apathetic, struggle to stay alive. Vampire's beast is quelled for better or worse"
+   },
+ {
+   "Name": "Unliving Hive",
+   "Discipline": "Animalism",
+   "Amalgam": "Obfuscate 2",
+   "LVL": 3,
+   "Breach": "M",
+   "Res": "Animal",
+   "Cost": "Free",
+   "Caster": "",
+   "Target": "",
+   "Duration": "Passive",
+   "PG": "246",
+  
+      "Notes": "Vampire creates a swarm of invertebrates that can act like a vertebrate creature, moving / attacking as one"
+   },
+ {
+   "Name": "Subsume the Spirit",
+   "Discipline": "Animalism",
+   "Amalgam": "",
+   "LVL": 4,
+   "Breach": "L",
+   "Res": "Animal",
+   "Cost": "one Rouse",
+   "Caster": "Manipulation + Animalism",
+   "Target": "",
+   "Duration": "One Scene/Permanent ",
+   "PG": "247",
+  
+      "Notes": "Vampire moves into a creature and possess it. May stay awake during daytime but must pass rolls as per pg 219"
+   },
+ {
+   "Name": "Animal Dominion",
+   "Discipline": "Animalism",
+   "Amalgam": "",
+   "LVL": 5,
+   "Breach": "M",
+   "Res": "Animal",
+   "Cost": "one Rouse",
+   "Caster": "Charisma + Animalism (D3)",
+   "Target": "",
+   "Duration": "One Scene",
+   "PG": "247",
+  
+      "Notes": "Vampire can control whole flocks of beasts as if they were extensions of their bodies"
+   },
+ {
+   "Name": "Drawing out the beast",
+   "Discipline": "Animalism",
+   "Amalgam": "",
+   "LVL": 5,
+   "Breach": "M",
+   "Res": "Animal",
+   "Cost": "one Rouse",
+   "Caster": "Wits + Animalism",
+   "Target": "Composure + Resolve",
+   "Duration": "Fury Frenzy Duration",
+   "PG": "247",
+  
+      "Notes": "Caster can send their frenzy to any vampire or mortal"
+   },
+ {
+   "Name": "Heightened Senses",
+   "Discipline": "Auspex",
+   "Amalgam": "",
+   "LVL": 1,
+   "Breach": "Low",
+   "Res": "Phlegm",
+   "Cost": "Free",
+   "Caster": "Wits & Resolve",
+   "Target": "",
+   "Duration": "Until Deactivated",
+   "PG": "249",
+  
+      "Notes": "Senses are sharpened to preternatural degree - See in pitch darkness"
+   },
+ {
+   "Name": "Sense The Unseen",
+   "Discipline": "Auspex",
+   "Amalgam": "",
+   "LVL": 1,
+   "Breach": "Low",
+   "Res": "Phlegm",
+   "Cost": "Free",
+   "Caster": "WITS + AUSPEX or RESOLVE + AUSPEX",
+   "Target": "",
+   "Duration": "Passive",
+   "PG": "249",
+  
+      "Notes": "Attuned to dimensions beyond the mundane.  See something hidden or supernatural in nature like ghosts"
+   },
+ {
+   "Name": "Premonition",
+   "Discipline": "Auspex",
+   "Amalgam": "",
+   "LVL": 2,
+   "Breach": "Low",
+   "Res": "Phlegm",
+   "Cost": "one Rouse",
+   "Caster": "Resolve + Auspex",
+   "Target": "",
+   "Duration": "Passive",
+   "PG": "249",
+  
+      "Notes": "Experiences flashes of insight these may take form of raised hackles or sudden inspiration"
+   },
+ {
+   "Name": "Scry the Soul",
+   "Discipline": "Auspex",
+   "Amalgam": "",
+   "LVL": 3,
+   "Breach": "Low",
+   "Res": "Phlegm",
+   "Cost": "one Rouse",
+   "Caster": "Intelligence + Auspex",
+   "Target": "Composure + Subterfuge",
+   "Duration": "One Turn",
+   "PG": "250",
+  
+      "Notes": "Perceive the state of the victims psyche. Auras reveal little precise information. Emotional State, Resonance, Supernatural"
+   },
+ {
+   "Name": "Share the Senses",
+   "Discipline": "Auspex",
+   "Amalgam": "",
+   "LVL": 3,
+   "Breach": "Low",
+   "Res": "Phlegm",
+   "Cost": "one Rouse",
+   "Caster": "Resolve + Auspex  - (D3)",
+   "Target": "",
+   "Duration": "One Scene",
+   "PG": "250",
+  
+      "Notes": "Tap into senses of another mortal or vampire. Seeing/feeling what they see or feel"
+   },
+ {
+   "Name": "Spirit's Touch",
+   "Discipline": "Auspex",
+   "Amalgam": "",
+   "LVL": 4,
+   "Breach": "Low",
+   "Res": "Phlegm",
+   "Cost": "one Rouse",
+   "Caster": "Intelligence + Auspex",
+   "Target": "Difficulty of the info sought",
+   "Duration": "One Turn",
+   "PG": "250",
+  
+      "Notes": "User gains insight into an inanimate object. Seeing into its history. More successes = more details or time"
+   },
+ {
+   "Name": "Clairvoyance",
+   "Discipline": "Auspex",
+   "Amalgam": "",
+   "LVL": 5,
+   "Breach": "Low",
+   "Res": "Phlegm",
+   "Cost": "one Rouse",
+   "Caster": "Intelligence + Auspex",
+   "Target": "Difficulty of the security of the area",
+   "Duration": "Few minutes of info gathered",
+   "PG": "251",
+  
+      "Notes": "User can enter a trance and get info roughly of a full city block. People, items, history"
+   },
+ {
+   "Name": "Possession",
+   "Discipline": "Auspex",
+   "Amalgam": "Dominate 3",
+   "LVL": 5,
+   "Breach": "Low",
+   "Res": "Phlegm",
+   "Cost": "2xone Rouse",
+   "Caster": "Resolve + Auspex",
+   "Target": "Resolve + Intelligence",
+   "Duration": "Until Ended Voluntary or involuntary",
+   "PG": "251",
+  
+      "Notes": "Completely possess another. Vamp body goes into torpor until possession is released. Agg damage to vamp body breaks it"
+   },
+ {
+   "Name": "Cat's Grace",
+   "Discipline": "Celerity",
+   "Amalgam": "",
+   "LVL": 1,
+   "Breach": "M-H",
+   "Res": "Chol",
+   "Cost": "Free",
+   "Caster": "",
+   "Target": "",
+   "Duration": "Passive",
+   "PG": "252",
+  
+      "Notes": "Auto passes any Dex or Athletics Checks"
+   },
+ {
+   "Name": "Rapid Reflexes",
+   "Discipline": "Celerity",
+   "Amalgam": "",
+   "LVL": 1,
+   "Breach": "M-H",
+   "Res": "Chol",
+   "Cost": "Free",
+   "Caster": "",
+   "Target": "",
+   "Duration": "One Scene",
+   "PG": "253",
+  
+      "Notes": "Successfully passes any defense roll for lack of cover in firearms "
+   },
+ {
+   "Name": "Fleetness",
+   "Discipline": "Celerity",
+   "Amalgam": "",
+   "LVL": 2,
+   "Breach": "M-H",
+   "Res": "Chol",
+   "Cost": "one Rouse",
+   "Caster": "",
+   "Target": "",
+   "Duration": "One Scene",
+   "PG": "235",
+  
+      "Notes": "Adds Celerity Rating to users dice pool for dex checks"
+   },
+ {
+   "Name": "Blink",
+   "Discipline": "Celerity",
+   "Amalgam": "",
+   "LVL": 3,
+   "Breach": "M-H",
+   "Res": "Chol",
+   "Cost": "one Rouse",
+   "Caster": "DEX + ATHLETICS",
+   "Target": "",
+   "Duration": "One Turn",
+   "PG": "253",
+  
+      "Notes": "Vamp moves in on prey in 1 motion"
+   },
+ {
+   "Name": "Traversal",
+   "Discipline": "Celerity",
+   "Amalgam": "",
+   "LVL": 3,
+   "Breach": "M-H",
+   "Res": "Chol",
+   "Cost": "one Rouse",
+   "Caster": "DEX + ATHLETICS",
+   "Target": "",
+   "Duration": "One Turn",
+   "PG": "253",
+  
+      "Notes": "vamp can run up a wall or traverse a surface (even water high dif)"
+   },
+ {
+   "Name": "Unerring Aim",
+   "Discipline": "Celerity",
+   "Amalgam": "Auspex 2",
+   "LVL": 4,
+   "Breach": "M-H",
+   "Res": "Chol",
+   "Cost": "one Rouse",
+   "Caster": "",
+   "Target": "Mortal: Can't Avoid | Kindred: Celerity 5 - one Rouse",
+   "Duration": "Single Attack",
+   "PG": "254",
+  
+      "Notes": "Target cannot avoid being shot at range"
+   },
+ {
+   "Name": "Draught of Elegance",
+   "Discipline": "Celerity",
+   "Amalgam": "",
+   "LVL": 4,
+   "Breach": "M-H",
+   "Res": "Chol",
+   "Cost": "one Rouse",
+   "Caster": "",
+   "Target": "",
+   "Duration": "One Night",
+   "PG": "254",
+  
+      "Notes": "Drinker gets 1/2 Celerity points of the giver"
+   },
+ {
+   "Name": "Lightning Strike",
+   "Discipline": "Celerity",
+   "Amalgam": "",
+   "LVL": 5,
+   "Breach": "M-H",
+   "Res": "Chol",
+   "Cost": "one Rouse",
+   "Caster": "",
+   "Target": "Mortal: Can't Avoid | Kindred: Celerity 5 - one Rouse",
+   "Duration": "Single Attack",
+   "PG": "254",
+  
+      "Notes": "Vamp can attack at such a speed attacker cannot avoid unless Cel 5"
+   },
+ {
+   "Name": "Split Second",
+   "Discipline": "Celerity",
+   "Amalgam": "",
+   "LVL": 5,
+   "Breach": "M-H",
+   "Res": "Chol",
+   "Cost": "one Rouse",
+   "Caster": "",
+   "Target": "",
+   "Duration": "",
+   "PG": "254",
+  
+      "Notes": "Player may \"Supercede storyteller's action\" within reason"
+   },
+ {
+   "Name": "Cloud Memory",
+   "Discipline": "Dominate",
+   "Amalgam": "",
+   "LVL": 1,
+   "Breach": "Low",
+   "Res": "Phlegm",
+   "Cost": "Free",
+   "Caster": "CHA + DOMINATE",
+   "Target": "WITS + RESOLVE",
+   "Duration": "Indefinite",
+   "PG": "256",
+  
+      "Notes": "Target forgets current moment and a few minutes prior"
+   },
+ {
+   "Name": "Compel",
+   "Discipline": "Dominate",
+   "Amalgam": "",
+   "LVL": 1,
+   "Breach": "Low",
+   "Res": "Phlegm",
+   "Cost": "Free",
+   "Caster": "CHA + DOMINATE",
+   "Target": "INT + RESOLVE",
+   "Duration": "No more than single target",
+   "PG": "256",
+  
+      "Notes": "Vamp can issue a single action command no longer than short sentence"
+   },
+ {
+   "Name": "Mesmerize",
+   "Discipline": "Dominate",
+   "Amalgam": "",
+   "LVL": 2,
+   "Breach": "Low",
+   "Res": "Phlegm",
+   "Cost": "one Rouse",
+   "Caster": "MANIPULATION + DOMINATE",
+   "Target": "INT + RESOLVE",
+   "Duration": "Until Command is carried out",
+   "PG": "256",
+  
+      "Notes": "Vamp can issue complex command. No roll required against unprepared humans"
+   },
+ {
+   "Name": "Demention",
+   "Discipline": "Dominate",
+   "Amalgam": "Obfuscate 2",
+   "LVL": 2,
+   "Breach": "Low",
+   "Res": "Phlegm",
+   "Cost": "one Rouse",
+   "Caster": "MANIPULATION + DOMINATE",
+   "Target": "COMPOSURE + INT",
+   "Duration": "One Scene",
+   "PG": "256",
+  
+      "Notes": "One one Rouse per scene. Mortals may have nervous breakdown or psychotic break. Vamp may succumb to compulsion"
+   },
+ {
+   "Name": "Forgetful Mind",
+   "Discipline": "Dominate",
+   "Amalgam": "",
+   "LVL": 3,
+   "Breach": "Low",
+   "Res": "Phlegm",
+   "Cost": "one Rouse",
+   "Caster": "MANIPULATION + DOMINATE",
+   "Target": "INT + RESOLVE",
+   "Duration": "Indefinite",
+   "PG": "257",
+  
+      "Notes": "Vamp can rewrite whole swaths of victims memory. one Rouse for each victim they wish to cast on"
+   },
+ {
+   "Name": "Submerged Directive",
+   "Discipline": "Dominate",
+   "Amalgam": "",
+   "LVL": 3,
+   "Breach": "Low",
+   "Res": "Phlegm",
+   "Cost": "one Rouse",
+   "Caster": "",
+   "Target": "Storyteller rolls for success in secret",
+   "Duration": "Passive",
+   "PG": "257",
+  
+      "Notes": "Victim can carry directive forever (years even)"
+   },
+ {
+   "Name": "Rationalize",
+   "Discipline": "Dominate",
+   "Amalgam": "",
+   "LVL": 4,
+   "Breach": "Low",
+   "Res": "Phlegm",
+   "Cost": "Free",
+   "Caster": "",
+   "Target": "WITS + AWARENESS (D5)",
+   "Duration": "Indefinite",
+   "PG": "257",
+  
+      "Notes": "Victim now believes all their actions are their own "
+   },
+ {
+   "Name": "Mass Manipulation",
+   "Discipline": "Dominate",
+   "Amalgam": "",
+   "LVL": 5,
+   "Breach": "Low",
+   "Res": "Phlegm",
+   "Cost": "one Rouse",
+   "Caster": "",
+   "Target": "",
+   "Duration": "Passive",
+   "PG": "257",
+  
+      "Notes": "Vamp can amplify any of their other powers to affect a group of mortals. Victims need to see eyes of user"
+   },
+ {
+   "Name": "Terminal Decree",
+   "Discipline": "Dominate",
+   "Amalgam": "",
+   "LVL": 5,
+   "Breach": "Low",
+   "Res": "Phlegm",
+   "Cost": "",
+   "Caster": "",
+   "Target": "",
+   "Duration": "Passive",
+   "PG": "257",
+  
+      "Notes": "Can cause victim to kill themselves in any fashion. No Rouse check but costs a humanity"
+   },
+ {
+   "Name": "Resilience",
+   "Discipline": "Fortitude",
+   "Amalgam": "",
+   "LVL": 1,
+   "Breach": "Med",
+   "Res": "Melon",
+   "Cost": "Free",
+   "Caster": "",
+   "Target": "",
+   "Duration": "Passive",
+   "PG": "258",
+  
+      "Notes": "Endowed with supernatural endurance the user can strengthen their physical resolve"
+   },
+ {
+   "Name": "Unswayable Mind",
+   "Discipline": "Fortitude",
+   "Amalgam": "",
+   "LVL": 1,
+   "Breach": "Med",
+   "Res": "Melon",
+   "Cost": "Free",
+   "Caster": "",
+   "Target": "",
+   "Duration": "Passive",
+   "PG": "258",
+  
+      "Notes": ""
+   },
+ {
+   "Name": "Toughness",
+   "Discipline": "Fortitude",
+   "Amalgam": "",
+   "LVL": 2,
+   "Breach": "Med",
+   "Res": "Melon",
+   "Cost": "one Rouse",
+   "Caster": "",
+   "Target": "",
+   "Duration": "One scene",
+   "PG": "258",
+  
+      "Notes": "User may ignore damage by subtracting fortitude dots from damage amount"
+   },
+ {
+   "Name": "Enduring Beasts",
+   "Discipline": "Fortitude",
+   "Amalgam": "Animalism 1",
+   "LVL": 2,
+   "Breach": "Med",
+   "Res": "Melon",
+   "Cost": "Free*",
+   "Caster": "STAMINA+ANIMALISM (for non famulus)",
+   "Target": "",
+   "Duration": "one scene",
+   "PG": "259",
+  
+      "Notes": "Vamp can share some of their fortitude with the animals they influence"
+   },
+ {
+   "Name": "Defy Bane",
+   "Discipline": "Fortitude",
+   "Amalgam": "",
+   "LVL": 3,
+   "Breach": "Med",
+   "Res": "Melon",
+   "Cost": "one Rouse",
+   "Caster": "WITS+SURVIVAL",
+   "Target": "",
+   "Duration": "One Scene or Until Expired w/e first",
+   "PG": "259",
+  
+      "Notes": "Vamp can convert aggravated damage equal to fort rating as superficial for this scene"
+   },
+ {
+   "Name": "Draught of Endurance",
+   "Discipline": "Fortitude",
+   "Amalgam": "",
+   "LVL": 4,
+   "Breach": "Med",
+   "Res": "Melon",
+   "Cost": "one Rouse",
+   "Caster": "",
+   "Target": "",
+   "Duration": "One night for vamps",
+   "PG": "259",
+  
+      "Notes": "Blood of the vamp comes saturated with fortitude. Drinker gets 1/2 fortitude level of the giver"
+   },
+ {
+   "Name": "Flesh of Marble",
+   "Discipline": "Fortitude",
+   "Amalgam": "",
+   "LVL": 5,
+   "Breach": "Med",
+   "Res": "Melon",
+   "Cost": "one Rousex2",
+   "Caster": "",
+   "Target": "",
+   "Duration": "One Scene",
+   "PG": "259",
+  
+      "Notes": "Vampires skin turns to stone. Ignore first point of physical damage including fire (not sunlight)"
+   },
+ {
+   "Name": "Prowess of Pain",
+   "Discipline": "Fortitude",
+   "Amalgam": "",
+   "LVL": 5,
+   "Breach": "Med",
+   "Res": "Melon",
+   "Cost": "one Rouse",
+   "Caster": "",
+   "Target": "",
+   "Duration": "One Scene",
+   "PG": "260",
+  
+      "Notes": "Vampire grows stronger with each blow(pg 260)"
+   },
+ {
+   "Name": "Cloak of Shadows",
+   "Discipline": "Obfuscate",
+   "Amalgam": "",
+   "LVL": 1,
+   "Breach": "Low",
+   "Res": "Melon",
+   "Cost": "Free",
+   "Caster": "",
+   "Target": "",
+   "Duration": "One Scene",
+   "PG": "261",
+  
+      "Notes": "Vaamp can merge into surroundings"
+   },
+ {
+   "Name": "Silence of Death ",
+   "Discipline": "Obfuscate",
+   "Amalgam": "",
+   "LVL": 1,
+   "Breach": "Low",
+   "Res": "Melon",
+   "Cost": "Free",
+   "Caster": "",
+   "Target": "",
+   "Duration": "One Scene",
+   "PG": "261",
+  
+      "Notes": "Vamp becomes silent. Can not be detected if the detection is audible only. Can be seen"
+   },
+ {
+   "Name": "Unseen Passage",
+   "Discipline": "Obfuscate",
+   "Amalgam": "",
+   "LVL": 2,
+   "Breach": "Low",
+   "Res": "Melon",
+   "Cost": "one Rouse",
+   "Caster": "",
+   "Target": "",
+   "Duration": "One Scene or Detected",
+   "PG": "261",
+  
+      "Notes": "Vampire becomes invisible allowing them to walk around unseen"
+   },
+ {
+   "Name": "Ghost in the Machine",
+   "Discipline": "Obfuscate",
+   "Amalgam": "",
+   "LVL": 3,
+   "Breach": "Low",
+   "Res": "Melon",
+   "Cost": "one Rouse",
+   "Caster": "",
+   "Target": "",
+   "Duration": "As power used",
+   "PG": "262",
+  
+      "Notes": "User can transmit obfuscate powers through electronic devices"
+   },
+ {
+   "Name": "Mask of 1000 faces",
+   "Discipline": "Obfuscate",
+   "Amalgam": "",
+   "LVL": 3,
+   "Breach": "Low",
+   "Res": "Melon",
+   "Cost": "one Rouse",
+   "Caster": "",
+   "Target": "",
+   "Duration": "One Scene",
+   "PG": "262",
+  
+      "Notes": "User appears as nondescript person in the area"
+   },
+ {
+   "Name": "Conceal",
+   "Discipline": "Obfuscate",
+   "Amalgam": "Auspex 3",
+   "LVL": 4,
+   "Breach": "Low",
+   "Res": "Melon",
+   "Cost": "one Rouse",
+   "Caster": "",
+   "Target": "",
+   "Duration": "One night **",
+   "PG": "262",
+  
+      "Notes": "User can conceal an object such as a car or door ** Additional night per point of margin on win"
+   },
+ {
+   "Name": "Vanish",
+   "Discipline": "Obfuscate",
+   "Amalgam": "***",
+   "LVL": 4,
+   "Breach": "Low",
+   "Res": "Melon",
+   "Cost": "one Rouse",
+   "Caster": "",
+   "Target": "",
+   "Duration": "As per power augmented",
+   "PG": "262",
+  
+      "Notes": "***Cloak of Shadows required. User can activate cloak of shadows and unseen passage even when being directly observed"
+   },
+ {
+   "Name": "Cloak The Gathering",
+   "Discipline": "Obfuscate",
+   "Amalgam": "",
+   "LVL": 5,
+   "Breach": "Low",
+   "Res": "Melon",
+   "Cost": "one Rouse",
+   "Caster": "",
+   "Target": "",
+   "Duration": "As power extended",
+   "PG": "263",
+  
+      "Notes": "User can shelter their companions under the cloak of obfuscate"
+   },
+ {
+   "Name": "Imposters Guise",
+   "Discipline": "Obfuscate",
+   "Amalgam": "†",
+   "LVL": 5,
+   "Breach": "Low",
+   "Res": "Melon",
+   "Cost": "one Rouse",
+   "Caster": "Wits Obfuscate",
+   "Target": "Manipulation + Performance",
+   "Duration": "One Scene",
+   "PG": "263",
+  
+      "Notes": "† Prerequisite: Mask of 1000 faces | Vamp can make themself look like anyone with proper preparation"
+   },
+ {
+   "Name": "Lethal Body",
+   "Discipline": "Potence",
+   "Amalgam": "",
+   "LVL": 1,
+   "Breach": "M-H",
+   "Res": "Chol",
+   "Cost": "Free",
+   "Caster": "",
+   "Target": "",
+   "Duration": "Passive",
+   "PG": "264",
+  
+      "Notes": "User now does aggravated health damage to mortals also ignore 1 level of armor per Potence level of user"
+   },
+ {
+   "Name": "Soaring Leap",
+   "Discipline": "Potence",
+   "Amalgam": "",
+   "LVL": 1,
+   "Breach": "M-H",
+   "Res": "Chol",
+   "Cost": "Free",
+   "Caster": "3x pot level meters vert | 5x pot meters horiz",
+   "Target": "",
+   "Duration": "Passive",
+   "PG": "264",
+  
+      "Notes": "User can leap far higher and farther than mortals "
+   },
+ {
+   "Name": "Prowess",
+   "Discipline": "Potence",
+   "Amalgam": "",
+   "LVL": 2,
+   "Breach": "M-H",
+   "Res": "Chol",
+   "Cost": "one Rouse",
+   "Caster": "",
+   "Target": "",
+   "Duration": "One Scene",
+   "PG": "264",
+  
+      "Notes": "When activated, add the Potence rating of the user to their unarmed damage value as well as to feats of Strength."
+   },
+ {
+   "Name": "Brutal Feed",
+   "Discipline": "Potence",
+   "Amalgam": "",
+   "LVL": 3,
+   "Breach": "M-H",
+   "Res": "Chol",
+   "Cost": "Free",
+   "Caster": "",
+   "Target": "",
+   "Duration": "One Feeding",
+   "PG": "264",
+  
+      "Notes": "Savage Kiss - User can feed at an alarming rate, mere seconds to drain a victim (may induce stains up to ST)"
+   },
+ {
+   "Name": "Spark of Rage",
+   "Discipline": "Potence",
+   "Amalgam": "Presence 3",
+   "LVL": 3,
+   "Breach": "M-H",
+   "Res": "Chol",
+   "Cost": "one Rouse",
+   "Caster": "",
+   "Target": "",
+   "Duration": "One Scene",
+   "PG": "265",
+  
+      "Notes": "User can use potence rating to incite a person or crowd to violence (careful not to turn on user but instead themselves)"
+   },
+ {
+   "Name": "Uncanny Grip",
+   "Discipline": "Potence",
+   "Amalgam": "",
+   "LVL": 3,
+   "Breach": "M-H",
+   "Res": "Chol",
+   "Cost": "one Rouse",
+   "Caster": "",
+   "Target": "",
+   "Duration": "One Scene",
+   "PG": "265",
+  
+      "Notes": "User can climb or hang from just about any surface allowing them to hang from ceiling or vertical walls"
+   },
+ {
+   "Name": "Draught of Might",
+   "Discipline": "Potence",
+   "Amalgam": "",
+   "LVL": 4,
+   "Breach": "M-H",
+   "Res": "Chol",
+   "Cost": "one Rouse",
+   "Caster": "",
+   "Target": "",
+   "Duration": "One Scene",
+   "PG": "265",
+  
+      "Notes": "Blood of the vamp comes saturated with Potence. Drinker gets 1/2 potence level of the giver (Rounded down)"
+   },
+ {
+   "Name": "Earthshock",
+   "Discipline": "Potence",
+   "Amalgam": "",
+   "LVL": 5,
+   "Breach": "M-H",
+   "Res": "Chol",
+   "Cost": "one Rousex2",
+   "Caster": "None - Ground is hard to miss",
+   "Target": "Dex+ Athletics (D3) (within 5 meters)",
+   "Duration": "One Scene",
+   "PG": "265",
+  
+      "Notes": "Vamp can hit ground causing shockwave - Stuff will break - Can use 1 time per scene max"
+   },
+ {
+   "Name": "Fists of Caine",
+   "Discipline": "Potence",
+   "Amalgam": "",
+   "LVL": 5,
+   "Breach": "M-H",
+   "Res": "Chol",
+   "Cost": "one Rouse",
+   "Caster": "",
+   "Target": "",
+   "Duration": "One Scene",
+   "PG": "266",
+  
+      "Notes": "Vamp can cause aggravated damage with bare hands"
+   },
+ {
+   "Name": "Awe",
+   "Discipline": "Presence",
+   "Amalgam": "",
+   "LVL": 1,
+   "Breach": "L-M",
+   "Res": "Sang",
+   "Cost": "Free",
+   "Caster": "Manipulation + Presence",
+   "Target": "Composure + Intellect",
+   "Duration": "One scene or intentionally ended",
+   "PG": "267",
+  
+      "Notes": "Add presence points to any roll for persuasion or performance"
+   },
+ {
+   "Name": "Daunt",
+   "Discipline": "Presence",
+   "Amalgam": "",
+   "LVL": 1,
+   "Breach": "L-M",
+   "Res": "Sang",
+   "Cost": "Free",
+   "Caster": "",
+   "Target": "",
+   "Duration": "One Scene or until cancelled",
+   "PG": "267",
+  
+      "Notes": "Add presence points to any roll for intimidation rolls"
+   },
+ {
+   "Name": "Lingering Kiss",
+   "Discipline": "Presence",
+   "Amalgam": "",
+   "LVL": 2,
+   "Breach": "L-M",
+   "Res": "Sang",
+   "Cost": "Free",
+   "Caster": "",
+   "Target": "",
+   "Duration": "Until successfully resisted",
+   "PG": "267",
+  
+      "Notes": "Vamps feeding results in near extasy for mortals. Victims fed upon by the user become addicted to the Kiss."
+   },
+ {
+   "Name": "Dread Gaze",
+   "Discipline": "Presence",
+   "Amalgam": "",
+   "LVL": 3,
+   "Breach": "L-M",
+   "Res": "Sang",
+   "Cost": "one Rouse",
+   "Caster": "Charisma + Presence ",
+   "Target": "Composure + Resolve ",
+   "Duration": "One Turn",
+   "PG": "267",
+  
+      "Notes": "Mortals: Fear, Vamps: Flee of Frenzy "
+   },
+ {
+   "Name": "Entrancement",
+   "Discipline": "Presence",
+   "Amalgam": "",
+   "LVL": 3,
+   "Breach": "L-M",
+   "Res": "Sang",
+   "Cost": "one Rouse",
+   "Caster": "Charisma + Presence ",
+   "Target": "Composure + Wits",
+   "Duration": "One Hour + 1 hour per point margin",
+   "PG": "268",
+  
+      "Notes": "Victim is rapt with adoration of the caster. Vamp may recast this indefinitely "
+   },
+ {
+   "Name": "Irresistible Voice",
+   "Discipline": "Presence",
+   "Amalgam": "Dominate 1",
+   "LVL": 4,
+   "Breach": "L-M",
+   "Res": "Sang",
+   "Cost": "one Rouse",
+   "Caster": "",
+   "Target": "",
+   "Duration": "Passive",
+   "PG": "268",
+  
+      "Notes": "User's voice is enough to cast dominate powers"
+   },
+ {
+   "Name": "Summon",
+   "Discipline": "Presence",
+   "Amalgam": "",
+   "LVL": 4,
+   "Breach": "L-M",
+   "Res": "Sang",
+   "Cost": "one Rouse",
+   "Caster": "Manipulation + Presence",
+   "Target": "Composure + Intelligence",
+   "Duration": "One Night",
+   "PG": "268",
+  
+      "Notes": "Vamp summons subject. Minor win, subject arrives after a while. Crit=subject comes immediately"
+   },
+ {
+   "Name": "Majesty",
+   "Discipline": "Presence",
+   "Amalgam": "",
+   "LVL": 5,
+   "Breach": "L-M",
+   "Res": "Sang",
+   "Cost": "one Rousex2",
+   "Caster": "Charisma + Presence",
+   "Target": "Composure + Resolve",
+   "Duration": "One Scene",
+   "PG": "268",
+  
+      "Notes": "Vampire has divine ability to appear as beautiful, grotesque or horrific at will. "
+   },
+ {
+   "Name": "Star Magnetism",
+   "Discipline": "Presence",
+   "Amalgam": "",
+   "LVL": 5,
+   "Breach": "L-M",
+   "Res": "Sang",
+   "Cost": "one Rouse+",
+   "Caster": "",
+   "Target": "",
+   "Duration": "As power used",
+   "PG": "269",
+  
+      "Notes": "Awe, Daunt, Entrancement can be transmitted over digital media"
+   },
+ {
+   "Name": "Eyes if the beast",
+   "Discipline": "Protean",
+   "Amalgam": "",
+   "LVL": 1,
+   "Breach": "H",
+   "Res": "Animal",
+   "Cost": "Free",
+   "Caster": "",
+   "Target": "",
+   "Duration": "As long as desired",
+   "PG": "269",
+  
+      "Notes": "Nightvision"
+   },
+ {
+   "Name": "Weight of a feather",
+   "Discipline": "Protean",
+   "Amalgam": "",
+   "LVL": 1,
+   "Breach": "H",
+   "Res": "Animal",
+   "Cost": "Free",
+   "Caster": "",
+   "Target": "",
+   "Duration": "As long as desired",
+   "PG": "270",
+  
+      "Notes": "Weightlessness "
+   },
+ {
+   "Name": "Feral Weapons",
+   "Discipline": "Protean",
+   "Amalgam": "",
+   "LVL": 2,
+   "Breach": "H",
+   "Res": "Animal",
+   "Cost": "one Rouse",
+   "Caster": "",
+   "Target": "",
+   "Duration": "One Scene",
+   "PG": "270",
+  
+      "Notes": "When activated, the vampire’s natural weapon of choice becomes a light piercing Brawl weapon with a +2 modifier to dmg. "
+   },
+ {
+   "Name": "Earth Meld",
+   "Discipline": "Protean",
+   "Amalgam": "",
+   "LVL": 3,
+   "Breach": "H",
+   "Res": "Animal",
+   "Cost": "one Rouse",
+   "Caster": "",
+   "Target": "",
+   "Duration": "One day or until disturbed",
+   "PG": "270",
+  
+      "Notes": "Vamp must be on natural surface but can merge into the ground, this will save them from sunlight"
+   },
+ {
+   "Name": "Shapechange",
+   "Discipline": "Protean",
+   "Amalgam": "",
+   "LVL": 3,
+   "Breach": "H",
+   "Res": "Animal",
+   "Cost": "one Rouse",
+   "Caster": "",
+   "Target": "",
+   "Duration": "One scene unless ended before",
+   "PG": "270",
+  
+      "Notes": "Vamp may assume the shape of any beast, gaining natural skills & abilities of that creature. Only communicate like beast"
+   },
+ {
+   "Name": "Metamorphosis",
+   "Discipline": "Protean",
+   "Amalgam": "",
+   "LVL": 4,
+   "Breach": "H",
+   "Res": "Animal",
+   "Cost": "one Rouse",
+   "Caster": "",
+   "Target": "",
+   "Duration": "One scene unless ended before",
+   "PG": "271",
+  
+      "Notes": "Vamp may assume the shape AND SIZE of any beast, gaining natural skills & abilities of that creature"
+   },
+ {
+   "Name": "Mist Form",
+   "Discipline": "Protean",
+   "Amalgam": "",
+   "LVL": 5,
+   "Breach": "H",
+   "Res": "Animal",
+   "Cost": "one Rousex3",
+   "Caster": "Takes 3 turns unless roll more rouse one Rouse",
+   "Target": "",
+   "Duration": "One scene unless ended before",
+   "PG": "271",
+  
+      "Notes": "Vamp can turn into a cloud of mist, untouchable by anything other than direct fire"
+   },
+ {
+   "Name": "Unfettered Heart",
+   "Discipline": "Protean",
+   "Amalgam": "",
+   "LVL": 5,
+   "Breach": "H",
+   "Res": "Animal",
+   "Cost": "Free",
+   "Caster": "",
+   "Target": "",
+   "Duration": "Passive",
+   "PG": "271",
+  
+      "Notes": "Heart can move anywhere in the chest at will, allowing the user to break paralysis by moving the heart away from stake"
+   },
+ {
+   "Name": "Corrosive Vitae",
+   "Discipline": "Blood Sorcery",
+   "Amalgam": "",
+   "LVL": 1,
+   "Breach": "L",
+   "Res": "Sang",
+   "Cost": "one Rouse",
+   "Caster": "",
+   "Target": "",
+   "Duration": "N/A",
+   "PG": "272",
+  
+      "Notes": "Can cause their blood to become a corrosive acid that can melt dead items/metals"
+   },
+ {
+   "Name": "A Taste for Blood",
+   "Discipline": "Blood Sorcery",
+   "Amalgam": "",
+   "LVL": 1,
+   "Breach": "L",
+   "Res": "Sang",
+   "Cost": "Free",
+   "Caster": "Resolve + Blood Sorcery",
+   "Target": "",
+   "Duration": "N/A",
+   "PG": "273",
+  
+      "Notes": "Just a taste of blood the user can identify who it belongs to, resonance, & intensity,  Blood potency"
+   },
+ {
+   "Name": "Extinguish Vitae",
+   "Discipline": "Blood Sorcery",
+   "Amalgam": "",
+   "LVL": 2,
+   "Breach": "M",
+   "Res": "Sang",
+   "Cost": "one Rouse",
+   "Caster": "Intelligence + Blood Sorcery",
+   "Target": "Stamina + Composure",
+   "Duration": "N/A",
+   "PG": "273",
+  
+      "Notes": "User can remove unlife giving properties of some of the blood of other vamps. Stoking hunger"
+   },
+ {
+   "Name": "Blood Potency",
+   "Discipline": "Blood Sorcery",
+   "Amalgam": "",
+   "LVL": 3,
+   "Breach": "L",
+   "Res": "Sang",
+   "Cost": "one Rouse",
+   "Caster": "Resolve + Blood Sorcery (D2)",
+   "Target": "Blood Potency",
+   "Duration": "One Scene",
+   "PG": "273",
+  
+      "Notes": "Vamp can concentrate blood and thereby increasing blood potency temporarily"
+   },
+ {
+   "Name": "Scorpion Touch",
+   "Discipline": "Blood Sorcery",
+   "Amalgam": "",
+   "LVL": 3,
+   "Breach": "L",
+   "Res": "Sang",
+   "Cost": "one Rouse",
+   "Caster": "Strength + Blood Sorcery ",
+   "Target": "Stamina+Occult or Fortitude",
+   "Duration": "Potent poison One scene",
+   "PG": "273",
+  
+      "Notes": "Vamp can turn their blood into a potent poison that can paralyze. Can be coated on a blade"
+   },
+ {
+   "Name": "Theft of Vitae",
+   "Discipline": "Blood Sorcery",
+   "Amalgam": "",
+   "LVL": 4,
+   "Breach": "H",
+   "Res": "Sang",
+   "Cost": "one Rouse",
+   "Caster": "Wits+Blood Sorcery",
+   "Target": "Wits+Occult",
+   "Duration": "One Feeding",
+   "PG": "274",
+  
+      "Notes": "Blood flies from victim's arteries directly into the mouth of the caster. High Masquerade Breach"
+   },
+ {
+   "Name": "Baal's Caress",
+   "Discipline": "Blood Sorcery",
+   "Amalgam": "",
+   "LVL": 5,
+   "Breach": "M",
+   "Res": "Sang",
+   "Cost": "one Rouse+",
+   "Caster": "Strength + Blood Sorcery ",
+   "Target": "Stamina+Occult or Fortitude",
+   "Duration": "Potent poison One scene",
+   "PG": "274",
+  
+      "Notes": "Extremely aggressive poison fatal to mortals and vampires alike"
+   },
+ {
+   "Name": "Cauldron of Blood",
+   "Discipline": "Blood Sorcery",
+   "Amalgam": "",
+   "LVL": 5,
+   "Breach": "H",
+   "Res": "Sang",
+   "Cost": "one Rouse††",
+   "Caster": "Resolve+Blood Sorcery",
+   "Target": "Composure + Occult or Fortitude",
+   "Duration": "One Turn",
+   "PG": "274",
+  
+      "Notes": "†† Gain 1 stain | Dex +Athletics to touch victim. Causes blood to boil. Each point of margin = point of agg damage"
+   },
+ {
+   "Name": "Far Reach",
+   "Discipline": "Thin Blood",
+   "Amalgam": "Choleric 🩸",
+   "LVL": 1,
+   "Breach": "M",
+   "Res": "Noted",
+   "Cost": "one Rouse",
+   "Caster": "Resolve + Alchemy",
+   "Target": "Strength + Athletics",
+   "Duration": "One Turn unless held",
+   "PG": "284",
+  
+      "Notes": "Allows the alchemist to move an object with mind, can cause harm to people/vamps"
+   },
+ {
+   "Name": "Haze",
+   "Discipline": "Thin Blood",
+   "Amalgam": "Phlegm 🩸",
+   "LVL": 1,
+   "Breach": "M",
+   "Res": "Noted",
+   "Cost": "one Rouse",
+   "Caster": "",
+   "Target": "",
+   "Duration": "One Scene or unless ended",
+   "PG": "285",
+  
+      "Notes": "Mist surrounds alchemist making them harder to hit with ranged weapons"
+   },
+ {
+   "Name": "Envelope",
+   "Discipline": "Thin Blood",
+   "Amalgam": "Mel & Phlegm 🩸",
+   "LVL": 2,
+   "Breach": "M",
+   "Res": "Noted",
+   "Cost": "one Rouse",
+   "Caster": "Wits + Alchemy",
+   "Target": "Stamina + Survival",
+   "Duration": "One Scene or unless ended",
+   "PG": "285",
+  
+      "Notes": "Add 3 dice to all rolls for victim"
+   },
+ {
+   "Name": "Defractionate",
+   "Discipline": "Thin Blood",
+   "Amalgam": "Alc+Sang+Mel🩸",
+   "LVL": 3,
+   "Breach": "L",
+   "Res": "Noted",
+   "Cost": "Mix",
+   "Caster": "",
+   "Target": "",
+   "Duration": "One Scene",
+   "PG": "286",
+  
+      "Notes": "Alchemist creates blood that can slake 1 hunger for any vampire"
+   },
+ {
+   "Name": "Profane Hieros Gamos",
+   "Discipline": "Thin Blood",
+   "Amalgam": "†††",
+   "LVL": 3,
+   "Breach": "H",
+   "Res": "†††",
+   "Cost": "one Rouse",
+   "Caster": "Alchemist distillation success",
+   "Target": "Stamina+Resolve (D8 + Bane severity)",
+   "Duration": "Permanent until performed again",
+   "PG": "ERR",
+  
+      "Notes": "Allows alchemist to change human shape/gender. Crit fail may cause new flaws (details see errata pdf)"
+   },
+ {
+   "Name": "Airborne Momentum",
+   "Discipline": "Thin Blood",
+   "Amalgam": "Alc+Chol+Sang🩸",
+   "LVL": 4,
+   "Breach": "H",
+   "Res": "Noted",
+   "Cost": "one Rouse",
+   "Caster": "Strength+Alchemy",
+   "Target": "Strength + Athletics(if resisted)",
+   "Duration": "One Scene",
+   "PG": "287",
+  
+      "Notes": "Alchemist can fly"
+   },
+ {
+   "Name": "Awaken The Sleeper",
+   "Discipline": "Thin Blood",
+   "Amalgam": "Alc+Chol+Sang🩸",
+   "LVL": 5,
+   "Breach": "L",
+   "Res": "Noted",
+   "Cost": "Mix",
+   "Caster": "",
+   "Target": "",
+   "Duration": "N/A",
+   "PG": "287",
+  
+      "Notes": "Alchemist creates a potion that can weaken a vampire from torpor (very detailed see page 287)"
+   },
+ {
+   "Name": "Shadow Cloak",
+   "Discipline": "Oblivion",
+   "Amalgam": "",
+   "LVL": 1,
+   "Breach": "M-H",
+   "Res": "Psycho",
+   "Cost": "Free",
+   "Caster": "",
+   "Target": "",
+   "Duration": "Passive",
+   "PG": "293 (Chicago by Night)",
+  
+      "Notes": "Subtly applying influence of Oblivion on ambient shadows +2 dice bonus to stealth rolls & Intimidate mortals"
+   },
+ {
+   "Name": "Oblivion's Sight",
+   "Discipline": "Oblivion",
+   "Amalgam": "",
+   "LVL": 1,
+   "Breach": "M-H",
+   "Res": "Psycho",
+   "Cost": "Free",
+   "Caster": "",
+   "Target": "",
+   "Duration": "One Scene",
+   "PG": "293 (Chicago by Night)",
+  
+      "Notes": "Eyes turn black - Can see clearly in pitch darkness, able to see ghosts"
+   },
+ {
+   "Name": "Shadow Cast",
+   "Discipline": "Oblivion",
+   "Amalgam": "",
+   "LVL": 2,
+   "Breach": "H",
+   "Res": "Psycho",
+   "Cost": "one Rouse",
+   "Caster": "",
+   "Target": "(if seen) Wits+Awareness (D3)",
+   "Duration": "One Scene",
+   "PG": "293 (Chicago by Night)",
+  
+      "Notes": "Can cast a shadow in an area that the user can use for other Oblivion powers. Anyone standing in shadow +1 Social conflict"
+   },
+ {
+   "Name": "Arms of Ahriman",
+   "Discipline": "Oblivion",
+   "Amalgam": "Potence 2",
+   "LVL": 2,
+   "Breach": "H",
+   "Res": "Psycho",
+   "Cost": "one Rouse",
+   "Caster": "Wits + Oblivion",
+   "Target": "",
+   "Duration": "One scene or until ended",
+   "PG": "294 (Chicago by Night)",
+  
+      "Notes": "Can cast tentacle shadow arms. May split (see pg 125 core) Complex discipline see page 294 for full details"
+   },
+ {
+   "Name": "Shadow Perspective",
+   "Discipline": "Oblivion",
+   "Amalgam": "",
+   "LVL": 3,
+   "Breach": "M",
+   "Res": "Psycho",
+   "Cost": "one Rouse",
+   "Caster": "",
+   "Target": "",
+   "Duration": "Up to one scene",
+   "PG": "294 (Chicago by Night)",
+  
+      "Notes": "Caster can project their senses into any shadow within sight. Seeing and hearing from that shadow like they were there"
+   },
+ {
+   "Name": "Touch of Oblivion",
+   "Discipline": "Oblivion",
+   "Amalgam": "",
+   "LVL": 3,
+   "Breach": "H",
+   "Res": "Psycho",
+   "Cost": "one Rouse",
+   "Caster": "",
+   "Target": "Strength + Brawl (if avoiding)",
+   "Duration": "One Turn",
+   "PG": "294 (Chicago by Night)",
+  
+      "Notes": "Caster can snap bone, blind eyes, rip muscles aggravated damage."
+   },
+ {
+   "Name": "Stygian Shroud",
+   "Discipline": "Oblivion",
+   "Amalgam": "",
+   "LVL": 4,
+   "Breach": "M-H",
+   "Res": "Psycho",
+   "Cost": "one Rouse",
+   "Caster": "",
+   "Target": "",
+   "Duration": "One Scene",
+   "PG": "295 (Chicago by Night)",
+  
+      "Notes": "Darkness spell - Caster creates an area of supernatural darkness. Anyone caught in it 3 dice penalty to ALL rolls"
+   },
+ {
+   "Name": "Shadow Step",
+   "Discipline": "Oblivion",
+   "Amalgam": "",
+   "LVL": 5,
+   "Breach": "H",
+   "Res": "Psycho",
+   "Cost": "one Rouse",
+   "Caster": "",
+   "Target": "",
+   "Duration": "One Turn",
+   "PG": "295 (Chicago by Night)",
+  
+      "Notes": "Caster steps in one shadow and emerges at any other shadow of their choosing within sight distance. If seen high breach"
+   },
+ {
+   "Name": "Tenebrous Avatar",
+   "Discipline": "Oblivion",
+   "Amalgam": "",
+   "LVL": 5,
+   "Breach": "M-H",
+   "Res": "Psycho",
+   "Cost": "one Rousex2",
+   "Caster": "",
+   "Target": "",
+   "Duration": "One scene or until ended",
+   "PG": "295 (Chicago by Night)",
+  
+      "Notes": "Caster becomes shadow. Able to fit in cracks, 2 Dimensional creature able to cross barriers, doors, wherever a shadow goes"
+   }
+
+]

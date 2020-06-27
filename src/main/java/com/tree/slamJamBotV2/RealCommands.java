@@ -2,47 +2,44 @@ package com.tree.slamJamBotV2;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
-import sx.blah.discord.api.events.EventSubscriber;
-import sx.blah.discord.handle.impl.events.guild.channel.message.MessageReceivedEvent;
-import sx.blah.discord.handle.impl.events.guild.member.UserJoinEvent;
-import sx.blah.discord.handle.obj.IChannel;
+import org.javacord.api.event.message.MessageCreateEvent;
+import org.javacord.api.listener.message.MessageCreateListener;
 
-import java.sql.Time;
 import java.util.ArrayList;
 
 /**
  * Created by Keith on 11/18/2017.
  */
-public class RealCommands {
+public class RealCommands implements MessageCreateListener {
 	Gson gson = new Gson();
 
-	@EventSubscriber
-	public void onUserJoin(UserJoinEvent event){
-		if (event.getUser().getLongID() == 73669669172555776L && event.getGuild().getLongID() == 284976055922458624L){
-			event.getGuild().getUserByID(73669669172555776L).addRole(event.getGuild().getRoleByID(348225438973296653L));
-			event.getGuild().getUserByID(73669669172555776L).addRole(event.getGuild().getRoleByID(433149215258968065L));
-		}
-	}
+
 	ArrayList<String> messages = new ArrayList<>();
 
 
-	@EventSubscriber
-	public void onMessageReceived(MessageReceivedEvent event) {
-		System.err.println(Time.from(event.getMessage().getTimestamp()).getTime());
-    	IChannel channel = event.getChannel();
+        //TODO ONLY F TO C WORKS
+
+    @Override
+    public void onMessageCreate(MessageCreateEvent event) {
+
+        System.err.println(event.getMessage().getCreationTimestamp());
+    	//Channel channel = event.getChannel();
 		String message = event.getMessage().getContent().toLowerCase();
 
 		if(message.contains("f to c")||message.contains("c to f")) {
-			SlamUtils.sendMessage(channel,String.valueOf(convertTemp(message)));
+		    event.getChannel().sendMessage(String.valueOf(convertTemp(message)));
+
 		}
+
+
 		if(message.contains("miles to km")||message.contains("km to miles")||
 				message.contains("m to ft") || message.contains("ft to m")
 				){
-			SlamUtils.sendMessage(channel,String.valueOf(convertDistance(message)));
+			event.getChannel().sendMessage(String.valueOf(convertDistance(message)));
 		}
 
 		if (message.contains("cad to usd")|| message.contains("usd to cad")){
-			SlamUtils.sendMessage(channel, String.valueOf(convertCurrancy(message)));
+			event.getChannel().sendMessage(String.valueOf(convertCurrancy(message)));
 		}
 
 
@@ -78,7 +75,7 @@ public class RealCommands {
 
 			double roundOff = (double) Math.round(a * 100) / 100;
 			return roundOff;
-					 
+
 		}
 
 	    System.out.println(json);
@@ -125,11 +122,11 @@ public class RealCommands {
 
 		double numberOnly= Double.parseDouble(s[0].replaceAll("[f | to | c]", ""));
 
-		if(s[0].contains("-")){
 
-			numberOnly -= 0;
-		}
 		System.err.println(numberOnly);
+
+
+
 		if(s[0].contains("f")){
 			double f = (numberOnly - 32)*.5556;
 			return Math.round(f*100.0)/100.0;
@@ -143,7 +140,6 @@ public class RealCommands {
 		return 0;
 
 	}
-
 
 
 
